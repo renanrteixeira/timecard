@@ -24,43 +24,45 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	<link href="<?php echo base_url('/includes/login/login.css') ?>" rel="stylesheet">
 </head>
 
-<body class="text-center">
-	<?php echo form_open('Users/doLogin'); ?>
-	<form>
-		<img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-		<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-		<?php if (validation_errors()) { ?>
-		<div class="callout callout-danger">
-			<h4>Warning!</h4>
-			<p><?php echo validation_errors(); ?></p>
-		</div>
-		<?php } ?>
-		<?php if (!empty($this->input->get('msg')) && $this->input->get('msg') == 1) { ?>
-		<div class="callout callout-danger">
-			E-mail e/ou senha inválidos!
-		</div>
-		<?php } ?>
-		<div class="input-group form-group">
-			<div class="input-group-prepend">
-				<span class="input-group-text"><i class="fas fa-user"></i></span>
+<body class="text-center hold-transition login-page">
+	<div class="login-box">
+		<?php echo form_open('Users/doLogin'); ?>
+		<form>
+			<img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+			<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+			<?php if (validation_errors()) { ?>
+			<div class="callout callout-danger">
+				<h4>Warning!</h4>
+				<p><?php echo validation_errors(); ?></p>
 			</div>
-			<input type="email" id="email" name="email" class="form-control" placeholder="E-mail address" required autofocus>
-		</div>
-		<div class="input-group form-group">
-			<div class="input-group-prepend">
-				<span class="input-group-text"><i class="fas fa-key"></i></span>
+			<?php } ?>
+			<?php if (!empty($this->input->get('msg')) && $this->input->get('msg') == 1) { ?>
+			<div class="callout callout-danger">
+				E-mail e/ou senha inválidos!
 			</div>
-			<input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
-		</div>
-		<div class="checkbox mb-3">
-			<label>
-				<input type="checkbox" value="remember-me"> Remember me
-			</label>
-		</div>
-		<button class="btn btn-lg btn-primary btn-block" type="submit" id="Login">Sign in</button>
-		<p class="mt-5 mb-3 text-muted">&copy; 2019</p>
-	</form>
-	<?php echo form_close(); ?>
+			<?php } ?>
+			<div class="input-group form-group">
+				<div class="input-group-prepend">
+					<span class="input-group-text"><i class="fas fa-user"></i></span>
+				</div>
+				<input type="email" id="email" name="email" class="form-control" placeholder="E-mail address" required autofocus>
+			</div>
+			<div class="input-group form-group">
+				<div class="input-group-prepend">
+					<span class="input-group-text"><i class="fas fa-key"></i></span>
+				</div>
+				<input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+			</div>
+			<div class="checkbox mb-3">
+				<label>
+					<input type="checkbox" value="remember-me"> Remember me
+				</label>
+			</div>
+			<button class="btn btn-lg btn-primary btn-block" type="submit" id="Login">Sign in</button>
+			<p class="mt-5 mb-3 text-muted">&copy; 2019</p>
+		</form>
+		<?php echo form_close(); ?>
+	</div>
 	<!-- jQuery 3 -->
 	<script src="<?php echo base_url('/assets/bower_components/jquery/dist/jquery.min.js') ?>"></script>
 	<!-- Bootstrap 3.3.7 -->
