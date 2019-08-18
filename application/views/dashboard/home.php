@@ -1,10 +1,11 @@
 <?php
+
 	defined('BASEPATH') OR exit('No direct script access allowed');
 
 	if (!$_SESSION['name']) {
 		redirect('users/login');
 	}
-
+	
 ?>
 <!DOCTYPE html>
 <html>
@@ -110,7 +111,7 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">Menu de Navegação</li>
-        <?php include_once('sidemenu.php'); ?>
+        <?php include_once($_SERVER['DOCUMENT_ROOT'].'/timecard/application/views/menu/sidemenu.php'); ?>
     </section>
     <!-- /.sidebar -->
   </aside>

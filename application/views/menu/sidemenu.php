@@ -1,3 +1,13 @@
+<?php
+
+	defined('BASEPATH') OR exit('No direct script access allowed');
+
+	if (!$_SESSION['name']) {
+		redirect('users/login');
+	}
+	
+?>
+
 <li class="treeview">
 	<a href="#">
 		<i class="fa fa-edit"></i>
