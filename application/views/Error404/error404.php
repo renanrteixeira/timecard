@@ -8,6 +8,8 @@
 	
 ?>
 <?php $this->load->view('template/header') ?>
+<?php $this->load->view('template/link') ?>
+<?php $this->load->view('template/headerafterlink') ?>
 
     <section class="content-header">
       <h1>
@@ -32,4 +34,6 @@
       <!-- /.error-page -->
     </section>	
 
-<?php $this->load->view('template/footer') ?>
+<?php $this->load->view('template/footerbeforescripts') ?>
+<?php $this->load->view('template/scripts') ?>
+<?php $this->load->view('template/footer') ?>		

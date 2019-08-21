@@ -11,6 +11,6 @@
 <?php $this->load->view('template/link') ?>
 <?php $this->load->view('template/headerafterlink') ?>
 
-<?php $this->load->view('template/footerbeforescripts') ?>	
-<?php $this->load->view('template/scripts') ?>	
+<?php $this->load->view('template/footerbeforescripts') ?>
+<?php $this->load->view('template/scripts') ?>
 <?php $this->load->view('template/footer') ?>
