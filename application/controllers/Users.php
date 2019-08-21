@@ -116,13 +116,13 @@ class Users extends CI_Controller {
 
 			$email = $this->input->post('email');
 			
-			if (isset($id)){
+			if ($id == NULL){
 
 			   $existe = $this->users->getEmail($email);
 			   
 			}
 			
-			if ($existe->result()) {
+			if (!IS_NULL($existe)) {
 				$variaveis['titulo'] = 'Novo Registro';
 				$variaveis['mensagem'] = "E-mail informado já foi cadastrado";
 				$this->load->view('users/cadastro', $variaveis);
@@ -140,7 +140,7 @@ class Users extends CI_Controller {
 					if ($id == null) {
 						$retorno = "Cadastro realizado com sucesso";
 					} else {
-						$retorno = "Cadastro realizado com sucesso";
+						$retorno = "Cadastro atualizado com sucesso";
 					}
 					//$this->load->view('users/index', $variaveis);
 					$this->session->set_flashdata('mensagem', $retorno);
