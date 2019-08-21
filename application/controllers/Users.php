@@ -133,7 +133,11 @@ class Users extends CI_Controller {
 				);
 				if ($this->users->save($dados, $id)) {
 					$variaveis['users'] = $this->users->get();
-					$variaveis['mensagem'] = "Cadastro realizado com sucesso";
+					if ($id == null) {
+					    $variaveis['mensagem'] = "Cadastro realizado com sucesso";
+					} else {
+						$variaveis['mensagem'] = "Cadastro atualizado com sucesso";
+					}
 					$this->load->view('users/index', $variaveis);
 				} else {
 					$variaveis['mensagem'] = "Ocorreu um erro. Por favor, tente novamente.";
