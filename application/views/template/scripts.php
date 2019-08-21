@@ -17,3 +17,12 @@
 	<script src="<?php echo base_url('/assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js')?>"></script>
 	<!-- ChartJS -->
 	<script src="<?php echo base_url('/assets/bower_components/chart.js/Chart.js')?>"></script>
+    <script>
+	$(document).ready(function() {
+		// show the alert
+		setTimeout(function() {
+			$(".alert").alert('close');
+		}, 2000);
+	});
+	</script>
+

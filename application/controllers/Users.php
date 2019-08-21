@@ -53,8 +53,7 @@ class Users extends CI_Controller {
 				$variaveis['status'] = $user->row()->status;
 				$this->load->view('users/cadastro', $variaveis);
 			} else {
-				$variaveis['mensagem'] = "Registro não encontrado." ;
-				$this->load->view('errors/html/v_erro', $variaveis);
+				redirect('useres/index');
 			}
 			
 		}
@@ -63,8 +62,14 @@ class Users extends CI_Controller {
 
 	public function delete($id = null) {
 		if ($this->users->delete($id)) {
-			$variaveis['mensagem'] = "Registro excluído com sucesso!";
-			$this->load->view('users/index', $variaveis);
+			$retorno = "Registro excluído com sucesso!";
+			$this->session->set_flashdata('mensagem', $retorno);
+			redirect('users/index');
+		} else {
+			$retorno = "Registro excluído com sucesso!";
+			$this->session->set_flashdata('erro', $retorno);
+			redirect('users/index');
+
 		}
 	}
 
@@ -116,8 +121,8 @@ class Users extends CI_Controller {
 			   $existe = $this->users->getEmail($email);
 			   
 			}
-
-			if ($existe == null) {
+			
+			if ($existe->result()) {
 				$variaveis['titulo'] = 'Novo Registro';
 				$variaveis['mensagem'] = "E-mail informado já foi cadastrado";
 				$this->load->view('users/cadastro', $variaveis);
@@ -132,13 +137,14 @@ class Users extends CI_Controller {
 				
 				);
 				if ($this->users->save($dados, $id)) {
-					$variaveis['users'] = $this->users->get();
 					if ($id == null) {
-					    $variaveis['mensagem'] = "Cadastro realizado com sucesso";
+						$retorno = "Cadastro realizado com sucesso";
 					} else {
-						$variaveis['mensagem'] = "Cadastro atualizado com sucesso";
+						$retorno = "Cadastro realizado com sucesso";
 					}
-					$this->load->view('users/index', $variaveis);
+					//$this->load->view('users/index', $variaveis);
+					$this->session->set_flashdata('mensagem', $retorno);
+					redirect('users/index');
 				} else {
 					$variaveis['mensagem'] = "Ocorreu um erro. Por favor, tente novamente.";
 					$this->load->view('users/cadastro', $variaveis);
