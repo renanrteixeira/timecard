@@ -3,7 +3,7 @@
 	defined('BASEPATH') OR exit('No direct script access allowed');
 
 	if (!$_SESSION['name']) {
-		redirect('users/login');
+		redirect('Login/login');
 	}
 	
 ?>
@@ -17,7 +17,7 @@
 		</span>
 	</a>
 	<ul class="treeview-menu">
-		<li><a href="pages/charts/chartjs.html"><i class="fa fa-circle-o"></i> Funcionários</a></li>
+		<li><a href="<?php echo base_url('/users/index')?>"><i class="fa fa-circle-o"></i> Usuários</a></li>
 	</ul>
 </li>
 <li class="treeview">
@@ -29,6 +29,6 @@
 		</span>
 	</a>
 	<ul class="treeview-menu">
-		<li><a href="pages/UI/general.html"><i class="fa fa-circle-o"></i> Funcionários</a></li>
+		<li><a href="#"><i class="fa fa-circle-o"></i> Funcionários</a></li>
 	</ul>
 </li>
