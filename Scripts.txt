@@ -22,7 +22,7 @@ CREATE TABLE `roles` (
 
 CREATE TABLE `employees` ( 
 		`id` INT NOT NULL AUTO_INCREMENT , 
-		`name` VARCHAR(50) NOT NUL , 
+		`name` VARCHAR(50) NOT NULL , 
 		`rolefk` INT NOT NULL , 
 		`birth` DATE NOT NULL , 
 		`gender` VARCHAR(1) NOT NULL , 
