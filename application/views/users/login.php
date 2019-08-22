@@ -50,7 +50,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 				</div>
 				<?php } ?>
 				<div class="form-group has-feedback">
-					<input type="email" id="email" name="email" class="form-control" placeholder="E-mail address" required autofocus>
+					<input type="email" id="email" name="email" class="form-control" placeholder="E-mail address" value="<?php if(isset($_COOKIE["timecardlogin"])) { echo $_COOKIE["timecardlogin"]; } ?>" required autofocus>
 					<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
 				</div>			
 				<div class="form-group has-feedback">
@@ -59,7 +59,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 				</div>
 				<div class="checkbox mb-3">
 					<label>
-						<input type="checkbox" value="remember-me"> Remember me
+						<input type="checkbox" value="remember-me" <?php if(isset($_COOKIE["timecardlogin"])) { ?> checked <?php } ?>> Remember me
 					</label>
 				</div>
 				<button class="btn btn-lg btn-primary btn-block" type="submit" id="Login">Sign in</button>
