@@ -32,7 +32,7 @@ if (!$_SESSION['name']) {
 		<?php } ?>
 	<div class="box-header">
 	    <div class="row col-md-12">
-			<a href="<?php echo base_url('/users/new')?>" class="btn btn-success btn-custom"><span class="glyphicon glyphicon-plus img-circle btn-icon"></span> Novo usuário</a>		
+			<a href="<?php echo base_url('/roles/new')?>" class="btn btn-success btn-custom"><span class="glyphicon glyphicon-plus img-circle btn-icon"></span> Nova Função</a>		
 		</div>
 	</div>
 	<div class="box-body">
@@ -41,23 +41,15 @@ if (!$_SESSION['name']) {
 				<tr>
 					<th>Código</th>
 					<th>Nome</th>
-					<th>E-mail</th>
-					<th>Status</th>
 					<th>Ação</th>
 				</tr>
 			</thead>
 			<tbody>
-				<?php foreach($users->result() as $user){ ?>
+				<?php foreach($roles->result() as $role){ ?>
 				<tr>
-					<td><?= $user->user_id ?></td>
-					<td><?= $user->name?></td>
-					<td><?= $user->email ?></td>
-					<?php if ($user->status == 0) { ?>
-					  <td>Inativo</td>
-					<?php } else { ?>
-						<td>Ativo</td>
-					<?php } ?>
-					<td><?= anchor("users/edit/$user->user_id", "Editar") ?></td>
+					<td><?= $role->id ?></td>
+					<td><?= $role->name?></td>
+					<td><?= anchor("roles/edit/$role->id", "Editar") ?></td>
 				</tr>
 				<?php } ?>
 			</tbody>			

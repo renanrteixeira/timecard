@@ -7,9 +7,9 @@
  */
 
 /**
- * Description of Users Model 
+ * Description of Roles Model 
  *
- * @author TRenan Teixeira
+ * @author Renan Teixeira
  *
  * @email 
  */

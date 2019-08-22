@@ -36,7 +36,7 @@ if (!$_SESSION['name']) {
 		<div class="box-body">
 			<div class="form-group">
 				<label for="name">Nome</label>
-				<input type="hidden" class="form-control" id="user_id" name="user_id" value="<?= set_value('iser_id') ? : (isset($user_id) ? $user_id : '') ?>">
+				<input type="hidden" class="form-control" id="user_id" name="user_id" value="<?= set_value('user_id') ? : (isset($user_id) ? $user_id : '') ?>">
 				<input type="text" class="form-control" id="name" name="name" placeholder="Fist and middle name" value="<?= set_value('name') ? : (isset($name) ? $name : '') ?>" autofocus='true' / required>
 			</div>
 			<div class="form-group">
@@ -53,7 +53,7 @@ if (!$_SESSION['name']) {
 			</div>
 			<div class="form-group">
 				<label>Status</label>
-				<select class="form-control" name="status" id="status">
+				<select class="form-control" name="status" id="status" required>
 					<option value="1" <?php echo isset($status) ? ($status==1) ?'selected':'' : ''; ?>>Ativo</option>
 					<option value="0" <?php echo isset($status) ? ($status==0) ?'selected':'' : ''; ?>>Inativo</option>
 				</select>

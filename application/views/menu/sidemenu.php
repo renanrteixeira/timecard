@@ -17,6 +17,8 @@
 		</span>
 	</a>
 	<ul class="treeview-menu">
+		<li><a href="<?php echo base_url('/roles/index')?>"><i class="fa fa-circle-o"></i> Funções</a></li>
+		<li><a href="<?php echo base_url('/employees/index')?>"><i class="fa fa-circle-o"></i> Funcionários</a></li>
 		<li><a href="<?php echo base_url('/users/index')?>"><i class="fa fa-circle-o"></i> Usuários</a></li>
 	</ul>
 </li>

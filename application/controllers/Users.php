@@ -136,6 +136,7 @@ class Users extends CI_Controller {
 					"password" => $this->input->post('password')
 				
 				);
+				
 				if ($this->users->save($dados, $id)) {
 					if ($id == null) {
 						$retorno = "Cadastro realizado com sucesso";

@@ -4,7 +4,7 @@ CREATE TABLE `users` (
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `status` int(1) NOT NULL
-);
+) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_general_ci;;
 
 ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`),
@@ -13,3 +13,22 @@ ALTER TABLE `users`
 ALTER TABLE `users`
   MODIFY `user_id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
+CREATE TABLE `roles` ( 
+		`id` INT NOT NULL AUTO_INCREMENT , 
+		`name` VARCHAR(50) NOT NULL , 
+		PRIMARY KEY (`id`)
+) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_general_ci;
+
+
+CREATE TABLE `employees` ( 
+		`id` INT NOT NULL AUTO_INCREMENT , 
+		`name` VARCHAR(50) NOT NUL , 
+		`rolefk` INT NOT NULL , 
+		`birth` DATE NOT NULL , 
+		`gender` VARCHAR(1) NOT NULL , 
+	PRIMARY KEY (`id`)
+) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_general_ci;
+
+ALTER TABLE `employees` ADD CONSTRAINT `employee_rolefk` 
+		FOREIGN KEY (`rolefk`) REFERENCES `roles`(`id`) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION;

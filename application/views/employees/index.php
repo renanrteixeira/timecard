@@ -32,7 +32,7 @@ if (!$_SESSION['name']) {
 		<?php } ?>
 	<div class="box-header">
 	    <div class="row col-md-12">
-			<a href="<?php echo base_url('/users/new')?>" class="btn btn-success btn-custom"><span class="glyphicon glyphicon-plus img-circle btn-icon"></span> Novo usuário</a>		
+			<a href="<?php echo base_url('/employees/new')?>" class="btn btn-success btn-custom"><span class="glyphicon glyphicon-plus img-circle btn-icon"></span> Novo Funcionário</a>		
 		</div>
 	</div>
 	<div class="box-body">
@@ -41,23 +41,25 @@ if (!$_SESSION['name']) {
 				<tr>
 					<th>Código</th>
 					<th>Nome</th>
-					<th>E-mail</th>
-					<th>Status</th>
+					<th>Função</th>
+					<th>Aniversário</th>
+					<th>Sexo</th>
 					<th>Ação</th>
 				</tr>
 			</thead>
 			<tbody>
-				<?php foreach($users->result() as $user){ ?>
+				<?php foreach($employees->result() as $employee){ ?>
 				<tr>
-					<td><?= $user->user_id ?></td>
-					<td><?= $user->name?></td>
-					<td><?= $user->email ?></td>
-					<?php if ($user->status == 0) { ?>
-					  <td>Inativo</td>
+					<td><?= $employee->id?></td>
+					<td><?= $employee->name?></td>
+					<td><?= $employee->role?></td>
+					<td><?= date('d/m/Y', strtotime($employee->birth))?></td>
+					<?php if ($employee->gender == "M") { ?>
+					  <td>Masculino</td>
 					<?php } else { ?>
-						<td>Ativo</td>
+						<td>Feminino</td>
 					<?php } ?>
-					<td><?= anchor("users/edit/$user->user_id", "Editar") ?></td>
+					<td><?= anchor("employees/edit/$employee->id", "Editar") ?></td>
 				</tr>
 				<?php } ?>
 			</tbody>			
