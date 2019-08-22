@@ -60,6 +60,7 @@ class Login extends CI_Controller {
       //Field validation succeeded.  Validate against database
       $email = $this->input->post('email');
       $password = $this->input->post('password');
+      $remember = $this->input->post('rememberme');
 
       $this->user->setEmail($email);
       //$this->user->setPassword(MD5($password));
@@ -78,6 +79,15 @@ class Login extends CI_Controller {
           );
         $this->session->set_userdata($sessArray);
         }
+        
+        if(!empty($remember)) {
+          setcookie ('timecardlogin',$this->input->post('email'),time()+ (10 * 365 * 24 * 60 * 60));
+        } else {
+          if(isset($_COOKIE['timecardlogin'])) {
+            setcookie ('timecardlogin','');
+          }
+        }
+
         redirect('dashboard/index');
       } else {
         redirect('Login/login?msg=1');

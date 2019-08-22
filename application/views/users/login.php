@@ -59,7 +59,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 				</div>
 				<div class="checkbox mb-3">
 					<label>
-						<input type="checkbox" value="remember-me" <?php if(isset($_COOKIE["timecardlogin"])) { ?> checked <?php } ?>> Remember me
+						<input type="checkbox" id="rememberme" name="rememberme" value="rememberme" <?php if(isset($_COOKIE["timecardlogin"])) { ?> checked <?php } ?>> Remember me
 					</label>
 				</div>
 				<button class="btn btn-lg btn-primary btn-block" type="submit" id="Login">Sign in</button>
