@@ -1,0 +1,109 @@
+<?php
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ * Description of Employees Model 
+ *
+ * @author Renan Teixeira
+ *
+ * @email 
+ */
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Hours_model extends CI_Model {
+  // declare private variable
+  private $_ID;
+  private $_Employee;
+  private $_Date;
+  private $_Hour1;
+  private $_Hour2;
+  private $_Hour3;
+  private $_Hour4;
+  private $_Hour5;
+  private $_Hour6;
+  
+  	/**
+	 * Grava os dados na tabela.
+	 * @param $dados. Array que contém os campos a serem inseridos
+	 * @param Se for passado o $id via parâmetro, então atualizo o registro em vez de inseri-lo.
+	 * @return boolean
+	 */
+	public function save($dados = null, $id = null) {
+		
+		if ($dados) {
+			if ($id) {
+				$this->db->where('id', $id);
+				if ($this->db->update("hours", $dados)) {
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+				if ($this->db->insert("hours", $dados)) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+		}
+	}
+
+	/**
+	 * Recupera o registro do banco de dados
+	 * @param $id - Se indicado, retorna somente um registro, caso contário, todos os registros.
+	 * @return objeto da banco de dados da tabela cadastros
+	 */
+	public function get($id = null, $employee = null, $date = null){
+		
+		if ($id) {
+			$this->db->where('hours.id', $id);
+		}
+		
+		if ($employee){
+			$this->db->where('hours.employeefk', $employee);
+		}
+
+		if ($date){
+			$this->db->where('hours.date', $date);
+		}
+		
+		$this->db->select('hours.id, employees.name, hours.date, hours.hour1, hours.hour2, hours.hour3, hours.hour4, hours.hour5, hours.hour6'); 
+		$this->db->from('hours');
+		$this->db->from('employees');
+		$this->db->where('employees.id = hours.employeefk');
+		$this->db->order_by("hours.id", 'desc');
+		return $this->db->get();
+	}
+
+	public function getEdit($id = null){
+		
+		if ($id) {
+			$this->db->where('hours.id', $id);
+		}
+		$this->db->order_by("hours.id", 'desc');
+		return $this->db->get('hours');
+	}
+
+
+	public function getEmployees(){
+		return $this->db->get('employees');
+	}
+
+	/**
+	 * Deleta um registro.
+	 * @param $id do registro a ser deletado
+	 * @return boolean;
+	 */
+	public function delete($id = null){
+		if ($id) {
+			return $this->db->where('id', $id)->delete('hours');
+		}
+	}
+
+}
+?>

@@ -19,7 +19,8 @@ class Login extends CI_Controller {
    
     public function __construct() {
         parent::__construct();
-        $this->load->model('Users_model', 'user');
+				$this->load->model('Users_model', 'user');
+				$this->load->helper(array('cookie', 'url')); 
     }
   // Dashboard
   public function index()
@@ -70,6 +71,13 @@ class Login extends CI_Controller {
       $result = $this->user->login();
       
       if($result) {
+
+				if ($this->input->post("rememberme")){                    
+          $this->input->set_cookie('timecardlogin', $this->input->post('email'), time() + (86400)); /* 86400 = 1 day */
+        } else {
+					delete_cookie('timecardlogin');
+				}
+
         foreach($result as $row) {
           $sessArray = array(
             'user_id' => $row->user_id,
@@ -78,14 +86,6 @@ class Login extends CI_Controller {
             'is_authenticated' => TRUE,
           );
         $this->session->set_userdata($sessArray);
-        }
-        
-        if(!empty($remember)) {
-          setcookie ('timecardlogin',$this->input->post('email'),time()+ (10 * 365 * 24 * 60 * 60));
-        } else {
-          if(isset($_COOKIE['timecardlogin'])) {
-            setcookie ('timecardlogin','');
-          }
         }
 
         redirect('dashboard/index');

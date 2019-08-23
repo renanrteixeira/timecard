@@ -108,6 +108,7 @@ class Employees extends CI_Controller {
 
 		if ($this->form_validation->run() == FALSE) {
 			$variaveis['titulo'] = 'Novo Funcionário';
+			$variaveis['employees'] = $this->employees->get();
 			$this->load->view('employees/cadastro', $variaveis);
 		} else {
 			
@@ -132,6 +133,7 @@ class Employees extends CI_Controller {
 				redirect('employees/index');
 			} else {
 				$variaveis['mensagem'] = "Ocorreu um erro. Por favor, tente novamente.";
+				$variaveis['employees'] = $this->employees->get();
 				$this->load->view('employees/cadastro', $variaveis);
 			}
 				

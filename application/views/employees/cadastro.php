@@ -10,6 +10,7 @@ if (!$_SESSION['name']) {
 <?php $this->load->view('template/header') ?>
 <?php $this->load->view('template/link') ?>
 <?php $this->load->view('template/headerdatepicker') ?>
+<?php $this->load->view('template/headerselect2') ?>
 <?php $this->load->view('template/headerafterlink') ?>
 
 <div class="box box-primary">
@@ -41,10 +42,10 @@ if (!$_SESSION['name']) {
 			</div>
 			<div class="form-group">
 				<label for="role">Função</label>
-				<select id="role" name="role" class="form-control" required>
-				  <?php foreach($roles->result() as $value) {?>
-                     <option value="<?= $value->id?>" <?php echo isset($role) ? ($role==$value->id) ? 'selected': '' : '';  ?>><?=$value->name?></option>
-				  <?php }?>
+				<select class="select2-single form-control" data-live-search="true" title="Please select a lunch ..." id="role" name="role" required>
+					<?php foreach($roles->result() as $value) {?>
+						<option value="<?= $value->id?>" <?php echo isset($role) ? ($role==$value->id) ? 'selected': '' : '';  ?>><?=$value->name?></option>
+					<?php }?>
 				</select>
 			</div>
 			<div class="form-group">
@@ -53,13 +54,13 @@ if (!$_SESSION['name']) {
 					<div class="input-group-addon">
 					<i class="fa fa-calendar"></i>
 					</div>
-					<input type="date" class="form-control" id="birth" name="birth" value="<?= set_value('birth') ? : (isset($birth) ? $birth : '') ?>" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-inputmask-placeholder="dd/mm/aaaa">
+					<input type="date" class="form-control" id="birth" name="birth" value="<?= set_value('birth') ? : (isset($birth) ? $birth : '') ?>" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-inputmask-placeholder="dd/mm/aaaa" required>
 				</div>
 				<!-- /.input group -->
 			</div>
 			<div class="form-group">
 				<label>Sexo</label>
-				<select class="form-control" name="gender" id="gender" required>
+				<select class="select2-single form-control" name="gender" id="gender" required>
 					<option value="M" <?php echo isset($gender) ? ($gender=='M') ?'selected':'' : ''; ?>>Masculino</option>
 					<option value="F" <?php echo isset($gender) ? ($gender=='F') ?'selected':'' : ''; ?>>Feminino</option>
 				</select>
@@ -73,4 +74,5 @@ if (!$_SESSION['name']) {
 <?php $this->load->view('template/footerbeforescripts') ?>
 <?php $this->load->view('template/scripts') ?>
 <?php $this->load->view('template/scriptdatepicker') ?>
+<?php $this->load->view('template/scriptselect2') ?>
 <?php $this->load->view('template/footer') ?>

@@ -32,3 +32,20 @@ CREATE TABLE `employees` (
 ALTER TABLE `employees` ADD CONSTRAINT `employee_rolefk` 
 		FOREIGN KEY (`rolefk`) REFERENCES `roles`(`id`) 
 		ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+CREATE TABLE `hours` ( 
+		`id` INT NOT NULL AUTO_INCREMENT , 
+		`employeefk` INT NOT NULL , 
+		`date` DATE NOT NULL , 
+		`hour1` TIME NOT NULL , 
+		`hour2` TIME NOT NULL , 
+		`hour3` TIME NOT NULL , 
+		`hour4` TIME NOT NULL , 
+		`hour5` TIME NOT NULL , 
+		`hour6` TIME NOT NULL , 
+	PRIMARY KEY (`id`)
+) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_general_ci;
+
+ALTER TABLE `hours` ADD CONSTRAINT `hours_employeefk` 
+		FOREIGN KEY (`employeefk`) REFERENCES `employees`(`id`) 
+		ON DELETE NO ACTION ON UPDATE NO ACTION;
