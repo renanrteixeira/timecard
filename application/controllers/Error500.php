@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 
-class Error404 extends CI_Controller {
+class Error500 extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -21,6 +21,6 @@ class Error404 extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('error404/error404');
+		$this->load->view('error500/error500');
 	}
 }
