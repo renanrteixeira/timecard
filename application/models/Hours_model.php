@@ -20,12 +20,14 @@ class Hours_model extends CI_Model {
   private $_ID;
   private $_Employee;
   private $_Date;
+  private $_Typedate;
   private $_Hour1;
   private $_Hour2;
   private $_Hour3;
   private $_Hour4;
   private $_Hour5;
   private $_Hour6;
+  private $_Balance;
   
   	/**
 	 * Grava os dados na tabela.
@@ -72,12 +74,16 @@ class Hours_model extends CI_Model {
 			$this->db->where('hours.date', $date);
 		}
 		
-		$this->db->select('hours.id, employees.name, hours.date, hours.hour1, hours.hour2, hours.hour3, hours.hour4, hours.hour5, hours.hour6'); 
+		$this->db->select('hours.id, employees.name, hours.date,, hours.typedatefk, hours.hour1, hours.hour2, hours.hour3, hours.hour4, hours.hour5, hours.hour6, hours.balance'); 
 		$this->db->from('hours');
 		$this->db->from('employees');
 		$this->db->where('employees.id = hours.employeefk');
 		$this->db->order_by("hours.id", 'desc');
 		return $this->db->get();
+	}
+	public function checktime($aux) {
+		$aux=explode(':',$aux);
+		echo "Permaneceu ".$aux[0]." horas e ".$aux[1]." minutos ".$aux[2]." segundos";
 	}
 
 	public function getEdit($id = null){
@@ -92,6 +98,14 @@ class Hours_model extends CI_Model {
 
 	public function getEmployees(){
 		return $this->db->get('employees');
+	}
+
+	public function getTypeDates($id = null){
+
+		if ($id) {
+			$this->db->where('typedates.id', $id);
+		}
+		return $this->db->get('typedates');
 	}
 
 	/**

@@ -55,6 +55,14 @@ if (!$_SESSION['name']) {
 				<!-- /.input group -->
 			</div>
 			<div class="form-group">
+                <label for="typedate">Tipo de Data</label>
+                <select class="form-control select2-single" id="typedate" name="typedate" required>
+				  <?php foreach($typedates->result() as $value) {?>
+                     <option value="<?= $value->id?>" <?php echo isset($typedate) ? ($typedate==$value->id) ? 'selected': '' : '';  ?>><?=$value->name?></option>
+				  <?php }?>
+				</select>
+            </div>			
+			<div class="form-group">
 				<label for="hour1">Entrada Manhã</label>
 				<div class="input-group">
 					<div class="input-group-addon">

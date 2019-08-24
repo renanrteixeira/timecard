@@ -28,6 +28,7 @@ class Hours extends CI_Controller {
 	public function index()
 	{
 		$variaveis['hours'] = $this->hours->get(null,$this->input->post('employee'), $this->input->post('date'));
+		$variaveis['typedates'] = $this->hours->getTypeDates();
 		$variaveis['employees'] = $this->hours->getEmployees();
 		$this->load->view('hours/index', $variaveis);
 	}
@@ -36,6 +37,7 @@ class Hours extends CI_Controller {
 	{
 		$variaveis['titulo'] = 'Nova Hora';
 		$variaveis['employees'] = $this->hours->getEmployees();
+		$variaveis['typedates'] = $this->hours->getTypeDates();
 		$this->load->view('hours/cadastro', $variaveis);
 	}
 
@@ -47,16 +49,19 @@ class Hours extends CI_Controller {
 			
 			if ($hour->num_rows() > 0 ) {
 				$variaveis['employees'] = $this->hours->getEmployees();
+				$variaveis['typedates'] = $this->hours->getTypeDates();
 				$variaveis['titulo'] = 'Edição de Horas';
 				$variaveis['id'] = $hour->row()->id;
 				$variaveis['employee'] = $hour->row()->employeefk;
 				$variaveis['date'] = $hour->row()->date;
+				$variaveis['typedate'] = $hour->row()->typedatefk;
 				$variaveis['hour1'] = $hour->row()->hour1;
 				$variaveis['hour2'] = $hour->row()->hour2;
 				$variaveis['hour3'] = $hour->row()->hour3;
 				$variaveis['hour4'] = $hour->row()->hour4;
 				$variaveis['hour5'] = $hour->row()->hour5;
 				$variaveis['hour6'] = $hour->row()->hour6;
+				$variaveis['balance'] = $hour->row()->balance;
 				$this->load->view('hours/cadastro', $variaveis);
 			} else {
 				redirect('hours/index');
@@ -78,6 +83,7 @@ class Hours extends CI_Controller {
 
 		}
 	}
+
 
 	public function save(){
 		
@@ -106,37 +112,93 @@ class Hours extends CI_Controller {
 
 		if ($this->form_validation->run() == FALSE) {
 			$variaveis['titulo'] = 'Nova Hora';
+			$variaveis['typedates'] = $this->hours->getTypeDates();
 			$variaveis['employees'] = $this->hours->getEmployees();
 			$this->load->view('hours/cadastro', $variaveis);
 		} else {
 			
 			$id = $this->input->post('id');
 
+			$existe = $this->hours->get(null, $this->input->post('employee'), $this->input->post('date'));
 
-			$dados = array(
-			
-				"employeefk" => $this->input->post('employee'),
-				"date" => $this->input->post('date'),
-				"hour1" => $this->input->post('hour1'),
-				"hour2" => $this->input->post('hour2'),
-				"hour3" => $this->input->post('hour3'),
-				"hour4" => $this->input->post('hour4'),
-				"hour5" => $this->input->post('hour5'),
-				"hour6" => $this->input->post('hour6'),
-
-			);
-			if ($this->hours->save($dados, $id)) {
-				if ($id == null) {
-					$retorno = "Cadastro realizado com sucesso";
-				} else {
-					$retorno = "Cadastro atualizado com sucesso";
-				}
-				$this->session->set_flashdata('mensagem', $retorno);
-				redirect('hours/index');
-			} else {
-				$variaveis['mensagem'] = "Ocorreu um erro. Por favor, tente novamente.";
+			if (($existe->result()) && (!$id)){
+				$variaveis['titulo'] = 'Nova Hora';
+				$variaveis['mensagem'] = "Lançamento já foi cadastrado.";
+				$variaveis['typedates'] = $this->hours->getTypeDates();
 				$variaveis['employees'] = $this->hours->getEmployees();
 				$this->load->view('hours/cadastro', $variaveis);
+			} else {
+
+				$time = $this->hours->getTypeDates($this->input->post('typedate'));
+				
+				$hourbase = $time->row()->time;
+
+				if ($id) {
+
+					$Entradamanha  = $this->input->post('hour1');
+					$Saidamanha   = $this->input->post('hour2');
+					$Entradatarde = $this->input->post('hour3');
+					$Saidatarde   = $this->input->post('hour4');
+					$Entradaextra = $this->input->post('hour5');
+					$Saidaextra   = $this->input->post('hour6');
+				
+				} else {
+
+					$Entradamanha  = $this->input->post('hour1').':00';
+					$Saidamanha   = $this->input->post('hour2').':00';
+					$Entradatarde = $this->input->post('hour3').':00';
+					$Saidatarde   = $this->input->post('hour4').':00';
+					$Entradaextra = $this->input->post('hour5').':00';
+					$Saidaextra   = $this->input->post('hour6').':00';
+				}
+
+
+
+				$balance = ((strtotime($Saidamanha) - strtotime($Entradamanha))+
+						    (strtotime($Saidatarde) - strtotime($Entradatarde))+
+						    (strtotime($Saidaextra) - strtotime($Entradaextra)));
+				
+				$balance = date('H:i:s', $balance);
+				 
+			    if (strtotime($balance) < strtotime($hourbase)) {
+					$balance = strtotime($hourbase) - strtotime($balance);
+					$balance = date('H:i:s', $balance);
+					$balance = '-'.$balance;
+				} else {
+					$balance = strtotime($balance) - strtotime($hourbase);
+					$balance = date('H:i:s', $balance);
+				}
+			
+				//echo  'Base: '.$hourbase.'  -  Convertido: '.strtotime($hourbase).'  -  Entrada: '.$Entadamanha.'  -  Convertido: '.strtotime($Entadamanha);
+				$dados = array(
+					
+
+					"employeefk" => $this->input->post('employee'),
+					"date" => $this->input->post('date'),
+					"typedatefk" => $this->input->post('typedate'),
+					"hour1" => $this->input->post('hour1'),
+					"hour2" => $this->input->post('hour2'),
+					"hour3" => $this->input->post('hour3'),
+					"hour4" => $this->input->post('hour4'),
+					"hour5" => $this->input->post('hour5'),
+					"hour6" => $this->input->post('hour6'),
+					"balance" => $balance
+				);
+
+				if ($this->hours->save($dados, $id)) {
+					if ($id == null) {
+						$retorno = "Cadastro realizado com sucesso";
+					} else {
+						$retorno = "Cadastro atualizado com sucesso";
+					}
+					$this->session->set_flashdata('mensagem', $retorno);
+					redirect('hours/index');
+				} else {
+					$variaveis['mensagem'] = "Ocorreu um erro. Por favor, tente novamente.";
+					$variaveis['typedates'] = $this->hours->getTypeDates();
+					$variaveis['employees'] = $this->hours->getEmployees();
+					$this->load->view('hours/cadastro', $variaveis);
+				}							
 			}
 				
 		}

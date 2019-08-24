@@ -49,3 +49,25 @@ CREATE TABLE `hours` (
 ALTER TABLE `hours` ADD CONSTRAINT `hours_employeefk` 
 		FOREIGN KEY (`employeefk`) REFERENCES `employees`(`id`) 
 		ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE `hours` 
+	ADD `typedatefk` INT NOT NULL AFTER `hour6`, 
+	ADD `balance` TIME NOT NULL AFTER `typedatefk`;
+
+CREATE TABLE `typedates` ( 
+		`id` INT NOT NULL AUTO_INCREMENT , 
+		`name` VARCHAR(50) NOT NULL , 
+		`time` TIME NOT NULL , 
+	PRIMARY KEY (`id`)
+) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_general_ci;
+
+ALTER TABLE `hours` 
+	ADD CONSTRAINT `hours_typedatefk` FOREIGN KEY (`typedatefk`) 
+	REFERENCES `typedates`(`id`) 
+	ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+/*
+trabalhando com horas no select para tirar o resultado
+SELECT TIME_FORMAT(sum(balance), '%T') AS 'Result' from hours where id in (4,7);
+*/
