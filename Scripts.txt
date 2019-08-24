@@ -66,6 +66,7 @@ ALTER TABLE `hours`
 	REFERENCES `typedates`(`id`) 
 	ON DELETE NO ACTION ON UPDATE NO ACTION;
 
+ALTER TABLE `ponto`.`hours` ADD UNIQUE `UNIQUE` (`id`, `employeefk`);
 
 /*
 trabalhando com horas no select para tirar o resultado
