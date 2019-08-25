@@ -68,6 +68,8 @@ ALTER TABLE `hours`
 
 ALTER TABLE `ponto`.`hours` ADD UNIQUE `UNIQUE` (`id`, `employeefk`);
 
+ALTER TABLE `employees` ADD `status` BOOLEAN NOT NULL AFTER `gender`;
+
 /*
 trabalhando com horas no select para tirar o resultado
 SELECT TIME_FORMAT(sum(balance), '%T') AS 'Result' from hours where id in (4,7);

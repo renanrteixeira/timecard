@@ -11,6 +11,7 @@ if (!$_SESSION['name']) {
 <?php $this->load->view('template/link') ?>
 <?php $this->load->view('template/headerdatepicker') ?>
 <?php $this->load->view('template/headerselect2') ?>
+<?php $this->load->view('template/linkicheck') ?>
 <?php $this->load->view('template/headerafterlink') ?>
 
 <div class="box box-primary">
@@ -65,7 +66,12 @@ if (!$_SESSION['name']) {
 					<option value="F" <?php echo isset($gender) ? ($gender=='F') ?'selected':'' : ''; ?>>Feminino</option>
 				</select>
 			</div>			
-		<div class="box-footer">
+			<div class="form-group">
+				<label>
+					<input type="checkbox" id="status" name="status" value="<?= set_value('status') ? : (isset($status) ? $status : '0') ?>" <?php if(isset($status)) { if ($status == 1) { ?> checked <?php } } ?>> Ativo?
+				</label>
+			</div>
+			<div class="box-footer">
 			<button type="submit" class="btn btn-primary">Gravar</button>
 		</div>
 	<?= form_close(); ?>
@@ -75,4 +81,5 @@ if (!$_SESSION['name']) {
 <?php $this->load->view('template/scripts') ?>
 <?php $this->load->view('template/scriptdatepicker') ?>
 <?php $this->load->view('template/scriptselect2') ?>
+<?php $this->load->view('template/scripticheck') ?>
 <?php $this->load->view('template/footer') ?>

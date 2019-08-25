@@ -22,7 +22,8 @@ class Employees_model extends CI_Model {
   private $_Role;
   private $_Birth;
   private $_Gender;
-  
+  private $_Status;
+
   public function setRoleID($ID) {
     $this->_ID = $ID;
 	}  

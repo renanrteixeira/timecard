@@ -52,6 +52,7 @@ class Employees extends CI_Controller {
 				$variaveis['role'] = $employee->row()->rolefk;
 				$variaveis['birth'] = $employee->row()->birth;
 				$variaveis['gender'] = $employee->row()->gender;
+				$variaveis['status'] = $employee->row()->status;
 				$this->load->view('employees/cadastro', $variaveis);
 			} else {
 				redirect('employees/index');
@@ -78,29 +79,38 @@ class Employees extends CI_Controller {
 		
 		$this->load->library('form_validation');
 		
-		$regras = array(
-		        array(
-		                'field' => 'name',
-		                'label' => 'Nome',
-		                'rules' => 'trim|required'
-				),
-		        array(
-						'field' => 'role',
-						'label' => 'Função',
-						'rules' => 'trim|required'
-				),
-		        array(
-						'field' => 'birth',
-						'label' => 'Aniversário',
-						'rules' => 'trim|required'
-				),
-		        array(
-						'field' => 'gender',
-						'label' => 'Sexo',
-						'rules' => 'trim|required'
-				),
+         if (is_null($this->input->post('status'))){
+			$_POST['status'] = 0;
+		 } else {
+			$_POST['status'] = 1; 
+		 }
 
-
+        $regras = array(
+			array(
+					'field' => 'name',
+					'label' => 'Nome',
+					'rules' => 'trim|required'
+			),
+			array(
+					'field' => 'role',
+					'label' => 'Função',
+					'rules' => 'trim|required'
+			),
+			array(
+					'field' => 'birth',
+					'label' => 'Aniversário',
+					'rules' => 'trim|required'
+			),
+			array(
+					'field' => 'gender',
+					'label' => 'Sexo',
+					'rules' => 'trim|required'
+			),
+			array(
+					'field' => 'status',
+					'label' => 'Status',
+					'rules' => 'trim|required'
+		)
 
 		);
 
@@ -109,6 +119,7 @@ class Employees extends CI_Controller {
 		if ($this->form_validation->run() == FALSE) {
 			$variaveis['titulo'] = 'Novo Funcionário';
 			$variaveis['employees'] = $this->employees->get();
+			$variaveis['roles'] = $this->employees->getRoles();
 			$this->load->view('employees/cadastro', $variaveis);
 		} else {
 			
@@ -121,6 +132,7 @@ class Employees extends CI_Controller {
 				"rolefk" => $this->input->post('role'),
 				"birth" => $this->input->post('birth'),
 				"gender" => $this->input->post('gender'),
+				"status" => $this->input->post('status'),
 
 			);
 			if ($this->employees->save($dados, $id)) {
@@ -134,6 +146,7 @@ class Employees extends CI_Controller {
 			} else {
 				$variaveis['mensagem'] = "Ocorreu um erro. Por favor, tente novamente.";
 				$variaveis['employees'] = $this->employees->get();
+				$variaveis['roles'] = $this->employees->getRoles();
 				$this->load->view('employees/cadastro', $variaveis);
 			}
 				

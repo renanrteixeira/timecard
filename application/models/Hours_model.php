@@ -78,6 +78,7 @@ class Hours_model extends CI_Model {
 		$this->db->from('hours');
 		$this->db->from('employees');
 		$this->db->where('employees.id = hours.employeefk');
+		$this->db->where('employees.status = 1');
 		$this->db->order_by("hours.id", 'desc');
 		return $this->db->get();
 	}
