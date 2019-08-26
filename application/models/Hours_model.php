@@ -74,7 +74,7 @@ class Hours_model extends CI_Model {
 			$this->db->where('hours.date', $date);
 		}
 		
-		$this->db->select('hours.id, employees.name, hours.date,, hours.typedatefk, hours.hour1, hours.hour2, hours.hour3, hours.hour4, hours.hour5, hours.hour6, hours.balance'); 
+		$this->db->select('hours.id, employees.name, hours.date, hours.typedatefk, hours.hour1, hours.hour2, hours.hour3, hours.hour4, hours.hour5, hours.hour6, hours.balance'); 
 		$this->db->from('hours');
 		$this->db->from('employees');
 		$this->db->where('employees.id = hours.employeefk');
@@ -82,6 +82,19 @@ class Hours_model extends CI_Model {
 		$this->db->order_by("hours.id", 'desc');
 		return $this->db->get();
 	}
+
+	public function getPersonalStatment($id, $mes){
+		
+		$this->db->select('hours.id, employees.name, hours.date, hours.typedatefk, hours.hour1, hours.hour2, hours.hour3, hours.hour4, hours.hour5, hours.hour6, hours.balance'); 
+		$this->db->from('hours');
+		$this->db->from('employees');
+		$this->db->where('employees.id = hours.employeefk');
+		$this->db->where('employees.status = 1');
+		$this->db->where('employees.id', $id);
+		$this->db->where('date(hours.date, m/Y', $mes);
+		$this->db->order_by("hours.id", 'desc');
+		return $this->db->get();
+	}	
 
 	public function getHoursExtract(){
 		$query = 'SELECT
