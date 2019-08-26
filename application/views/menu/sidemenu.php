@@ -33,6 +33,6 @@
 		</span>
 	</a>
 	<ul class="treeview-menu">
-		<li><a href="#"><i class="fa fa-circle-o"></i> Extrato de Horas</a></li>
+		<li><a href="<?php echo base_url('/hoursextract/index')?>"><i class="fa fa-circle-o"></i> Extrato de Horas</a></li>
 	</ul>
 </li>

@@ -82,6 +82,107 @@ class Hours_model extends CI_Model {
 		$this->db->order_by("hours.id", 'desc');
 		return $this->db->get();
 	}
+
+	public function getHoursExtract(){
+		$query = 'SELECT
+					employees.name,
+					TIME_FORMAT((SELECT
+								SUM(TIMEDIFF(ADDTIME(ADDTIME( TIME_FORMAT(TIMEDIFF(hour2,hour1),"%T") ,
+									TIME_FORMAT(TIMEDIFF(hour4,hour3), "%T")),
+									TIME_FORMAT(TIMEDIFF(hour6,hour5),"%T")),typedates.time))
+								FROM
+									hours h,
+									typedates
+								WHERE
+									h.id = h.id AND
+									h.typedatefk = typedates.id AND
+									h.employeefk = employees.id AND
+									PERIOD_ADD(DATE_FORMAT(SYSDATE(), "%Y%m"), -6) = DATE_FORMAT(h.date, "%Y%m")), "%T")  AS MES_0,  
+					TIME_FORMAT((SELECT
+								SUM(TIMEDIFF(ADDTIME(ADDTIME( TIME_FORMAT(TIMEDIFF(hour2,hour1),"%T") ,
+									TIME_FORMAT(TIMEDIFF(hour4,hour3), "%T")),
+									TIME_FORMAT(TIMEDIFF(hour6,hour5),"%T")),typedates.time))
+								FROM
+									hours h,
+									typedates
+								WHERE
+									h.id = h.id AND
+									h.typedatefk = typedates.id AND
+									h.employeefk = employees.id AND
+									PERIOD_ADD(DATE_FORMAT(SYSDATE(), "%Y%m"), -5) = DATE_FORMAT(h.date, "%Y%m")), "%T")  AS MES_1,
+					TIME_FORMAT((SELECT
+								SUM(TIMEDIFF(ADDTIME(ADDTIME( TIME_FORMAT(TIMEDIFF(hour2,hour1),"%T") ,
+									TIME_FORMAT(TIMEDIFF(hour4,hour3), "%T")),
+									TIME_FORMAT(TIMEDIFF(hour6,hour5),"%T")),typedates.time))
+								FROM
+									hours h,
+									typedates
+								WHERE
+									h.id = h.id AND
+									h.typedatefk = typedates.id AND
+									h.employeefk = employees.id AND
+									PERIOD_ADD(DATE_FORMAT(SYSDATE(), "%Y%m"), -4) = DATE_FORMAT(h.date, "%Y%m")), "%T")  AS MES_2,
+					TIME_FORMAT((SELECT
+								SUM(TIMEDIFF(ADDTIME(ADDTIME( TIME_FORMAT(TIMEDIFF(hour2,hour1),"%T") ,
+									TIME_FORMAT(TIMEDIFF(hour4,hour3), "%T")),
+									TIME_FORMAT(TIMEDIFF(hour6,hour5),"%T")),typedates.time))
+								FROM
+									hours h,
+									typedates
+								WHERE
+									h.id = h.id AND
+									h.typedatefk = typedates.id AND
+									h.employeefk = employees.id AND
+									PERIOD_ADD(DATE_FORMAT(SYSDATE(), "%Y%m"), -3) = DATE_FORMAT(h.date, "%Y%m")), "%T")  AS MES_3,
+					TIME_FORMAT((SELECT
+								SUM(TIMEDIFF(ADDTIME(ADDTIME( TIME_FORMAT(TIMEDIFF(hour2,hour1),"%T") ,
+									TIME_FORMAT(TIMEDIFF(hour4,hour3), "%T")),
+									TIME_FORMAT(TIMEDIFF(hour6,hour5),"%T")),typedates.time))
+								FROM
+									hours h,
+									typedates
+								WHERE
+									h.id = h.id AND
+									h.typedatefk = typedates.id AND
+									h.employeefk = employees.id AND
+									PERIOD_ADD(DATE_FORMAT(SYSDATE(), "%Y%m"), -2) = DATE_FORMAT(h.date, "%Y%m")), "%T")  AS MES_4,
+					TIME_FORMAT((SELECT
+								SUM(TIMEDIFF(ADDTIME(ADDTIME( TIME_FORMAT(TIMEDIFF(hour2,hour1),"%T") ,
+									TIME_FORMAT(TIMEDIFF(hour4,hour3), "%T")),
+									TIME_FORMAT(TIMEDIFF(hour6,hour5),"%T")),typedates.time))
+								FROM
+									hours h,
+									typedates
+								WHERE
+									h.id = h.id AND
+									h.typedatefk = typedates.id AND
+									h.employeefk = employees.id AND
+									PERIOD_ADD(DATE_FORMAT(SYSDATE(), "%Y%m"), -1) = DATE_FORMAT(h.date, "%Y%m")), "%T")  AS MES_5,  
+					TIME_FORMAT((SELECT
+					SUM(TIMEDIFF((TIMEDIFF(hour2,hour1) +
+								TIMEDIFF(hour4,hour3) +
+								TIMEDIFF(hour6,hour5)), typedates.time))
+					FROM
+						hours h,
+						typedates
+					WHERE
+						h.id = h.id AND
+						h.typedatefk = typedates.id AND
+						h.employeefk = employees.id AND
+						DATE_FORMAT(h.date, "%m-%Y") = DATE_FORMAT(SYSDATE(),"%m-%Y")), "%T") AS MES_ATUAL,
+  					TIME_FORMAT(SUM(balance), "%T") AS SALDO
+				FROM 
+					hours,
+					employees
+				WHERE
+					hours.employeefk = employees.id
+				GROUP BY
+					hours.employeefk';
+
+		
+		return $this->db->query($query);;
+	}
+	
 	public function checktime($aux) {
 		$aux=explode(':',$aux);
 		echo "Permaneceu ".$aux[0]." horas e ".$aux[1]." minutos ".$aux[2]." segundos";

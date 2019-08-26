@@ -73,4 +73,102 @@ ALTER TABLE `employees` ADD `status` BOOLEAN NOT NULL AFTER `gender`;
 /*
 trabalhando com horas no select para tirar o resultado
 SELECT TIME_FORMAT(sum(balance), '%T') AS 'Result' from hours where id in (4,7);
+
+
+SELECT
+  employees.name,
+  TIME_FORMAT((SELECT
+                 SUM(TIMEDIFF(ADDTIME(ADDTIME( TIME_FORMAT(TIMEDIFF(hour2,hour1),'%T') ,
+                     TIME_FORMAT(TIMEDIFF(hour4,hour3), '%T')),
+                     TIME_FORMAT(TIMEDIFF(hour6,hour5),'%T')),typedates.time))
+               FROM
+                  hours h,
+                  typedates
+               WHERE
+                  h.id = h.id AND
+                  h.typedatefk = typedates.id AND
+                  h.employeefk = employees.id AND
+                  PERIOD_ADD(DATE_FORMAT(SYSDATE(), '%Y%m'), -6) = DATE_FORMAT(h.date, '%Y%m')), '%T')  AS MES_0,  
+  TIME_FORMAT((SELECT
+                 SUM(TIMEDIFF(ADDTIME(ADDTIME( TIME_FORMAT(TIMEDIFF(hour2,hour1),'%T') ,
+                     TIME_FORMAT(TIMEDIFF(hour4,hour3), '%T')),
+                     TIME_FORMAT(TIMEDIFF(hour6,hour5),'%T')),typedates.time))
+               FROM
+                  hours h,
+                  typedates
+               WHERE
+                  h.id = h.id AND
+                  h.typedatefk = typedates.id AND
+                  h.employeefk = employees.id AND
+                  PERIOD_ADD(DATE_FORMAT(SYSDATE(), '%Y%m'), -5) = DATE_FORMAT(h.date, '%Y%m')), '%T')  AS MES_1,
+  TIME_FORMAT((SELECT
+                 SUM(TIMEDIFF(ADDTIME(ADDTIME( TIME_FORMAT(TIMEDIFF(hour2,hour1),'%T') ,
+                     TIME_FORMAT(TIMEDIFF(hour4,hour3), '%T')),
+                     TIME_FORMAT(TIMEDIFF(hour6,hour5),'%T')),typedates.time))
+               FROM
+                  hours h,
+                  typedates
+               WHERE
+                  h.id = h.id AND
+                  h.typedatefk = typedates.id AND
+                  h.employeefk = employees.id AND
+                  PERIOD_ADD(DATE_FORMAT(SYSDATE(), '%Y%m'), -4) = DATE_FORMAT(h.date, '%Y%m')), '%T')  AS MES_2,
+  TIME_FORMAT((SELECT
+                 SUM(TIMEDIFF(ADDTIME(ADDTIME( TIME_FORMAT(TIMEDIFF(hour2,hour1),'%T') ,
+                     TIME_FORMAT(TIMEDIFF(hour4,hour3), '%T')),
+                     TIME_FORMAT(TIMEDIFF(hour6,hour5),'%T')),typedates.time))
+               FROM
+                  hours h,
+                  typedates
+               WHERE
+                  h.id = h.id AND
+                  h.typedatefk = typedates.id AND
+                  h.employeefk = employees.id AND
+                  PERIOD_ADD(DATE_FORMAT(SYSDATE(), '%Y%m'), -3) = DATE_FORMAT(h.date, '%Y%m')), '%T')  AS MES_3,
+  TIME_FORMAT((SELECT
+                 SUM(TIMEDIFF(ADDTIME(ADDTIME( TIME_FORMAT(TIMEDIFF(hour2,hour1),'%T') ,
+                     TIME_FORMAT(TIMEDIFF(hour4,hour3), '%T')),
+                     TIME_FORMAT(TIMEDIFF(hour6,hour5),'%T')),typedates.time))
+               FROM
+                  hours h,
+                  typedates
+               WHERE
+                  h.id = h.id AND
+                  h.typedatefk = typedates.id AND
+                  h.employeefk = employees.id AND
+                  PERIOD_ADD(DATE_FORMAT(SYSDATE(), '%Y%m'), -2) = DATE_FORMAT(h.date, '%Y%m')), '%T')  AS MES_4,
+  TIME_FORMAT((SELECT
+                 SUM(TIMEDIFF(ADDTIME(ADDTIME( TIME_FORMAT(TIMEDIFF(hour2,hour1),'%T') ,
+                     TIME_FORMAT(TIMEDIFF(hour4,hour3), '%T')),
+                     TIME_FORMAT(TIMEDIFF(hour6,hour5),'%T')),typedates.time))
+               FROM
+                  hours h,
+                  typedates
+               WHERE
+                  h.id = h.id AND
+                  h.typedatefk = typedates.id AND
+                  h.employeefk = employees.id AND
+                  PERIOD_ADD(DATE_FORMAT(SYSDATE(), '%Y%m'), -1) = DATE_FORMAT(h.date, '%Y%m')), '%T')  AS MES_5,  
+  TIME_FORMAT((SELECT
+     SUM(TIMEDIFF((TIMEDIFF(hour2,hour1) +
+               TIMEDIFF(hour4,hour3) +
+               TIMEDIFF(hour6,hour5)), typedates.time))
+   FROM
+      hours h,
+      typedates
+   WHERE
+      h.id = h.id AND
+      h.typedatefk = typedates.id AND
+      h.employeefk = employees.id AND
+      DATE_FORMAT(h.date, '%m-%Y') = DATE_FORMAT(SYSDATE(),'%m-%Y')), '%T') AS MES_ATUAL,
+  TIME_FORMAT(SUM(balance), '%T') AS SALDO
+FROM 
+  `hours`,
+  `employees`
+WHERE
+  hours.employeefk = employees.id
+GROUP BY
+  hours.employeefk
+  
+
 */
