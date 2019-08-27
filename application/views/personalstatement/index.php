@@ -54,8 +54,8 @@ if (!$_SESSION['name']) {
 
 <div class="box box-primary">
 	<div class="box-header">
-		<h4>Funcionário: <?= $employee->row()->employee ?></h4>
-		<h4>Função: <?= $employee->row()->role ?></h4>
+		<h4>Funcionário: <?=  isset($employee) ? $employee->row()->employee : ''?></h4>
+		<h4>Função: <?= isset($employee) ? $employee->row()->role : '' ?></h4>
 		<h4>Período: <?= $periodo?></h4>
 	</div>
 	<div class="box-body">
@@ -73,7 +73,7 @@ if (!$_SESSION['name']) {
 				</tr>
 			</thead>
 			<tbody>
-			<?php foreach($extract->result() as $value){ ?>
+			<?php if (isset($extract)) { foreach($extract->result() as $value){ ?>
 				<tr>
     				<td><?= date('d/m/Y', strtotime($value->date))?></td>
 					<td><?= $value->hour1?></td>
@@ -84,7 +84,7 @@ if (!$_SESSION['name']) {
 					<td><?= $value->hour6?></td>
 					<td><?= $value->balance?></td>
 				</tr>
-				<?php } ?>
+				<?php }} ?>
 			</tbody>			
 		</table>
 	</div>

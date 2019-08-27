@@ -228,12 +228,16 @@ class Hours_model extends CI_Model {
 
 
 	public function getEmployee($id){
-		$this->db->select('employees.name as employee, roles.name as role');
-		$this->db->from('employees');
-		$this->db->from('roles');
-    	$this->db->where('employees.rolefk = roles.id');
-    	$this->db->where('employees.id', $id);
-		return $this->db->get();
+		if ($id){
+			$this->db->select('employees.name as employee, roles.name as role');
+			$this->db->from('employees');
+			$this->db->from('roles');
+			$this->db->where('employees.rolefk = roles.id');
+			$this->db->where('employees.id', $id);
+			return $this->db->get();
+		} else {
+			return null;
+		}
 	}
 
 	/**
