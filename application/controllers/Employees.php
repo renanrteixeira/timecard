@@ -154,3 +154,4 @@ class Employees extends CI_Controller {
 	}	
 	
 }
+?>

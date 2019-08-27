@@ -120,3 +120,4 @@ class TypeDates extends CI_Controller {
 	}	
 	
 }
+?>

@@ -13,40 +13,78 @@ if (!$_SESSION['name']) {
 <?php $this->load->view('template/headerselect2') ?>
 <?php $this->load->view('template/headerafterlink') ?>
 
+<div class="box box-warning collapsed-box">
+	<div class="box-header">
+		<h3 class="box-title">Filtros</h3>
+		<div class="box-tools pull-right">
+			<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+		</div>
+	</div>
+	<div class="box-body" style="display: none;">
+		<?= form_open('personalstatement/index')  ?>
+				<div class="form-group">
+					<label for="employee">Funcionário</label>
+					<div class="input-group">
+						<div class="input-group-addon">
+							<i class="fa fa-search"></i>
+						</div>
+						<select class="form-control select2-single" id="employee" name="employee">
+							<option value="">Informe um valor para filtrar</option>
+							<?php foreach($employees->result() as $value) {?>
+								<option value="<?= $value->id?>"><?=$value->name?></option>
+							<?php }?>
+						</select>
+					</div>
+				</div>	
+				<div class="form-group">
+					<label for="mes" class="col-2 col-form-label">Mês/Ano</label>
+					<div class="input-group">
+						<div class="input-group-addon">
+							<i class="fa fa-calendar"></i>
+						</div>
+						<input class="form-control" type="month" value="<?= date('Y-m')?>" id="mes" name="mes">
+					</div>
+				</div>
+				<div class="box-footer">
+					<button type="submit" class="btn btn-primary btn-custom"><span class="glyphicon glyphicon-filter img-circle btn-icon"></span> Filtrar</button>
+				</div>
+		<?= form_close(); ?>
+	</div>
+</div>
+
 <div class="box box-primary">
 	<div class="box-header">
-		<h3>Funcionário: <?=$extract->result()->name?></h3>
+		<h4>Funcionário: <?= $employee->row()->employee ?></h4>
+		<h4>Função: <?= $employee->row()->role ?></h4>
+		<h4>Período: <?= $periodo?></h4>
 	</div>
 	<div class="box-body">
 		<table id="table" class="table table-striped table-bordered" style="width:100%">
 			<thead>
 				<tr>
-					<th>Funcionário</th>
-					<th><?= date('M/y',strtotime('-6month'))?></th>
-					<th><?= date('M/y',strtotime('-5month'))?></th>
-					<th><?= date('M/y',strtotime('-4month'))?></th>
-					<th><?= date('M/y',strtotime('-3month'))?></th>
-					<th><?= date('M/y',strtotime('-2month'))?></th>
-					<th><?= date('M/y',strtotime('-1month'))?></th>
-					<th><?= date('M/y')?></th>
+					<th>Data</th>
+					<th>Entrada Manhã</th>
+					<th>Saída Manhã</th>
+					<th>Entrada Tarde</th>
+					<th>Saída Tarde</th>
+					<th>Entrada Extra</th>
+					<th>Saída Extra</th>
 					<th>Saldo Total</th>
 				</tr>
 			</thead>
 			<tbody>
 			<?php foreach($extract->result() as $value){ ?>
 				<tr>
-					<td><?= $value->name?></td>
-					<td><?= $value->MES_0?></td>
-					<td><?= $value->MES_1?></td>
-					<td><?= $value->MES_2?></td>
-					<td><?= $value->MES_3?></td>
-					<td><?= $value->MES_4?></td>
-					<td><?= $value->MES_5?></td>
-					<td><?= $value->MES_ATUAL?></td>
-					<td><?= $value->SALDO?></td>
+    				<td><?= date('d/m/Y', strtotime($value->date))?></td>
+					<td><?= $value->hour1?></td>
+					<td><?= $value->hour2?></td>
+					<td><?= $value->hour3?></td>
+					<td><?= $value->hour4?></td>
+					<td><?= $value->hour5?></td>
+					<td><?= $value->hour6?></td>
+					<td><?= $value->balance?></td>
 				</tr>
 				<?php } ?>
-
 			</tbody>			
 		</table>
 	</div>

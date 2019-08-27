@@ -24,3 +24,4 @@ class Error404 extends CI_Controller {
 		$this->load->view('error404/error404');
 	}
 }
+?>

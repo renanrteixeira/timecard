@@ -27,9 +27,13 @@ class PersonalStatement extends CI_Controller {
 
 	public function index()
 	{
-		$variaveis['extract'] = $this->hours->getPersonalStatment($this->input->post('id'), $this->input->post('mes'));
+		$variaveis['extract'] = $this->hours->getPersonalStatment($this->input->post('employee'), $this->input->post('mes'));
+		$variaveis['employee'] = $this->hours->getEmployee($this->input->post('employee'));
+		$variaveis['periodo'] = $this->input->post('mes');
 		$variaveis['employees'] = $this->hours->getEmployees();
 		$this->load->view('personalstatement/index', $variaveis);
 	}
 	
 }
+
+?>

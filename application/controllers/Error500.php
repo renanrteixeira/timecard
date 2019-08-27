@@ -24,3 +24,4 @@ class Error500 extends CI_Controller {
 		$this->load->view('error500/error500');
 	}
 }
+?>

@@ -85,15 +85,18 @@ class Hours_model extends CI_Model {
 
 	public function getPersonalStatment($id, $mes){
 		
-		$this->db->select('hours.id, employees.name, hours.date, hours.typedatefk, hours.hour1, hours.hour2, hours.hour3, hours.hour4, hours.hour5, hours.hour6, hours.balance'); 
-		$this->db->from('hours');
-		$this->db->from('employees');
-		$this->db->where('employees.id = hours.employeefk');
-		$this->db->where('employees.status = 1');
-		$this->db->where('employees.id', $id);
-		$this->db->where('date(hours.date, m/Y', $mes);
-		$this->db->order_by("hours.id", 'desc');
-		return $this->db->get();
+		if ($id) {
+       		$this->db->select('hours.id, employees.name, hours.date, hours.typedatefk, hours.hour1, hours.hour2, hours.hour3, hours.hour4, hours.hour5, hours.hour6, hours.balance'); 
+			$this->db->from('hours');
+			$this->db->from('employees');
+			$this->db->where('employees.id = hours.employeefk');
+			$this->db->where('employees.status = 1');
+			$this->db->where('employees.id', $id);
+			//$this->db->where('DATE_FORMAT(hours.date, "m-Y") = ', $mes);
+			return $this->db->get();
+		} else {
+			return null;
+		}
 	}	
 
 	public function getHoursExtract(){
@@ -172,9 +175,9 @@ class Hours_model extends CI_Model {
 									h.employeefk = employees.id AND
 									PERIOD_ADD(DATE_FORMAT(SYSDATE(), "%Y%m"), -1) = DATE_FORMAT(h.date, "%Y%m")), "%T")  AS MES_5,  
 					TIME_FORMAT((SELECT
-					SUM(TIMEDIFF((TIMEDIFF(hour2,hour1) +
-								TIMEDIFF(hour4,hour3) +
-								TIMEDIFF(hour6,hour5)), typedates.time))
+									SUM(TIMEDIFF(ADDTIME(ADDTIME( TIME_FORMAT(TIMEDIFF(hour2,hour1),"%T") ,
+									TIME_FORMAT(TIMEDIFF(hour4,hour3), "%T")),
+									TIME_FORMAT(TIMEDIFF(hour6,hour5),"%T")),typedates.time))
 					FROM
 						hours h,
 						typedates
@@ -221,6 +224,16 @@ class Hours_model extends CI_Model {
 			$this->db->where('typedates.id', $id);
 		}
 		return $this->db->get('typedates');
+	}
+
+
+	public function getEmployee($id){
+		$this->db->select('employees.name as employee, roles.name as role');
+		$this->db->from('employees');
+		$this->db->from('roles');
+    	$this->db->where('employees.rolefk = roles.id');
+    	$this->db->where('employees.id', $id);
+		return $this->db->get();
 	}
 
 	/**

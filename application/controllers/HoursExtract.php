@@ -32,3 +32,4 @@ class HoursExtract extends CI_Controller {
 	}
 	
 }
+?>
