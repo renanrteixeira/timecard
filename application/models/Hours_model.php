@@ -85,14 +85,14 @@ class Hours_model extends CI_Model {
 
 	public function getPersonalStatment($id, $mes){
 		
-		if ($id) {
+		if (($id) && ($mes)) {
        		$this->db->select('hours.id, employees.name, hours.date, hours.typedatefk, hours.hour1, hours.hour2, hours.hour3, hours.hour4, hours.hour5, hours.hour6, hours.balance'); 
 			$this->db->from('hours');
 			$this->db->from('employees');
 			$this->db->where('employees.id = hours.employeefk');
 			$this->db->where('employees.status = 1');
 			$this->db->where('employees.id', $id);
-			//$this->db->where('DATE_FORMAT(hours.date, "m-Y") = ', $mes);
+			$this->db->where('DATE_FORMAT(hours.date, "%Y-%m") = ', $mes);
 			return $this->db->get();
 		} else {
 			return null;
@@ -196,7 +196,7 @@ class Hours_model extends CI_Model {
 					hours.employeefk';
 
 		
-		return $this->db->query($query);;
+		return $this->db->query($query);
 	}
 	
 	public function checktime($aux) {
