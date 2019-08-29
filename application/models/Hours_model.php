@@ -86,14 +86,56 @@ class Hours_model extends CI_Model {
 	public function getPersonalStatment($id, $mes){
 		
 		if (($id) && ($mes)) {
-       		$this->db->select('hours.id, employees.name, hours.date, hours.typedatefk, hours.hour1, hours.hour2, hours.hour3, hours.hour4, hours.hour5, hours.hour6, hours.balance'); 
-			$this->db->from('hours');
-			$this->db->from('employees');
-			$this->db->where('employees.id = hours.employeefk');
-			$this->db->where('employees.status = 1');
-			$this->db->where('employees.id', $id);
-			$this->db->where('DATE_FORMAT(hours.date, "%Y-%m") = ', $mes);
-			return $this->db->get();
+			$query = 'SELECT
+						hours.id, 
+						employees.name, 
+						hours.date, 
+						hours.typedatefk, 
+						hours.hour1, 
+						hours.hour2, 
+						hours.hour3, 
+						hours.hour4, 
+						hours.hour5, 
+						hours.hour6, 
+						hours.balance
+					FROM
+						hours,
+						employees
+					WHERE
+						hours.employeefk = employees.id AND
+						employees.status = 1 AND
+						employees.id = '.$id.' AND
+						DATE_FORMAT(hours.date, "%Y-%m") = "'.$mes.'"
+					UNION
+					SELECT
+						NULL, 
+						"TOTAL", 
+						2300-12-31, 
+						NULL, 
+						NULL, 
+						NULL, 
+						NULL, 
+						NULL, 
+						NULL, 
+						NULL, 
+						TIME_FORMAT(SUM(hours.balance), "%T") AS balance
+					FROM
+						hours,
+						employees
+					WHERE
+						hours.employeefk = employees.id AND
+						employees.status = 1 AND
+						employees.id = '.$id.' AND
+						DATE_FORMAT(hours.date, "%Y-%m") = "'.$mes.'"';
+			return $this->db->query($query);
+       		//$this->db->select('hours.id, employees.name, hours.date, hours.typedatefk, hours.hour1, hours.hour2, hours.hour3, hours.hour4, hours.hour5, hours.hour6, hours.balance'); 
+			//$this->db->from('hours');
+			//$this->db->from('employees');
+			//$this->db->where('employees.id = hours.employeefk');
+			//$this->db->where('employees.status = 1');
+			//$this->db->where('employees.id', $id);
+			//$this->db->where('DATE_FORMAT(hours.date, "%Y-%m") = ', $mes);
+			//return $this->db->get();
 		} else {
 			return null;
 		}
