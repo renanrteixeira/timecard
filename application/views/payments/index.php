@@ -21,7 +21,7 @@ if (!$_SESSION['name']) {
 		</div>
 	</div>
 	<div class="box-body" style="display: none;">
-		<?= form_open('hours/index')  ?>
+		<?= form_open('payments/index')  ?>
 				<div class="form-group">
 					<label for="employee">Funcionário</label>
 					<div class="input-group">
