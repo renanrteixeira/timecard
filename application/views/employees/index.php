@@ -42,7 +42,7 @@ if (!$_SESSION['name']) {
 					<th>Código</th>
 					<th>Nome</th>
 					<th>Função</th>
-					<th>Aniversário</th>
+					<th>Admissão</th>
 					<th>Sexo</th>
 					<th>Ação</th>
 				</tr>
@@ -53,7 +53,7 @@ if (!$_SESSION['name']) {
 					<td><?= $employee->id?></td>
 					<td><?= $employee->name?></td>
 					<td><?= $employee->role?></td>
-					<td><?= date('d/m/Y', strtotime($employee->birth))?></td>
+					<td><?= date('d/m/Y', strtotime($employee->admission))?></td>
 					<?php if ($employee->gender == "M") { ?>
 					  <td>Masculino</td>
 					<?php } else { ?>

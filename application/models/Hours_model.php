@@ -79,9 +79,31 @@ class Hours_model extends CI_Model {
 		$this->db->from('employees');
 		$this->db->where('employees.id = hours.employeefk');
 		$this->db->where('employees.status = 1');
+		$this->db->where('hours.type = 0');
 		$this->db->order_by("hours.id", 'desc');
 		return $this->db->get();
 	}
+
+	public function getPayments( $employee = null, $date = null){
+		
+		if ($employee){
+			$this->db->where('hours.employeefk', $employee);
+		}
+
+		if ($date){
+			$this->db->where('hours.date', $date);
+		}
+
+		$this->db->select('hours.id, employees.name, hours.date, hours.hour1, hours.balance'); 
+		$this->db->from('hours');
+		$this->db->from('employees');
+		$this->db->where('employees.id = hours.employeefk');
+		$this->db->where('employees.status = 1');
+		$this->db->where('hours.type = 1');
+		$this->db->order_by("hours.id", 'desc');
+		return $this->db->get();
+	}
+
 
 	public function getPersonalStatment($id, $mes){
 		
@@ -128,14 +150,6 @@ class Hours_model extends CI_Model {
 						employees.id = '.$id.' AND
 						DATE_FORMAT(hours.date, "%Y-%m") = "'.$mes.'"';
 			return $this->db->query($query);
-       		//$this->db->select('hours.id, employees.name, hours.date, hours.typedatefk, hours.hour1, hours.hour2, hours.hour3, hours.hour4, hours.hour5, hours.hour6, hours.balance'); 
-			//$this->db->from('hours');
-			//$this->db->from('employees');
-			//$this->db->where('employees.id = hours.employeefk');
-			//$this->db->where('employees.status = 1');
-			//$this->db->where('employees.id', $id);
-			//$this->db->where('DATE_FORMAT(hours.date, "%Y-%m") = ', $mes);
-			//return $this->db->get();
 		} else {
 			return null;
 		}

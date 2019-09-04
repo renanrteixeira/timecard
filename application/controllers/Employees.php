@@ -50,7 +50,7 @@ class Employees extends CI_Controller {
 				$variaveis['id'] = $employee->row()->id;
 				$variaveis['name'] = $employee->row()->name;
 				$variaveis['role'] = $employee->row()->rolefk;
-				$variaveis['birth'] = $employee->row()->birth;
+				$variaveis['admission'] = $employee->row()->admission;
 				$variaveis['gender'] = $employee->row()->gender;
 				$variaveis['status'] = $employee->row()->status;
 				$this->load->view('employees/cadastro', $variaveis);
@@ -97,8 +97,8 @@ class Employees extends CI_Controller {
 					'rules' => 'trim|required'
 			),
 			array(
-					'field' => 'birth',
-					'label' => 'Aniversário',
+					'field' => 'admission',
+					'label' => 'Admissão',
 					'rules' => 'trim|required'
 			),
 			array(
@@ -130,7 +130,7 @@ class Employees extends CI_Controller {
 			
 				"name" => $this->input->post('name'),
 				"rolefk" => $this->input->post('role'),
-				"birth" => $this->input->post('birth'),
+				"admission" => $this->input->post('admission'),
 				"gender" => $this->input->post('gender'),
 				"status" => $this->input->post('status'),
 

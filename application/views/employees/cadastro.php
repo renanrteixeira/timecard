@@ -50,12 +50,12 @@ if (!$_SESSION['name']) {
 				</select>
 			</div>
 			<div class="form-group">
-				<label>Aniversário</label>
+				<label>Admissão</label>
 				<div class="input-group">
 					<div class="input-group-addon">
 					<i class="fa fa-calendar"></i>
 					</div>
-					<input type="date" class="form-control" id="birth" name="birth" value="<?= set_value('birth') ? : (isset($birth) ? $birth : '') ?>" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-inputmask-placeholder="dd/mm/aaaa" required>
+					<input type="date" class="form-control" id="admission" name="admission" value="<?= set_value('admission') ? : (isset($admission) ? $admission : '') ?>" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-inputmask-placeholder="dd/mm/aaaa" required>
 				</div>
 				<!-- /.input group -->
 			</div>

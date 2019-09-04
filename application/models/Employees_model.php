@@ -20,7 +20,7 @@ class Employees_model extends CI_Model {
   private $_ID;
   private $_name;
   private $_Role;
-  private $_Birth;
+  private $_Admission;
   private $_Gender;
   private $_Status;
 
@@ -36,8 +36,8 @@ class Employees_model extends CI_Model {
 		$this->_Role = $role;
 	}	
 
-  public function setBirth($birth) {
-		$this->_Birth = $birth;
+  public function setAdmission($admission) {
+		$this->_Admission = $admission;
 	}	
 
   public function sete($gender) {
@@ -80,7 +80,7 @@ class Employees_model extends CI_Model {
 		if ($id) {
 			$this->db->where('employees.id', $id);
 		}
-		$this->db->select('employees.id, employees.name, roles.name as role, employees.birth, employees.gender'); 
+		$this->db->select('employees.id, employees.name, roles.name as role, employees.admission, employees.gender'); 
 		$this->db->from('employees');
 		$this->db->from('roles');
 		$this->db->where('employees.rolefk = roles.id');

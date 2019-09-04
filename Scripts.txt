@@ -70,6 +70,30 @@ ALTER TABLE `ponto`.`hours` ADD UNIQUE `UNIQUE` (`id`, `employeefk`);
 
 ALTER TABLE `employees` ADD `status` BOOLEAN NOT NULL AFTER `gender`;
 
+--//aqui
+
+ALTER TABLE `employees` CHANGE `birth` `admission` DATE NOT NULL;
+
+ALTER TABLE `hours` ADD `type` INT NOT NULL DEFAULT '0' AFTER `date`;
+
+ALTER TABLE `ponto`.`hours` DROP INDEX `UNIQUE`, ADD UNIQUE `UNIQUE` (`employeefk`, `type`, `date`);
+
+ALTER TABLE `hours` CHANGE `type` `type` INT(11) NOT NULL DEFAULT '0';
+
+ALTER TABLE `hours` CHANGE `hour1` `hour1` TIME NOT NULL DEFAULT '00:00:00';
+
+ALTER TABLE `hours` CHANGE `hour2` `hour2` TIME NOT NULL DEFAULT '00:00:00';
+
+ALTER TABLE `hours` CHANGE `hour3` `hour3` TIME NOT NULL DEFAULT '00:00:00';
+
+ALTER TABLE `hours` CHANGE `hour4` `hour4` TIME NOT NULL DEFAULT '00:00:00';
+
+ALTER TABLE `hours` CHANGE `hour5` `hour5` TIME NOT NULL DEFAULT '00:00:00';
+
+ALTER TABLE `hours` CHANGE `hour6` `hour6` TIME NOT NULL DEFAULT '00:00:00';
+
+ALTER TABLE `hours` CHANGE `typedatefk` `typedatefk` INT(11) NULL;
+
 /*
 trabalhando com horas no select para tirar o resultado
 SELECT TIME_FORMAT(sum(balance), '%T') AS 'Result' from hours where id in (4,7);

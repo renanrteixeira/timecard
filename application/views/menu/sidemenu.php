@@ -21,6 +21,7 @@
 		<li><a href="<?php echo base_url('/employees/index')?>"><i class="fa fa-circle-o"></i> Funcionários</a></li>
 		<li><a href="<?php echo base_url('/typedates/index')?>"><i class="fa fa-circle-o"></i> Tipos de Data</a></li>
 		<li><a href="<?php echo base_url('/hours/index')?>"><i class="fa fa-circle-o"></i> Lançamento Horas</a></li>
+		<li><a href="<?php echo base_url('/payments/index')?>"><i class="fa fa-circle-o"></i> Pagamentos de Horas</a></li>
 		<li><a href="<?php echo base_url('/users/index')?>"><i class="fa fa-circle-o"></i> Usuários</a></li>
 	</ul>
 </li>
