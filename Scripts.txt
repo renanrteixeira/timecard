@@ -195,4 +195,6 @@ GROUP BY
   hours.employeefk
   
 
+https://stackoverflow.com/questions/3054123/calculate-a-sum-of-type-time-using-sql  
+
 */
