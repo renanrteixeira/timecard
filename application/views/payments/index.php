@@ -94,7 +94,7 @@ if (!$_SESSION['name']) {
 					<td><?= $hour->id ?></td>
 					<td><?= $hour->name?></td>
 					<td><?= date('d/m/Y', strtotime($hour->date))?></td>
-					<td><?= $hour->balance?></td>
+					<td><?= $hour->hour1?></td>
 					<td><?= anchor("payments/edit/$hour->id", "Editar") ?></td>
 				</tr>
 				<?php } ?>

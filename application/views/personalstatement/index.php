@@ -73,7 +73,7 @@ if (!$_SESSION['name']) {
 				</tr>
 			</thead>
 			<tbody>
-			<?php if (isset($extract)) { foreach($extract->result() as $value){ ?>
+			<?php if (isset($extract)) { foreach($extract->result() as $value){ if ($value->name != 'TOTAL') {?>
 				<tr>
     				<td><?= date('d/m/Y', strtotime($value->date))?></td>
 					<td><?= $value->hour1?></td>
@@ -84,7 +84,18 @@ if (!$_SESSION['name']) {
 					<td><?= $value->hour6?></td>
 					<td><?= $value->balance?></td>
 				</tr>
-				<?php }} ?>
+				<?php } else {   ?>
+					<tr>
+    				<td>TOTAL</td>
+					<td><?= $value->hour1?></td>
+					<td><?= $value->hour2?></td>
+					<td><?= $value->hour3?></td>
+					<td><?= $value->hour4?></td>
+					<td><?= $value->hour5?></td>
+					<td><?= $value->hour6?></td>
+					<td><?= $value->balance?></td>
+				</tr>
+				<?php } } }?>
 			</tbody>			
 		</table>
 	</div>
