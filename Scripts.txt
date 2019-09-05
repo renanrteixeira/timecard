@@ -185,7 +185,7 @@ SELECT
       h.typedatefk = typedates.id AND
       h.employeefk = employees.id AND
       DATE_FORMAT(h.date, '%m-%Y') = DATE_FORMAT(SYSDATE(),'%m-%Y')), '%T') AS MES_ATUAL,
-  TIME_FORMAT(SUM(balance), '%T') AS SALDO
+  sec_to_time(SUM(time_to_sec(balance))) AS SALDO
 FROM 
   `hours`,
   `employees`

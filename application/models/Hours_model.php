@@ -140,7 +140,7 @@ class Hours_model extends CI_Model {
 						NULL, 
 						NULL, 
 						NULL, 
-						TIME_FORMAT(SUM(hours.balance), "%T") AS balance
+						sec_to_time(SUM(time_to_sec(balance))) AS balance
 					FROM
 						hours,
 						employees
@@ -242,7 +242,7 @@ class Hours_model extends CI_Model {
 						h.typedatefk = typedates.id AND
 						h.employeefk = employees.id AND
 						DATE_FORMAT(h.date, "%m-%Y") = DATE_FORMAT(SYSDATE(),"%m-%Y")), "%T") AS MES_ATUAL,
-  					TIME_FORMAT(SUM(balance), "%T") AS SALDO
+						sec_to_time(SUM(time_to_sec(balance))) AS SALDO
 				FROM 
 					hours,
 					employees
