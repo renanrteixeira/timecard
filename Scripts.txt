@@ -197,4 +197,24 @@ GROUP BY
 
 https://stackoverflow.com/questions/3054123/calculate-a-sum-of-type-time-using-sql  
 
+somar tempo
+
+select COUNT(*),SEC_TO_TIME(SUM(TIME_TO_SEC(TIMEDIFF(end_time,start_time)))) AS timeSum from nfba2_hrm_attendance a where a.user_id = 162 and date(a.start_time) BETWEEN '2018-03-28' AND '2018-04-30'
+
+SELECT SEC_TO_TIME(SUM(UNIX_TIMESTAMP(endtime) - UNIX_TIMESTAMP(begintime))) AS sumtime
+FROM mytable WHERE begintime>='2005-03-01 00:00:00' AND begintime<='2005-03-31 23:59:59'
+
+select sec_to_time(sum(time_to_sec(mv_time))) 
+from data 
+where user_id=3
+
+
+select sec_to_time(sum(
+    extract(hour from mv_time) * 3600
+  + extract(minute from mv_time) * 60
+  + extract(second from mv_time)
+  )) AS total_mv_time
+from data
+
+
 */
