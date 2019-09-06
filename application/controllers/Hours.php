@@ -191,8 +191,8 @@ class Hours extends CI_Controller {
 					} else {
 						$retorno = "Cadastro atualizado com sucesso";
 					}
-					$this->session->set_flashdata('mensagem', $retorno);
-					redirect('hours/index');
+					$this->session->set_flashdata('retorno', $retorno);
+					redirect('hours/new');
 				} else {
 					$variaveis['mensagem'] = "Ocorreu um erro. Por favor, tente novamente.";
 					$variaveis['typedates'] = $this->hours->getTypeDates();

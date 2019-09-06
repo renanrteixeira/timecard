@@ -28,6 +28,15 @@ if (!$_SESSION['name']) {
 				<?= $mensagem ?>
 			</div>
 		<?php } ?>
+		<?php if (!empty($_SESSION['retorno'])) { ?>
+					<div class="alert alert-success alert-dismissible">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+						<h4><i class="icon fa fa-check"></i> Sucesso!</h4>
+						<!-- <?= $mensagem ?> -->
+						<?= $_SESSION['retorno'] ?>
+					</div>
+		<?php } ?>
+
 	<div class="box-header with-border">
 		<h3 class="box-title"><?= $titulo?></h3>
 	</div>
