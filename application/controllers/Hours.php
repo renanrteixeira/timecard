@@ -169,7 +169,7 @@ class Hours extends CI_Controller {
 					$balance = date('H:i:s', $balance);
 				}
 			
-				//echo  'Base: '.$hourbase.'  -  Convertido: '.strtotime($hourbase).'  -  Entrada: '.$Entadamanha.'  -  Convertido: '.strtotime($Entadamanha);
+				//echo  'Base: '.$hourbase.'  -  Convertido: '.strtotime($hourbase).'  -  Entrada: '.$Entradamanha.'  -  Convertido: '.strtotime($Entradamanha).' Balance: '.$balance;
 				$dados = array(
 					
 
