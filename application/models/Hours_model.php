@@ -139,15 +139,17 @@ class Hours_model extends CI_Model {
 						NULL, 
 						NULL, 
 						NULL, 
-						NULL, 
+						sec_to_time(SUM(time_to_sec(typedates.time))) as hours6, 
 						sec_to_time(SUM(time_to_sec(balance))) AS balance
 					FROM
 						hours,
-						employees
+						employees,
+                        typedates
 					WHERE
 						hours.employeefk = employees.id AND
 						employees.status = 1 AND
 						employees.id = '.$id.' AND
+                        typedates.id = hours.typedatefk AND						
 						DATE_FORMAT(hours.date, "%Y-%m") = "'.$mes.'"';
 			return $this->db->query($query);
 		} else {
@@ -254,7 +256,6 @@ class Hours_model extends CI_Model {
 		$this->db->order_by("hours.id", 'desc');
 		return $this->db->get('hours');
 	}
-
 
 	public function getEmployees(){
 		return $this->db->get('employees');

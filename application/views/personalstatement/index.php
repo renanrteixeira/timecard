@@ -28,7 +28,7 @@ if (!$_SESSION['name']) {
 						<div class="input-group-addon">
 							<i class="fa fa-search"></i>
 						</div>
-						<select class="form-control select2-single" id="employee" name="employee">
+						<select class="form-control select2-single" id="employee" name="employee" style="width: 100%">
 							<option value="">Informe um valor para filtrar</option>
 							<?php foreach($employees->result() as $value) {?>
 								<option value="<?= $value->id?>"><?=$value->name?></option>
@@ -86,15 +86,16 @@ if (!$_SESSION['name']) {
 				</tr>
 				<?php } else {   ?>
 					<tr>
-    				<td>TOTAL</td>
-					<td><?= $value->hour1?></td>
-					<td><?= $value->hour2?></td>
-					<td><?= $value->hour3?></td>
-					<td><?= $value->hour4?></td>
-					<td><?= $value->hour5?></td>
-					<td><?= $value->hour6?></td>
-					<td><?= $value->balance?></td>
-				</tr>
+						<td>TOTAL</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>Mês</td>
+						<td><?= $value->hour6?></td>
+						<td>Realizado</td>
+						<td><?= $value->balance?></td>
+					</tr>
+					</tr>
 				<?php } } }?>
 			</tbody>			
 		</table>

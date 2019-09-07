@@ -20,7 +20,7 @@ if (!$_SESSION['name']) {
 			<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
 		</div>
 	</div>
-	<div class="box-body" style="display: none;">
+	<div class="box-body" id="box">
 		<?= form_open('hours/index')  ?>
 				<div class="form-group">
 					<label for="employee">Funcionário</label>
@@ -28,14 +28,14 @@ if (!$_SESSION['name']) {
 						<div class="input-group-addon">
 							<i class="fa fa-search"></i>
 						</div>
-						<select class="form-control select2-single" id="employee" name="employee">
+						<select class="select2-single" id="employee" name="employee" style="width: 100%">
 							<option value="">Informe um valor para filtrar</option>
 							<?php foreach($employees->result() as $value) {?>
 								<option value="<?= $value->id?>"><?=$value->name?></option>
 							<?php }?>
 						</select>
 					</div>
-				</div>	
+				</div>
 
 				<div class="form-group">
 					<label for="date">Data</label>

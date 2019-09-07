@@ -84,6 +84,38 @@ class Hours extends CI_Controller {
 		}
 	}
 
+	//Transforma as horas em "inteiro"
+	function toUnixTime($total) {
+		$negativo = false;
+		if (strpos($total, '-') === 0) {
+			$negativo = true;
+			$total = str_replace('-', '', $total);
+		}
+
+		list($horas, $minutos, $segundos) = explode(':', $total);
+		$ut = mktime($horas, $minutos, $segundos);
+		if ($negativo) {
+			return -$ut;
+		}
+
+		return $ut;
+	}
+
+	//Gera horarios acima de 24 horas (para calculo total)
+	function getFullHour($input) {
+		$seconds = intval($input);
+		$resp = NULL;//Em caso de receber um valor não suportado retorna nulo
+
+		if (is_int($seconds)) {
+			$hours = floor($seconds / 3600);
+			$mins = floor(($seconds - ($hours * 3600)) / 60);
+			$secs = '00';//floor($seconds % 60);
+
+			$resp = sprintf('%02d:%02d:%02d', $hours, $mins, $secs);
+		}
+
+		return $resp;
+	}	
 
 	public function save(){
 		
@@ -152,8 +184,7 @@ class Hours extends CI_Controller {
 					$Saidaextra   = $this->input->post('hour6').':00';
 				}
 
-
-
+/*
 				$balance = ((strtotime($Saidamanha) - strtotime($Entradamanha))+
 						    (strtotime($Saidatarde) - strtotime($Entradatarde))+
 						    (strtotime($Saidaextra) - strtotime($Entradaextra)));
@@ -163,12 +194,31 @@ class Hours extends CI_Controller {
 			    if (strtotime($balance) < strtotime($hourbase)) {
 					$balance = strtotime($hourbase) - strtotime($balance);
 					$balance = date('H:i:s', $balance);
-					$balance = '-'.$balance;
+					$balance = -$balance;
 				} else {
 					$balance = strtotime($balance) - strtotime($hourbase);
 					$balance = date('H:i:s', $balance);
 				}
 			
+*/			
+			  
+			    $h1 = $this->toUnixTime($Entradamanha);
+			    $h2 = $this->toUnixTime($Saidamanha);
+			    $h3 = $this->toUnixTime($Entradatarde);
+			    $h4 = $this->toUnixTime($Saidatarde);
+			    $h5 = $this->toUnixTime($Saidaextra);
+			    $h6 = $this->toUnixTime($Entradaextra);
+			   
+				$balance = (($h2 - $h1) +
+							($h4 - $h3) +
+							($h6 - $h5));
+
+     			$balance = $this->getFullHour($balance);
+				
+				$balance = $this->toUnixTime($balance) - $this->toUnixTime($hourbase);
+
+				$balance = $this->getFullHour($balance);
+
 				//echo  'Base: '.$hourbase.'  -  Convertido: '.strtotime($hourbase).'  -  Entrada: '.$Entradamanha.'  -  Convertido: '.strtotime($Entradamanha).' Balance: '.$balance;
 				$dados = array(
 					

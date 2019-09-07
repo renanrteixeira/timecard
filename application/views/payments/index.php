@@ -28,7 +28,7 @@ if (!$_SESSION['name']) {
 						<div class="input-group-addon">
 							<i class="fa fa-search"></i>
 						</div>
-						<select class="form-control select2-single" id="employee" name="employee">
+						<select class="form-control select2-single" id="employee" name="employee" style="width: 100%">
 							<option value="">Informe um valor para filtrar</option>
 							<?php foreach($employees->result() as $value) {?>
 								<option value="<?= $value->id?>"><?=$value->name?></option>
