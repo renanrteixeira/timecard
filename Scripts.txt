@@ -94,6 +94,8 @@ ALTER TABLE `hours` CHANGE `hour6` `hour6` TIME NOT NULL DEFAULT '00:00:00';
 
 ALTER TABLE `hours` CHANGE `typedatefk` `typedatefk` INT(11) NULL;
 
+ALTER TABLE `hours` CHANGE `id` `id` SERIAL NOT NULL AUTO_INCREMENT;
+
 /*
 trabalhando com horas no select para tirar o resultado
 SELECT TIME_FORMAT(sum(balance), '%T') AS 'Result' from hours where id in (4,7);
