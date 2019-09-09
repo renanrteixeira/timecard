@@ -92,7 +92,7 @@ if (!$_SESSION['name']) {
 						<td></td>
 						<td>Mês</td>
 						<td><?= $value->hour6?></td>
-						<td>Realizado</td>
+						<td>Saldo</td>
 						<td><?= $value->balance?></td>
 					</tr>
 					</tr>
