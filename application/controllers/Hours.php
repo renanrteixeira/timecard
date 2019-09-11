@@ -184,7 +184,7 @@ class Hours extends CI_Controller {
 					$Saidaextra   = $this->input->post('hour6').':00';
 				}
 
-/*
+
 				$balance = ((strtotime($Saidamanha) - strtotime($Entradamanha))+
 						    (strtotime($Saidatarde) - strtotime($Entradatarde))+
 						    (strtotime($Saidaextra) - strtotime($Entradaextra)));
@@ -199,9 +199,9 @@ class Hours extends CI_Controller {
 					$balance = strtotime($balance) - strtotime($hourbase);
 					$balance = date('H:i:s', $balance);
 				}
-			*/
 			
-			  
+			
+	/*		  
 			    $h1 = $this->toUnixTime($Entradamanha);
 			    $h2 = $this->toUnixTime($Saidamanha);
 			    $h3 = $this->toUnixTime($Entradatarde);
@@ -227,7 +227,7 @@ class Hours extends CI_Controller {
 					$balance = $this->toUnixTime($balance) - $this->toUnixTime($hourbase);
 
 					$balance = $this->getFullHour($balance);
-				}
+				}*/
 
 				//echo  'Base: '.$hourbase.'  -  Convertido: '.strtotime($hourbase).'  -  Entrada: '.$Entradamanha.'  -  Convertido: '.strtotime($Entradamanha).' Balance: '.$balance;
 				$dados = array(
