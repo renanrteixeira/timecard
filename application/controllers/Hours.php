@@ -185,6 +185,7 @@ class Hours extends CI_Controller {
 				}
 
 
+<<<<<<< HEAD
 				$balance = ((strtotime($Saidamanha) - strtotime($Entradamanha))+
 						    (strtotime($Saidatarde) - strtotime($Entradatarde))+
 							(strtotime($Saidaextra) - strtotime($Entradaextra)));
@@ -218,6 +219,8 @@ class Hours extends CI_Controller {
 /*
 				outra forma
 
+=======
+>>>>>>> e1c06f2fd35b812d707f58724b266d1e27ffd9cb
 				$balance = ((strtotime($Saidamanha) - strtotime($Entradamanha))+
 						    (strtotime($Saidatarde) - strtotime($Entradatarde))+
 						    (strtotime($Saidaextra) - strtotime($Entradaextra)));
@@ -232,9 +235,13 @@ class Hours extends CI_Controller {
 					$balance = strtotime($balance) - strtotime($hourbase);
 					$balance = date('H:i:s', $balance);
 				}
-			*/
 			
+<<<<<<< HEAD
 /*			  
+=======
+			
+	/*		  
+>>>>>>> e1c06f2fd35b812d707f58724b266d1e27ffd9cb
 			    $h1 = $this->toUnixTime($Entradamanha);
 			    $h2 = $this->toUnixTime($Saidamanha);
 			    $h3 = $this->toUnixTime($Entradatarde);
@@ -261,7 +268,10 @@ class Hours extends CI_Controller {
 
 					$balance = $this->getFullHour($balance);
 				}*/
+<<<<<<< HEAD
 
+=======
+>>>>>>> e1c06f2fd35b812d707f58724b266d1e27ffd9cb
 
 				//echo  'Base: '.$hourbase.'  -  Convertido: '.strtotime($hourbase).'  -  Entrada: '.$Entradamanha.'  -  Convertido: '.strtotime($Entradamanha).' Balance: '.$balance;
 				$dados = array(
