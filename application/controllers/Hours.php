@@ -184,7 +184,40 @@ class Hours extends CI_Controller {
 					$Saidaextra   = $this->input->post('hour6').':00';
 				}
 
+
+				$balance = ((strtotime($Saidamanha) - strtotime($Entradamanha))+
+						    (strtotime($Saidatarde) - strtotime($Entradatarde))+
+							(strtotime($Saidaextra) - strtotime($Entradaextra)));
+							
+				$balance = date('H:i:s', $balance);
+
+				if (strtotime($balance) < strtotime($hourbase)) {
+					$balance = strtotime($hourbase) - strtotime($balance);
+					// Encontra as horas trabalhadas
+					$hours      = floor($balance / 60 / 60);	
+					// Encontra os minutos trabalhados
+					$minutes    = round(($balance - ($hours * 60 * 60)) / 60);						
+
+					$balance = $hours.':'.$minutes.':00';
+					$balance = '-'.$balance;
+				} else {
+					$balance = strtotime($balance) - strtotime($hourbase);
+					// Encontra as horas trabalhadas
+					$hours      = floor($balance / 60 / 60);	
+					// Encontra os minutos trabalhados
+					$minutes    = round(($balance - ($hours * 60 * 60)) / 60);						
+
+					// Formata a hora e minuto para ficar no formato de 2 números, exemplo 00
+					$hours = str_pad($hours, 2, "0", STR_PAD_LEFT);
+					$minutes = str_pad($minutes, 2, "0", STR_PAD_LEFT);				
+
+					$balance = $hours.':'.$minutes.':00';
+				}			
+		
+
 /*
+				outra forma
+
 				$balance = ((strtotime($Saidamanha) - strtotime($Entradamanha))+
 						    (strtotime($Saidatarde) - strtotime($Entradatarde))+
 						    (strtotime($Saidaextra) - strtotime($Entradaextra)));
@@ -201,7 +234,7 @@ class Hours extends CI_Controller {
 				}
 			*/
 			
-			  
+/*			  
 			    $h1 = $this->toUnixTime($Entradamanha);
 			    $h2 = $this->toUnixTime($Saidamanha);
 			    $h3 = $this->toUnixTime($Entradatarde);
@@ -227,7 +260,8 @@ class Hours extends CI_Controller {
 					$balance = $this->toUnixTime($balance) - $this->toUnixTime($hourbase);
 
 					$balance = $this->getFullHour($balance);
-				}
+				}*/
+
 
 				//echo  'Base: '.$hourbase.'  -  Convertido: '.strtotime($hourbase).'  -  Entrada: '.$Entradamanha.'  -  Convertido: '.strtotime($Entradamanha).' Balance: '.$balance;
 				$dados = array(

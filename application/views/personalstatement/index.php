@@ -2,9 +2,14 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
+setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+date_default_timezone_set('America/Sao_Paulo');
+
 if (!$_SESSION['name']) {
 	redirect('login/login');
 }
+
+
 
 ?>
 <?php $this->load->view('template/header') ?>
@@ -75,7 +80,7 @@ if (!$_SESSION['name']) {
 			<tbody>
 			<?php if (isset($extract)) { foreach($extract->result() as $value){ if ($value->name != 'TOTAL') {?>
 				<tr>
-    				<td><?= date('d/m/Y', strtotime($value->date))?></td>
+    				<td><?= ucfirst(utf8_encode(strftime('%d/%m/%Y (%A)', strtotime($value->date))))?></td>
 					<td><?= $value->hour1?></td>
 					<td><?= $value->hour2?></td>
 					<td><?= $value->hour3?></td>

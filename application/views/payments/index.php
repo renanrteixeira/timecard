@@ -2,6 +2,10 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
+
+setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+date_default_timezone_set('America/Sao_Paulo');
+
 if (!$_SESSION['name']) {
 	redirect('login/login');
 }
@@ -93,7 +97,7 @@ if (!$_SESSION['name']) {
 				<tr>
 					<td><?= $hour->id ?></td>
 					<td><?= $hour->name?></td>
-					<td><?= date('d/m/Y', strtotime($hour->date))?></td>
+					<td><?= ucfirst(utf8_encode(strftime('%d/%m/%Y',strtotime($hour->date))))?></td>
 					<td><?= $hour->hour1?></td>
 					<td><?= anchor("payments/edit/$hour->id", "Editar") ?></td>
 				</tr>

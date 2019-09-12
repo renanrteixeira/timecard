@@ -2,6 +2,10 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
+setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+date_default_timezone_set('America/Sao_Paulo');
+
+
 if (!$_SESSION['name']) {
 	redirect('login/login');
 }
@@ -19,13 +23,13 @@ if (!$_SESSION['name']) {
 			<thead>
 				<tr>
 					<th>Funcionário</th>
-					<th><?= date('M/y',strtotime('-6month'))?></th>
-					<th><?= date('M/y',strtotime('-5month'))?></th>
-					<th><?= date('M/y',strtotime('-4month'))?></th>
-					<th><?= date('M/y',strtotime('-3month'))?></th>
-					<th><?= date('M/y',strtotime('-2month'))?></th>
-					<th><?= date('M/y',strtotime('-1month'))?></th>
-					<th><?= date('M/y')?></th>
+					<th><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-6month'))))?></th>
+					<th><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-5month'))))?></th>
+					<th><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-4month'))))?></th>
+					<th><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-3month'))))?></th>
+					<th><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-2month'))))?></th>
+					<th><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-1month'))))?></th>
+					<th><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('today'))))?></th>
 					<th>Saldo Total</th>
 				</tr>
 			</thead>
