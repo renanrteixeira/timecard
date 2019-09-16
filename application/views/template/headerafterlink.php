@@ -83,6 +83,7 @@
         Controle Ponto
         <small>Versão 1.0</small>
       </h1>
+      <!-- <?php echo create_breadcrumb('home', base_url()); ?> -->
     </section>
 
     <!-- Main content -->
