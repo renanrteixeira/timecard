@@ -46,6 +46,8 @@ if (!$_SESSION['name']) {
 		<div class="box-body">
 			<div class="form-group">
 				<input type="hidden" class="form-control" id="id" name="id" value="<?= set_value('id') ? : (isset($id) ? $id : '') ?>">
+			</div>
+			<div class="form-group">
                 <label for="employee">Funcionário</label>
                 <select class="form-control select2-single" id="employee" name="employee" required autofocus>
 				  <?php foreach($employees->result() as $value) {?>
@@ -65,7 +67,7 @@ if (!$_SESSION['name']) {
 			</div>
 			<div class="form-group">
                 <label for="typedate">Tipo de Data</label>
-                <select class="form-control select2-single" id="typedate" name="typedate" required>
+                <select class="form-control select2-single" id="typedate" name="typedate"  required>
 				  <?php foreach($typedates->result() as $value) {?>
                      <option value="<?= $value->id?>" <?php echo isset($typedate) ? ($typedate==$value->id) ? 'selected': '' : '';  ?>><?=$value->name?></option>
 				  <?php }?>

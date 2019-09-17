@@ -43,7 +43,7 @@ if (!$_SESSION['name']) {
 			</div>
 			<div class="form-group">
 				<label for="role">Função</label>
-				<select class="select2-single form-control" data-live-search="true" title="Please select a lunch ..." id="role" name="role" required>
+				<select class="form-control select2-single" id="role" name="role" style="width: 100%;" required>
 					<?php foreach($roles->result() as $value) {?>
 						<option value="<?= $value->id?>" <?php echo isset($role) ? ($role==$value->id) ? 'selected': '' : '';  ?>><?=$value->name?></option>
 					<?php }?>
@@ -61,7 +61,7 @@ if (!$_SESSION['name']) {
 			</div>
 			<div class="form-group">
 				<label>Sexo</label>
-				<select class="select2-single form-control" name="gender" id="gender" required>
+				<select class="form-control select2-single" name="gender" id="gender" style="width: 100%; height: 34px" required>
 					<option value="M" <?php echo isset($gender) ? ($gender=='M') ?'selected':'' : ''; ?>>Masculino</option>
 					<option value="F" <?php echo isset($gender) ? ($gender=='F') ?'selected':'' : ''; ?>>Feminino</option>
 				</select>
