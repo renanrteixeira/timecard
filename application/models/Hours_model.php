@@ -110,9 +110,11 @@ class Hours_model extends CI_Model {
 		if (($id) && ($mes)) {
 			$query = 'SELECT
 						hours.id, 
-						employees.name, 
+						NULL AS info, 
 						hours.date, 
 						hours.typedatefk, 
+                        typedates.name as data,
+						typedates.time,
 						hours.hour1, 
 						hours.hour2, 
 						hours.hour3, 
@@ -122,9 +124,11 @@ class Hours_model extends CI_Model {
 						hours.balance
 					FROM
 						hours,
-						employees
+						employees,
+                        typedates
 					WHERE
 						hours.employeefk = employees.id AND
+                        typedates.id = hours.typedatefk AND
 						employees.status = 1 AND
 						employees.id = '.$id.' AND
 						DATE_FORMAT(hours.date, "%Y-%m") = "'.$mes.'"
@@ -134,12 +138,22 @@ class Hours_model extends CI_Model {
 						"TOTAL", 
 						2300-12-31, 
 						NULL, 
+						NULL as data, 
+						NULL,
+						NULL,
 						NULL, 
 						NULL, 
 						NULL, 
-						NULL, 
-						NULL, 
-						sec_to_time(SUM(time_to_sec(typedates.time))) as hours6, 
+						sec_to_time(
+							SUM( 
+								 (
+								   (time_to_sec(hours.hour2) - time_to_sec(hours.hour1)) +
+								   (time_to_sec(hours.hour4) - time_to_sec(hours.hour3)) +
+								   (time_to_sec(hours.hour6) - time_to_sec(hours.hour5))   
+								  )
+							   )
+						  )  as hour5, 
+						sec_to_time(SUM(time_to_sec(typedates.time))) as hour6, 
 						sec_to_time(SUM(time_to_sec(balance))) AS balance
 					FROM
 						hours,

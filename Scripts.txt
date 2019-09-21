@@ -96,6 +96,11 @@ ALTER TABLE `hours` CHANGE `typedatefk` `typedatefk` INT(11) NULL;
 
 ALTER TABLE `hours` CHANGE `id` `id` SERIAL NOT NULL AUTO_INCREMENT;
 
+
+--//nova
+CREATE TABLE `companies` ( `id` BIGINT NOT NULL AUTO_INCREMENT , `name` VARCHAR(100) NOT NULL , `address` VARCHAR(500) NOT NULL , `telephone` VARCHAR(50) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_general_ci;
+
+
 /*
 trabalhando com horas no select para tirar o resultado
 SELECT TIME_FORMAT(sum(balance), '%T') AS 'Result' from hours where id in (4,7);

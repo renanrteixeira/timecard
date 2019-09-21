@@ -68,6 +68,7 @@ if (!$_SESSION['name']) {
 			<thead>
 				<tr>
 					<th>Data</th>
+					<th>Tipo de Data</th>
 					<th>Entrada Manhã</th>
 					<th>Saída Manhã</th>
 					<th>Entrada Tarde</th>
@@ -78,9 +79,10 @@ if (!$_SESSION['name']) {
 				</tr>
 			</thead>
 			<tbody>
-			<?php if (isset($extract)) { foreach($extract->result() as $value){ if ($value->name != 'TOTAL') {?>
+			<?php if (isset($extract)) { foreach($extract->result() as $value){ if ($value->info != 'TOTAL') { ?>
 				<tr>
-    				<td><?= ucfirst(utf8_encode(strftime('%d/%m/%Y (%A)', strtotime($value->date))))?></td>
+    				<td><?= ucfirst(utf8_encode(strftime('%d/%m/%Y', strtotime($value->date))))?></td>
+					<td><?= $value->data?></td>
 					<td><?= $value->hour1?></td>
 					<td><?= $value->hour2?></td>
 					<td><?= $value->hour3?></td>
@@ -94,8 +96,9 @@ if (!$_SESSION['name']) {
 						<td>TOTAL</td>
 						<td></td>
 						<td></td>
-						<td></td>
-						<td>Mês</td>
+						<td>Horas Trabalhadas</td>
+						<td><?= $value->hour5?></td>
+						<td>Horas a Trabalhar</td>
 						<td><?= $value->hour6?></td>
 						<td>Saldo</td>
 						<td><?= $value->balance?></td>
