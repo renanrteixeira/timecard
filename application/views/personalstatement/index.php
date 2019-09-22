@@ -59,16 +59,18 @@ if (!$_SESSION['name']) {
 
 <div class="box box-primary">
 	<div class="box-header">
+		<h4>Empresa: <?= isset($companies) ? $companies->row()->name : '' ?></h4>
 		<h4>Funcionário: <?=  isset($employee) ? $employee->row()->employee : ''?></h4>
 		<h4>Função: <?= isset($employee) ? $employee->row()->role : '' ?></h4>
-		<h4>Período: <?= $periodo?></h4>
+		<h4>Admissão: <?= isset($employee) ? ucfirst(utf8_encode(strftime('%d/%m/%Y', strtotime($employee->row()->admission)))) : '' ?></h4>
+		<h4>Período: <?= ucfirst(utf8_encode(strftime('%m/%Y', strtotime($periodo)))) ?></h4>
 	</div>
 	<div class="box-body">
 		<table id="table" class="table table-striped table-bordered" style="width:100%">
 			<thead>
 				<tr>
 					<th>Data</th>
-					<th>Tipo de Data</th>
+					<th>Tipo</th>
 					<th>Entrada Manhã</th>
 					<th>Saída Manhã</th>
 					<th>Entrada Tarde</th>
@@ -80,17 +82,17 @@ if (!$_SESSION['name']) {
 			</thead>
 			<tbody>
 			<?php if (isset($extract)) { foreach($extract->result() as $value){ if ($value->info != 'TOTAL') { ?>
-				<tr>
-    				<td><?= ucfirst(utf8_encode(strftime('%d/%m/%Y', strtotime($value->date))))?></td>
-					<td><?= $value->data?></td>
-					<td><?= $value->hour1?></td>
-					<td><?= $value->hour2?></td>
-					<td><?= $value->hour3?></td>
-					<td><?= $value->hour4?></td>
-					<td><?= $value->hour5?></td>
-					<td><?= $value->hour6?></td>
-					<td><?= $value->balance?></td>
-				</tr>
+					<tr>
+						<td><?= ucfirst(utf8_encode(strftime('%d/%m/%Y', strtotime($value->date))))?></td>
+						<td><?= $value->data?></td>
+						<td><?= $value->hour1?></td>
+						<td><?= $value->hour2?></td>
+						<td><?= $value->hour3?></td>
+						<td><?= $value->hour4?></td>
+						<td><?= $value->hour5?></td>
+						<td><?= $value->hour6?></td>
+						<td><?= $value->balance?></td>
+					</tr>
 				<?php } else {   ?>
 					<tr>
 						<td>TOTAL</td>

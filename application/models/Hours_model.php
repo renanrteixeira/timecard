@@ -104,6 +104,11 @@ class Hours_model extends CI_Model {
 		return $this->db->get();
 	}
 
+	public function getCompanies(){
+		
+		return $this->db->get('companies');
+
+	}
 
 	public function getPersonalStatment($id, $mes){
 		
@@ -286,7 +291,7 @@ class Hours_model extends CI_Model {
 
 	public function getEmployee($id){
 		if ($id){
-			$this->db->select('employees.name as employee, roles.name as role');
+			$this->db->select('employees.name as employee, roles.name as role, employees.admission as admission');
 			$this->db->from('employees');
 			$this->db->from('roles');
 			$this->db->where('employees.rolefk = roles.id');

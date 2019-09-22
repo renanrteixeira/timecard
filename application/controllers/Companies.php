@@ -94,12 +94,19 @@ class Companies extends CI_Controller {
 		$this->form_validation->set_rules($regras);
 
 		if ($this->form_validation->run() == FALSE) {
-			$variaveis['titulo'] = 'Novo Registro';
+			$variaveis['titulo'] = 'Novo Empresa';
 			$this->load->view('companies/cadastro', $variaveis);
 		} else {
 			
 			$id = $this->input->post('id');
+			
+			$count = 0;
 
+			if ($id == null) {
+
+				$count = $company = $this->companies->count();
+		
+			}
 
 			$dados = array(
 			
@@ -108,18 +115,28 @@ class Companies extends CI_Controller {
 				"telephone" => $this->input->post('telephone')
 
 			);
-			if ($this->companies->save($dados, $id)) {
-				if ($id == null) {
-					$retorno = "Cadastro realizado com sucesso";
-				} else {
-					$retorno = "Cadastro atualizado com sucesso";
-				}
-				$this->session->set_flashdata('mensagem', $retorno);
-				redirect('companies/index');
+
+			if ($count->num_rows() > 0) {
+					$variaveis['titulo'] = 'Nova Empresa';
+					$variaveis['mensagem'] = "Já existe cadastro de empresa. Apenas é permitido um registro.";
+					$this->load->view('companies/cadastro', $variaveis);					
 			} else {
-				$variaveis['mensagem'] = "Ocorreu um erro. Por favor, tente novamente.";
-				$this->load->view('companies/cadastro', $variaveis);
-			}
+
+				if ($this->companies->save($dados, $id)) {
+					if ($id == null) {
+						$retorno = "Cadastro realizado com sucesso";
+					} else {
+						$retorno = "Cadastro atualizado com sucesso";
+					}
+					$this->session->set_flashdata('mensagem', $retorno);
+					redirect('companies/index');
+				} else {
+					$variaveis['titulo'] = 'Nova Empresa';
+					$variaveis['mensagem'] = "Ocorreu um erro. Por favor, tente novamente.";
+					$this->load->view('companies/cadastro', $variaveis);
+				} 
+
+			} 
 				
 		}
 	}	

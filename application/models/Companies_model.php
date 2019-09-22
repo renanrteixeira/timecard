@@ -68,6 +68,10 @@ class Companies_model extends CI_Model {
 		return $this->db->get('companies');
 	}
 
+	public function count(){
+		return $this->db->get('companies');
+	}
+
 	/**
 	 * Deleta um registro.
 	 * @param $id do registro a ser deletado
