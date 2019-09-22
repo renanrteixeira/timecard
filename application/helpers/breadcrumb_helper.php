@@ -6,8 +6,8 @@ if (!function_exists('create_breadcrumb')) {
 
         $ci = &get_instance();
 
-        $open_tag = '<nav aria-label="breadcrumb">  <ol class="breadcrumb">';
-        $close_tag = '</ol> </nav>';
+        $open_tag = '<ol class="breadcrumb">';
+        $close_tag = '</ol>';
         $crumb_open_tag = '<li class="breadcrumb-item" >';
         $active_crumb_open_tag = '<li class="breadcrumb-item" >';
         $crumb_close_tag = '</li>';
