@@ -51,7 +51,7 @@ if (!$_SESSION['name']) {
 					<div class="input-group-addon">
 						<i class="fa fa-phone"></i>
 					</div>
-					<input type="text" class="form-control" id="telephone" name="telephone" placeholder="Company telephone" value="<?= set_value('telephone') ? : (isset($telephone) ? $telephone : '') ?>" required>
+					<input type="text" class="form-control" id="telephone" name="telephone" placeholder="Company telephone" value="<?= set_value('telephone') ? : (isset($telephone) ? $telephone : '') ?>" data-inputmask='"mask": "(99) 9999-9999"' data-mask required>
 				</div>
 			</div>
 		<div class="box-footer">

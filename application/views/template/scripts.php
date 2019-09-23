@@ -17,14 +17,17 @@
 	<script src="<?php echo base_url('/assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js')?>"></script>
 	<!-- ChartJS -->
 	<script src="<?php echo base_url('/assets/bower_components/chart.js/Chart.js')?>"></script>
-	
+	<!-- InputMask -->
+	<script src="<?php echo base_url('/assets/plugins/input-mask/jquery.inputmask.js')?>"></script>
+	<script src="<?php echo base_url('/assets/plugins/input-mask/jquery.inputmask.date.extensions.js')?>"></script>
+	<script src="<?php echo base_url('/assets/plugins/input-mask/jquery.inputmask.extensions.js')?>"></script>
     <script>
-	$(document).ready(function() {
-		// show the alert
-		setTimeout(function() {
-			$(".alert").alert('close');
-		}, 2000);
-	});
-
+		$(document).ready(function() {
+			// show the alert
+			setTimeout(function() {
+				$(".alert").alert('close');
+			}, 2000);
+		});
+		$('[data-mask]').inputmask();
 	</script>
 
