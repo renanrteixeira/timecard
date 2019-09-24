@@ -291,7 +291,7 @@ class Hours_model extends CI_Model {
 
 	public function getEmployee($id){
 		if ($id){
-			$this->db->select('employees.name as employee, roles.name as role, employees.admission as admission');
+			$this->db->select('employees.id, employees.name as employee, roles.name as role, employees.admission as admission');
 			$this->db->from('employees');
 			$this->db->from('roles');
 			$this->db->where('employees.rolefk = roles.id');
