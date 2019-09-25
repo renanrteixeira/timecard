@@ -181,15 +181,41 @@ class PersonalStatement extends CI_Controller {
 					$time += $secounds;
 
 					$secounds1 = 0;
+					$secounds2 = 0;
 
-/*					list($h1, $m1, $s1) = explode(':', $row->hour1);
+					list($h1, $m1, $s1) = explode(':', $row->hour1);
+					list($h2, $m2, $s2) = explode(':', $row->hour2);
+					list($h3, $m3, $s3) = explode(':', $row->hour3);
+					list($h4, $m4, $s4) = explode(':', $row->hour4);
+					list($h5, $m5, $s5) = explode(':', $row->hour5);
+					list($h6, $m6, $s6) = explode(':', $row->hour6);
 
-					$secounds1 += $h * 3600;
-					$secounds1 += $m * 60;
-					$secounds1 += $s;*/
+					$secounds1 += $h1 * 3600;
+					$secounds1 += $m1 * 60;
+					$secounds1 += $s1;
 
-					$worked += $secounds1; 
-							 
+					$secounds2 += $h2 * 3600;
+					$secounds2 += $m2 * 60;
+					$secounds2 += $s2;
+
+					$secounds3 += $h3 * 3600;
+					$secounds3 += $m3 * 60;
+					$secounds3 += $s3;
+
+					$secounds4 += $h4 * 3600;
+					$secounds4 += $m4 * 60;
+					$secounds4 += $s4;
+
+					$secounds5 += $h5 * 3600;
+					$secounds5 += $m5 * 60;
+					$secounds5 += $s5;
+
+					$secounds6 += $h6 * 3600;
+					$secounds6 += $m6 * 60;
+					$secounds6 += $s6;
+
+					$worked += $secounds2 - $secounds1 ; 
+					
 					if ($row->weekend == 'S') {
 						$resultado = $time;
 						$hour = floor($resultado / 3600);
@@ -230,7 +256,7 @@ class PersonalStatement extends CI_Controller {
 						$html .= '<td></td>';
 						$html .= '<td><b>Horas Trabalhadas</b></td>';
 						//$html .= '<td><b>'.str_pad($hworked, 2, '0', STR_PAD_LEFT).':'.str_pad($mworked, 2, '0', STR_PAD_LEFT).':'.str_pad($sworked, 2, '0', STR_PAD_LEFT).'</b></td>';
-						$html .= '<td><b>00:00:00</b></td>';
+						$html .= '<td><b>'.$worked.'</b></td>';
 						$html .= '<td></td>';
 						$html .= '<td><b>Saldo</b></td>';
 						$html .= '<td><b>00:00:00</b></td>';
