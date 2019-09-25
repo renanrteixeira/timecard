@@ -87,7 +87,7 @@ class Companies extends CI_Controller {
 
 		                'field' => 'telephone',
 		                'label' => 'Telefone',
-		                'rules' => 'trim|required|numeric',
+		                'rules' => 'trim|required',
 					)
 		);
 
@@ -100,13 +100,7 @@ class Companies extends CI_Controller {
 			
 			$id = $this->input->post('id');
 			
-			$count = 0;
-
-			if ($id == null) {
-
-				$count = $company = $this->companies->count();
-		
-			}
+			$count = $this->companies->count();
 
 			$dados = array(
 			
@@ -116,7 +110,7 @@ class Companies extends CI_Controller {
 
 			);
 
-			if ($count->num_rows() > 0) {
+			if (($count->num_rows() > 0) && ($id == null)) {
 					$variaveis['titulo'] = 'Nova Empresa';
 					$variaveis['mensagem'] = "Já existe cadastro de empresa. Apenas é permitido um registro.";
 					$this->load->view('companies/cadastro', $variaveis);					

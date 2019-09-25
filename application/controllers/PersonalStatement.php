@@ -134,11 +134,12 @@ class PersonalStatement extends CI_Controller {
 			//Rodapé: Seta a data/hora completa de quando o PDF foi gerado + um texto no lado direito
 			$pdf->SetFooter('{DATE j/m/Y H:i}|{PAGENO}/{nb}|Contole Ponto Web');
 			
-			$html .= 'Empresa: '.$company->row()->name.'<br>';
-			$html .= 'Código: '.$employee->row()->id.'<br>';
-			$html .= 'Funcionário: '.$employee->row()->name.'<br>';
-			$html .= 'Período: '.ucfirst(utf8_encode(strftime('%m/%Y', strtotime($mes)))).'<br>';
-			$html .= '----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------<br>';
+			$html .= '<b>Empresa: '.$company->row()->name.'</b><br>';
+			$html .= '<b>Código: '.$employee->row()->id.'</b><br>';
+			$html .= '<b>Funcionário: '.$employee->row()->name.'</b><br>';
+			$html .= '<b>Período: '.ucfirst(utf8_encode(strftime('%m/%Y', strtotime($mes)))).'</b><br>';
+			//$html .= '----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------<br>';
+			$html .= str_pad('-', 196, '-', STR_PAD_LEFT).'<br>';
 			$html .= '<table>';
 			$html .= '<tr>';
 			$html .= '<td>Data</td>';
@@ -183,10 +184,22 @@ class PersonalStatement extends CI_Controller {
 						$time %= 60;
 
 						$html .= '<tr>';
-						$html .= '<td>Total Semana</td>';
 						$html .= '<td></td>';
-						$html .= '<td>Horas a trabalhar</td>';
-						$html .= '<td>'.str_pad($hour, 2, '0', STR_PAD_LEFT).':'.str_pad($minutes, 2, '0', STR_PAD_LEFT).':'.str_pad($time, 2, '0', STR_PAD_LEFT).'</td>';
+						$html .= '<td></td>';
+						$html .= '<td></td>';
+						$html .= '<td></td>';
+						$html .= '<td></td>';
+						$html .= '<td></td>';
+						$html .= '<td></td>';
+						$html .= '<td></td>';
+						$html .= '<td></td>';
+						$html .= '<td></td>';
+						$html .= '</tr>';
+						$html .= '<tr>';
+						$html .= '<td><b>Total Semana</b></td>';
+						$html .= '<td></td>';
+						$html .= '<td><b>Horas a trabalhar</b></td>';
+						$html .= '<td><b>'.str_pad($hour, 2, '0', STR_PAD_LEFT).':'.str_pad($minutes, 2, '0', STR_PAD_LEFT).':'.str_pad($time, 2, '0', STR_PAD_LEFT).'</b></td>';
 						$html .= '<td></td>';
 						$html .= '<td></td>';
 						$html .= '<td></td>';
@@ -195,10 +208,22 @@ class PersonalStatement extends CI_Controller {
 						$html .= '<td></td>';
 						$html .= '</tr>';
 						$time = 0;
+						$html .= '<tr>';
+						$html .= '<td></td>';
+						$html .= '<td></td>';
+						$html .= '<td></td>';
+						$html .= '<td></td>';
+						$html .= '<td></td>';
+						$html .= '<td></td>';
+						$html .= '<td></td>';
+						$html .= '<td></td>';
+						$html .= '<td></td>';
+						$html .= '<td></td>';
+						$html .= '</tr>';
 					}
 				} else {
 					$html .= '</table><p></p>';
-					$html .= '&nbsp;Horas a trabalhar: '.$row->hour6.'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Horas Trabalhadas: '.$row->hour5.'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Saldo: '.$row->balance;
+					$html .= '&nbsp;<b>Horas a trabalhar: '.$row->hour6.'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Horas Trabalhadas: '.$row->hour5.'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Saldo: '.$row->balance.'</b>';
 				}
 
 			}

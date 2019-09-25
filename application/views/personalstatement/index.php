@@ -59,7 +59,7 @@ if (!$_SESSION['name']) {
 
 <div class="box box-primary">
 	<div class="box-header">
-		<h4>Empresa: <?= isset($companies) ? $companies->row()->name : 'CADASTRE A EMPRESA'?></h4>
+		<h4>Empresa: <?= isset($companies) ? isset($companies->row()->name) ? $companies->row()->name : 'CADASTRE A EMPRESA' : ''?></h4>
 		<h4>Código: <?=  isset($employee) ? $employee->row()->id : ''?></h4>
 		<h4>Funcionário: <?=  isset($employee) ? $employee->row()->employee : ''?></h4>
 		<h4>Função: <?= isset($employee) ? $employee->row()->role : '' ?> </h4>
