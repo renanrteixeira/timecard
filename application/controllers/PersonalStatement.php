@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 require_once  $_SERVER['DOCUMENT_ROOT'] . '/timecard/vendor/autoload.php';
+//require_once dirname(dirname(dirname(__FILE__))).'\vendor\autoload.php';
 setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
 date_default_timezone_set('America/Sao_Paulo');
 
