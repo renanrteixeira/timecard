@@ -154,6 +154,7 @@ class PersonalStatement extends CI_Controller {
 			$html .= '<td>Saldo</td>';
 			$html .= '</tr>';
 			$time = 0;
+			//
 			foreach($rows->result() as $row){
 				if ($row->info != 'TOTAL') {
 					$secounds = 0;
