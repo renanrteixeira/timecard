@@ -38,7 +38,6 @@ class PersonalStatement extends CI_Controller {
 		$this->load->view('personalstatement/index', $variaveis);
 	}
 
-	
 	public function export(){
 
 		$id = $this->input->post('employee');
@@ -156,6 +155,7 @@ class PersonalStatement extends CI_Controller {
 			$html .= '<td>Saldo</td>';
 			$html .= '</tr>';
 			$time = 0;
+			$worked = 0;
 			//
 			foreach($rows->result() as $row){
 				if ($row->info != 'TOTAL') {
@@ -180,11 +180,35 @@ class PersonalStatement extends CI_Controller {
 					
 					$time += $secounds;
 
+					$secounds1 = 0;
+
+/*					list($h1, $m1, $s1) = explode(':', $row->hour1);
+
+					$secounds1 += $h * 3600;
+					$secounds1 += $m * 60;
+					$secounds1 += $s;*/
+
+					$worked += $secounds1; 
+							 
 					if ($row->weekend == 'S') {
-						$hour = floor($time / 3600);
+						$resultado = $time;
+						$hour = floor($resultado / 3600);
+						$resultado = $resultado - ($hour * 3600);
+						$minutes = floor($resultado / 60);
+						$resultado = $resultado - ($minutes * 60);
+						$secounds = $resultado;
+
+						/*$hour = floor($time / 3600);
 						$time %= 3600;
 						$minutes = floor($time / 3600);
-						$time %= 60;
+						$time %= 60;*/
+
+						/*$resultado = $worked;
+						$hworked = floor($resultado / 3600);
+						$resultado = $resultado - ($hworked * 3600);
+						$mworked = floor($resultado / 60);
+						$resultado = $resultado - ($min_ponto * 60);
+						$sworked = $resultado;*/
 
 						$html .= '<tr>';
 						$html .= '<td></td>';
@@ -202,15 +226,15 @@ class PersonalStatement extends CI_Controller {
 						$html .= '<td><b>Total Semana</b></td>';
 						$html .= '<td></td>';
 						$html .= '<td><b>Horas a trabalhar</b></td>';
-						$html .= '<td><b>'.str_pad($hour, 2, '0', STR_PAD_LEFT).':'.str_pad($minutes, 2, '0', STR_PAD_LEFT).':'.str_pad($time, 2, '0', STR_PAD_LEFT).'</b></td>';
+						$html .= '<td><b>'.str_pad($hour, 2, '0', STR_PAD_LEFT).':'.str_pad($minutes, 2, '0', STR_PAD_LEFT).':'.str_pad($secounds, 2, '0', STR_PAD_LEFT).'</b></td>';
 						$html .= '<td></td>';
+						$html .= '<td><b>Horas Trabalhadas</b></td>';
+						//$html .= '<td><b>'.str_pad($hworked, 2, '0', STR_PAD_LEFT).':'.str_pad($mworked, 2, '0', STR_PAD_LEFT).':'.str_pad($sworked, 2, '0', STR_PAD_LEFT).'</b></td>';
+						$html .= '<td><b>00:00:00</b></td>';
 						$html .= '<td></td>';
-						$html .= '<td></td>';
-						$html .= '<td></td>';
-						$html .= '<td></td>';
-						$html .= '<td></td>';
+						$html .= '<td><b>Saldo</b></td>';
+						$html .= '<td><b>00:00:00</b></td>';
 						$html .= '</tr>';
-						$time = 0;
 						$html .= '<tr>';
 						$html .= '<td></td>';
 						$html .= '<td></td>';
@@ -223,6 +247,8 @@ class PersonalStatement extends CI_Controller {
 						$html .= '<td></td>';
 						$html .= '<td></td>';
 						$html .= '</tr>';
+						$time = 0;	
+						$worked = 0;					
 					}
 				} else {
 					$html .= '</table><p></p>';
