@@ -48,6 +48,13 @@ if (!$_SESSION['name']) {
 					<input type="time" class="form-control" id="time" name="time" value="<?= set_value('time') ? : (isset($time) ? $time : '') ?>" required>
 				</div>
 			</div>
+			<div class="form-group">
+				<label for="weekend">Fim da Semana</label>
+				<select class="form-control" name="weekend" id="weekend" required>
+					<option value="S" <?php echo isset($weekend) ? ($weekend=='S') ?'selected':'' : ''; ?>>Sim</option>
+					<option value="N" <?php echo isset($weekend) ? ($weekend=='N') ?'selected':'' : ''; ?>>Não</option>
+				</select>
+			</div>
 		<div class="box-footer">
 			<button type="submit" class="btn btn-primary">Gravar</button>
 		</div>

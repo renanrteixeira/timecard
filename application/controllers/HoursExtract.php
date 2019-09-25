@@ -30,6 +30,6 @@ class HoursExtract extends CI_Controller {
 		$variaveis['extract'] = $this->hours->getHoursExtract();
 		$this->load->view('hoursextract/index', $variaveis);
 	}
-	
+
 }
 ?>
