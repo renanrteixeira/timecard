@@ -120,7 +120,8 @@ class PersonalStatement extends CI_Controller {
 			$pdf  = new \Mpdf\Mpdf([
 									'mode' => 'utf-8',
 									//'format' => [190, 236],
-									//'orientation' => 'R'
+									// P - Portrait or L - Landspace
+									//'orientation' => 'P'
 									'default_font_size' => 8,
 									'default_font' => 'courier_new'
 									]);
