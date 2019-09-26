@@ -121,11 +121,10 @@ class PersonalStatement extends CI_Controller {
 									'mode' => 'utf-8',
 									//'format' => [190, 236],
 									// P - Portrait or L - Landspace
-									//'orientation' => 'P'
+									'orientation' => 'P',
 									'default_font_size' => 8,
 									'default_font' => 'courier_new'
 									]);
-			$date = new DateTime;
 			$pdf->allow_charset_conversion=true;
 			$pdf->charset_in='UTF-8';
 			$pdf->SetDisplayMode('fullpage');
@@ -160,6 +159,7 @@ class PersonalStatement extends CI_Controller {
 			foreach($rows->result() as $row){
 				if ($row->info != 'TOTAL') {
 					$secounds = 0;
+					$secounds7 = 0;
 					$html .= '<tr>';
 					$html .= '<td>'.ucfirst(utf8_encode(strftime('%d/%m/%Y', strtotime($row->date)))).'</td>';
 					$html .= '<td>'.$row->name.'</td>';
@@ -172,6 +172,7 @@ class PersonalStatement extends CI_Controller {
 					$html .= '<td>'.$row->hour6.'</td>';
 					$html .= '<td>'.$row->balance.'</td>';
 					$html .= '</tr>';
+					//Calculando as horas a trabalhar
 					list($h, $m, $s) = explode(':', $row->time);
 
 					$secounds += $h * 3600;
@@ -180,8 +181,13 @@ class PersonalStatement extends CI_Controller {
 					
 					$time += $secounds;
 
+					//calculando horas trabahadas
 					$secounds1 = 0;
 					$secounds2 = 0;
+					$secounds3 = 0;
+					$secounds4 = 0;
+					$secounds5 = 0;
+					$secounds6 = 0;
 
 					list($h1, $m1, $s1) = explode(':', $row->hour1);
 					list($h2, $m2, $s2) = explode(':', $row->hour2);
@@ -214,9 +220,21 @@ class PersonalStatement extends CI_Controller {
 					$secounds6 += $m6 * 60;
 					$secounds6 += $s6;
 
-					$worked += $secounds2 - $secounds1 ; 
-					
+					$worked += ($secounds2 - $secounds1); 
+					$worked += ($secounds4 - $secounds3); 
+					$worked += ($secounds6 - $secounds5); 
+
+
 					if ($row->weekend == 'S') {
+						//Calculando saldo
+						$negative = false;
+						if ($worked < $time) {
+							$balance = $time - $worked;
+							$negative = true;
+						} else {
+							$balance = $worked - $time;
+						}
+
 						$resultado = $time;
 						$hour = floor($resultado / 3600);
 						$resultado = $resultado - ($hour * 3600);
@@ -224,17 +242,19 @@ class PersonalStatement extends CI_Controller {
 						$resultado = $resultado - ($minutes * 60);
 						$secounds = $resultado;
 
-						/*$hour = floor($time / 3600);
-						$time %= 3600;
-						$minutes = floor($time / 3600);
-						$time %= 60;*/
-
-						/*$resultado = $worked;
+						$resultado = $worked;
 						$hworked = floor($resultado / 3600);
 						$resultado = $resultado - ($hworked * 3600);
 						$mworked = floor($resultado / 60);
-						$resultado = $resultado - ($min_ponto * 60);
-						$sworked = $resultado;*/
+						$resultado = $resultado - ($mworked * 60);
+						$sworked = $resultado;
+
+						$resultado = $balance;
+						$hbalance = floor($resultado / 3600);
+						$resultado = $resultado - ($hbalance * 3600);
+						$mbalance = floor($resultado / 60);
+						$resultado = $resultado - ($mbalance * 60);
+						$sbalance = $resultado;
 
 						$html .= '<tr>';
 						$html .= '<td></td>';
@@ -255,11 +275,15 @@ class PersonalStatement extends CI_Controller {
 						$html .= '<td><b>'.str_pad($hour, 2, '0', STR_PAD_LEFT).':'.str_pad($minutes, 2, '0', STR_PAD_LEFT).':'.str_pad($secounds, 2, '0', STR_PAD_LEFT).'</b></td>';
 						$html .= '<td></td>';
 						$html .= '<td><b>Horas Trabalhadas</b></td>';
-						//$html .= '<td><b>'.str_pad($hworked, 2, '0', STR_PAD_LEFT).':'.str_pad($mworked, 2, '0', STR_PAD_LEFT).':'.str_pad($sworked, 2, '0', STR_PAD_LEFT).'</b></td>';
-						$html .= '<td><b>'.$worked.'</b></td>';
+						$html .= '<td><b>'.str_pad($hworked, 2, '0', STR_PAD_LEFT).':'.str_pad($mworked, 2, '0', STR_PAD_LEFT).':'.str_pad($sworked, 2, '0', STR_PAD_LEFT).'</b></td>';
 						$html .= '<td></td>';
 						$html .= '<td><b>Saldo</b></td>';
-						$html .= '<td><b>00:00:00</b></td>';
+						//$html .= '<td><b>'.$over.'</b></td>';
+						if ($negative) {
+							$html .= '<td><b>-'.str_pad($hbalance, 2, '0', STR_PAD_LEFT).':'.str_pad($mbalance, 2, '0', STR_PAD_LEFT).':'.str_pad($sbalance, 2, '0', STR_PAD_LEFT).'</b></td>';
+						} else {
+							$html .= '<td><b>'.str_pad($hbalance, 2, '0', STR_PAD_LEFT).':'.str_pad($mbalance, 2, '0', STR_PAD_LEFT).':'.str_pad($sbalance, 2, '0', STR_PAD_LEFT).'</b></td>';
+						}
 						$html .= '</tr>';
 						$html .= '<tr>';
 						$html .= '<td></td>';
