@@ -313,6 +313,10 @@ class PersonalStatement extends CI_Controller {
 			// define um nome para o arquivo PDF
 			$filename = $employee->row()->name.'.pdf';
 
+			// I - Abre no navegador
+			// F - Salva no servidor
+			// D - Salva no Cliente
+
 			$pdf->Output($filename, 'I');
 		}
 	}	
