@@ -108,7 +108,7 @@ class Payments extends CI_Controller {
 			
 			$id = $this->input->post('id');
 
-			$existe = $this->hours->get(null, $this->input->post('employee'), $this->input->post('date'));
+			$existe = $this->hours->getPayments($this->input->post('employee'), $this->input->post('date'));
 
 			if (($existe->result()) && (!$id)){
 				$variaveis['titulo'] = 'Novo Abatimento';
