@@ -344,7 +344,7 @@ class PersonalStatement extends CI_Controller {
 
 			$rows = $this->db->query($query);
 
-			if ($rows->num_rows() > 0){
+			if ($rows->num_rows() > 1){
 				$html .= '<p align="center"><b>Horas Pagas</p></b><table>';
 				$html .= '<tr>';
 				$html .= '<td><b>Data</b></td>';
