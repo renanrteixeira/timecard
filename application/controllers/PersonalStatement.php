@@ -67,6 +67,7 @@ class PersonalStatement extends CI_Controller {
 					WHERE
 						hours.employeefk = employees.id AND
 						typedates.id = hours.typedatefk AND
+						hours.type = 0 AND
 						employees.status = 1 AND
 						employees.id = '.$id.' AND
 						DATE_FORMAT(hours.date, "%Y-%m") = "'.$mes.'"
@@ -101,6 +102,7 @@ class PersonalStatement extends CI_Controller {
 					WHERE
 						hours.employeefk = employees.id AND
 						employees.status = 1 AND
+						hours.type = 0 AND
 						employees.id = '.$id.' AND
 						typedates.id = hours.typedatefk AND						
 						DATE_FORMAT(hours.date, "%Y-%m") = "'.$mes.'"
@@ -142,16 +144,16 @@ class PersonalStatement extends CI_Controller {
 			$html .= str_pad('-', 196, '-', STR_PAD_LEFT).'<br>';
 			$html .= '<table>';
 			$html .= '<tr>';
-			$html .= '<td>Data</td>';
-			$html .= '<td>Tipo</td>';
-			$html .= '<td>Tempo</td>';
-			$html .= '<td>Entrada Manhã</td>';
-			$html .= '<td>Saída Manhã</td>';
-			$html .= '<td>Entrada Tarde</td>';
-			$html .= '<td>Saída Tarde</td>';
-			$html .= '<td>Entrada Extra</td>';
-			$html .= '<td>Saída Extra</td>';
-			$html .= '<td>Saldo</td>';
+			$html .= '<td><b>Data</b></td>';
+			$html .= '<td><b>Tipo</b></td>';
+			$html .= '<td><b>Tempo</b></td>';
+			$html .= '<td><b>Entrada Manhã</b></td>';
+			$html .= '<td><b>Saída Manhã</b>/<td>';
+			$html .= '<td><b>Entrada Tarde</b><td>';
+			$html .= '<td><b>Saída Tarde</b></td>';
+			$html .= '<td><b>Entrada Extra</b></td>';
+			$html .= '<td><b>Saída Extra</b></td>';
+			$html .= '<td><b>Saldo</b></td>';
 			$html .= '</tr>';
 			$time = 0;
 			$worked = 0;
@@ -159,7 +161,6 @@ class PersonalStatement extends CI_Controller {
 			foreach($rows->result() as $row){
 				if ($row->info != 'TOTAL') {
 					$secounds = 0;
-					$secounds7 = 0;
 					$html .= '<tr>';
 					$html .= '<td>'.ucfirst(utf8_encode(strftime('%d/%m/%Y', strtotime($row->date)))).'</td>';
 					$html .= '<td>'.$row->name.'</td>';
@@ -303,9 +304,73 @@ class PersonalStatement extends CI_Controller {
 				} else {
 					$html .= '</table><p></p>';
 					$html .= '&nbsp;<b>Horas a trabalhar: '.$row->hour6.'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Horas Trabalhadas: '.$row->hour5.'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Saldo: '.$row->balance.'</b>';
+					$ghours = $row->balance;
 				}
 
 			}
+
+			//Inserindo as horas pagas, caso exista
+			$query = 'SELECT
+						hours.id, 
+						"" AS info,
+						hours.date, 
+						hours.hour1, 
+						hours.balance
+					FROM
+						hours,
+						employees
+					WHERE
+						hours.employeefk = employees.id AND
+						employees.status = 1 AND
+						hours.type = 1 AND
+						employees.id = '.$id.' AND
+						DATE_FORMAT(hours.date, "%Y-%m") = "'.$mes.'"
+					UNION ALL
+					SELECT
+						null, 
+						"TOTAL" AS info,
+						2300-12-31 AS date, 
+						NULL, 
+						sec_to_time(SUM(time_to_sec(balance))) AS balance
+					FROM
+						hours,
+						employees
+					WHERE
+						hours.employeefk = employees.id AND
+						employees.status = 1 AND
+						employees.id = '.$id.' AND
+						DATE_FORMAT(hours.date, "%Y-%m") = "'.$mes.'"					
+					ORDER BY 3';
+
+			$rows = $this->db->query($query);
+
+			if ($rows->num_rows() > 0){
+				$html .= '<p align="center"><b>Horas Pagas</p></b><table>';
+				$html .= '<tr>';
+				$html .= '<td><b>Data</b></td>';
+				$html .= '<td><b>Horas</b></td>';
+				$html .= '</tr>';
+				
+				foreach($rows->result() as $row){
+					if ($row->info != 'TOTAL') {
+						$html .= '<tr>';
+						$html .= '<td>'.ucfirst(utf8_encode(strftime('%d/%m/%Y', strtotime($row->date)))).'</td>';
+						$html .= '<td>'.$row->hour1.'</td>';
+						$html .= '</tr>';
+					} else {
+						$html .= '<tr>';
+						$html .= '<td></td>';
+						$html .= '<td></td>';
+						$html .= '</tr>';
+						$html .= '<tr>';
+						$html .= '<td><b>Saldo do Mês</b></td>';
+						$html .= '<td><b>'.$row->balance.'</b></td>';
+						$html .= '</tr>';
+					}
+				}
+				$html .= '</table>';
+			}
+
 			$html .= '</body></html>';
 
 			$pdf->WriteHTML($html);
