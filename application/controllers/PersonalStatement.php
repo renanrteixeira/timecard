@@ -110,8 +110,10 @@ class PersonalStatement extends CI_Controller {
 			
 			$rows = $this->db->query($query);
 
-			$this->db->select('*'); 
+			$this->db->select('employees.id, employees.name, employees.admission, employees.gender, roles.name as role'); 
 			$this->db->from('employees');
+			$this->db->from('roles');
+			$this->db->where('employees.rolefk = roles.id');
 			$this->db->where('employees.id = '.$id);
 			$employee = $this->db->get();
 
@@ -138,7 +140,7 @@ class PersonalStatement extends CI_Controller {
 			//$pdf->SetFooter('{DATE j/m/Y H:i}|{PAGENO}/{nb}|Contole Ponto Web');
 			
 			//$html .= '<b>Empresa: '.$company->row()->name.'&nbsp;&nbsp;&nbsp;&nbsp;Período: '.ucfirst(utf8_encode(strftime('%m/%Y', strtotime($mes)))).'</b><br>';
-			$html .= '<table><tr><td width="20%"><b>Código: '.$employee->row()->id.'</b></td><td width="60%"><b>Funcionário: '.$employee->row()->name.'</b></td><td whidth="20%"><b>Admissão: '.ucfirst(utf8_encode(strftime('%d/%m/%Y', strtotime($employee->row()->admission)))).'</b></td></tr></table><br>';
+			$html .= '<table><tr><td width="10%"><b>Código: '.$employee->row()->id.'</b></td><td width="40%"><b>Funcionário: '.$employee->row()->name.'</b></td><td width="30%"><b>Função: '.$employee->row()->role.'</b></td><td width="20%"><b>Admissão: '.ucfirst(utf8_encode(strftime('%d/%m/%Y', strtotime($employee->row()->admission)))).'</b></td></tr></table><br>';
 			$html .= str_pad('_', 141, '_', STR_PAD_LEFT).'<br>';
 			$html .= '<table>';
 			$html .= '<tr>';
