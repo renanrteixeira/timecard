@@ -138,7 +138,7 @@ class PersonalStatement extends CI_Controller {
 			//$pdf->SetFooter('{DATE j/m/Y H:i}|{PAGENO}/{nb}|Contole Ponto Web');
 			
 			//$html .= '<b>Empresa: '.$company->row()->name.'&nbsp;&nbsp;&nbsp;&nbsp;Período: '.ucfirst(utf8_encode(strftime('%m/%Y', strtotime($mes)))).'</b><br>';
-			$html .= '<b>Código: '.$employee->row()->id.'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Funcionário: '.$employee->row()->name.'</b><br>';
+			$html .= '<b>Código: '.$employee->row()->id.'&nbsp;&nbsp;&nbsp;Funcionário: '.$employee->row()->name.'&nbsp;&nbsp; Admissão: '.ucfirst(utf8_encode(strftime('%d/%m/%Y', strtotime($employee->row()->admission)))).'</b><br>';
 			$html .= str_pad('_', 141, '_', STR_PAD_LEFT).'<br>';
 			$html .= '<table>';
 			$html .= '<tr>';
