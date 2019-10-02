@@ -214,54 +214,6 @@ class Hours extends CI_Controller {
 					$balance = $hours.':'.$minutes.':00';
 				}			
 		
-/*
-				outra forma
-
-				$balance = ((strtotime($Saidamanha) - strtotime($Entradamanha))+
-						    (strtotime($Saidatarde) - strtotime($Entradatarde))+
-						    (strtotime($Saidaextra) - strtotime($Entradaextra)));
-				
-				$balance = date('H:i:s', $balance);
-				 
-			    if (strtotime($balance) < strtotime($hourbase)) {
-					$balance = strtotime($hourbase) - strtotime($balance);
-					$balance = date('H:i:s', $balance);
-					$balance = '-'.$balance;
-				} else {
-					$balance = strtotime($balance) - strtotime($hourbase);
-					$balance = date('H:i:s', $balance);
-				}
-    /*			  
-	/*		  
-			    $h1 = $this->toUnixTime($Entradamanha);
-			    $h2 = $this->toUnixTime($Saidamanha);
-			    $h3 = $this->toUnixTime($Entradatarde);
-			    $h4 = $this->toUnixTime($Saidatarde);
-			    $h5 = $this->toUnixTime($Entradaextra);
-			    $h6 = $this->toUnixTime($Saidaextra);
-			   
-				$balance = (($h2 - $h1) +
-							($h4 - $h3) +
-							($h6 - $h5));
-
-     			$balance = $this->getFullHour($balance);
-				
-                if ($this->toUnixTime($balance) < $this->toUnixTime($hourbase)) {
-
-					$balance = $this->toUnixTime($hourbase) - $this->toUnixTime($balance);
-
-					$balance = $this->getFullHour($balance);
-					
-					$balance = '-'.$balance;
-	
-				} else {
-					$balance = $this->toUnixTime($balance) - $this->toUnixTime($hourbase);
-
-					$balance = $this->getFullHour($balance);
-				}*/
-
-
-				//echo  'Base: '.$hourbase.'  -  Convertido: '.strtotime($hourbase).'  -  Entrada: '.$Entradamanha.'  -  Convertido: '.strtotime($Entradamanha).' Balance: '.$balance;
 				$dados = array(
 					
 
