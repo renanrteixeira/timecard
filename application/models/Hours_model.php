@@ -135,6 +135,7 @@ class Hours_model extends CI_Model {
 						hours.employeefk = employees.id AND
                         typedates.id = hours.typedatefk AND
 						employees.status = 1 AND
+						hours.type = 0 AND
 						employees.id = '.$id.' AND
 						DATE_FORMAT(hours.date, "%Y-%m") = "'.$mes.'"
 					UNION
@@ -167,6 +168,7 @@ class Hours_model extends CI_Model {
 					WHERE
 						hours.employeefk = employees.id AND
 						employees.status = 1 AND
+						hours.type = 0 AND
 						employees.id = '.$id.' AND
                         typedates.id = hours.typedatefk AND						
 						DATE_FORMAT(hours.date, "%Y-%m") = "'.$mes.'"';
@@ -255,6 +257,8 @@ class Hours_model extends CI_Model {
 					employees
 				WHERE
 					hours.employeefk = employees.id
+				AND 						
+					hours.type in (0, 1)
 				GROUP BY
 					hours.employeefk';
 

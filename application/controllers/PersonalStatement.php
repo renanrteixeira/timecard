@@ -131,25 +131,23 @@ class PersonalStatement extends CI_Controller {
 			$pdf->charset_in='UTF-8';
 			$pdf->SetDisplayMode('fullpage');
 			//Cabeçalho: Seta a data/hora completa de quando o PDF foi gerado + um texto no lado direito
-			$pdf->SetHeader('{DATE j/m/Y H:i}|{PAGENO}/{nb}|Controle Ponto Web');
+			$pdf->SetHeader('Empresa: '.$company->row()->name.'||Período: '.ucfirst(utf8_encode(strftime('%m/%Y', strtotime($mes)))));
 			
 			//Rodapé: Seta a data/hora completa de quando o PDF foi gerado + um texto no lado direito
-			$pdf->SetFooter('{DATE j/m/Y H:i}|{PAGENO}/{nb}|Contole Ponto Web');
+			$pdf->SetFooter('{DATE j/m/Y H:i}|{PAGENO}/{nb}|Copyright © 2019 Contole Ponto');
+			//$pdf->SetFooter('{DATE j/m/Y H:i}|{PAGENO}/{nb}|Contole Ponto Web');
 			
-			$html .= '<b>Empresa: '.$company->row()->name.'</b><br>';
-			$html .= '<b>Código: '.$employee->row()->id.'</b><br>';
-			$html .= '<b>Funcionário: '.$employee->row()->name.'</b><br>';
-			$html .= '<b>Período: '.ucfirst(utf8_encode(strftime('%m/%Y', strtotime($mes)))).'</b><br>';
-			//$html .= '----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------<br>';
-			$html .= str_pad('-', 196, '-', STR_PAD_LEFT).'<br>';
+			//$html .= '<b>Empresa: '.$company->row()->name.'&nbsp;&nbsp;&nbsp;&nbsp;Período: '.ucfirst(utf8_encode(strftime('%m/%Y', strtotime($mes)))).'</b><br>';
+			$html .= '<b>Código: '.$employee->row()->id.'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Funcionário: '.$employee->row()->name.'</b><br>';
+			$html .= str_pad('_', 141, '_', STR_PAD_LEFT).'<br>';
 			$html .= '<table>';
 			$html .= '<tr>';
 			$html .= '<td><b>Data</b></td>';
 			$html .= '<td><b>Tipo</b></td>';
 			$html .= '<td><b>Tempo</b></td>';
 			$html .= '<td><b>Entrada Manhã</b></td>';
-			$html .= '<td><b>Saída Manhã</b>/<td>';
-			$html .= '<td><b>Entrada Tarde</b><td>';
+			$html .= '<td><b>Saída Manhã</b></td>';
+			$html .= '<td><b>Entrada Tarde</b></td>';
 			$html .= '<td><b>Saída Tarde</b></td>';
 			$html .= '<td><b>Entrada Extra</b></td>';
 			$html .= '<td><b>Saída Extra</b></td>';
@@ -302,9 +300,8 @@ class PersonalStatement extends CI_Controller {
 						$worked = 0;					
 					}
 				} else {
-					$html .= '</table><p></p>';
+					$html .= '</table>';
 					$html .= '&nbsp;<b>Horas a trabalhar: '.$row->hour6.'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Horas Trabalhadas: '.$row->hour5.'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Saldo: '.$row->balance.'</b>';
-					$ghours = $row->balance;
 				}
 
 			}
@@ -338,6 +335,7 @@ class PersonalStatement extends CI_Controller {
 					WHERE
 						hours.employeefk = employees.id AND
 						employees.status = 1 AND
+						hours.type in (0, 1) AND
 						employees.id = '.$id.' AND
 						DATE_FORMAT(hours.date, "%Y-%m") = "'.$mes.'"					
 					ORDER BY 3';
@@ -345,7 +343,7 @@ class PersonalStatement extends CI_Controller {
 			$rows = $this->db->query($query);
 
 			if ($rows->num_rows() > 1){
-				$html .= '<p align="center"><b>Horas Pagas</p></b><table>';
+				$html .= '<br><br><b>&nbsp;Horas Pagas</b><table>';
 				$html .= '<tr>';
 				$html .= '<td><b>Data</b></td>';
 				$html .= '<td><b>Horas</b></td>';
@@ -359,10 +357,6 @@ class PersonalStatement extends CI_Controller {
 						$html .= '</tr>';
 					} else {
 						$html .= '<tr>';
-						$html .= '<td></td>';
-						$html .= '<td></td>';
-						$html .= '</tr>';
-						$html .= '<tr>';
 						$html .= '<td><b>Saldo do Mês</b></td>';
 						$html .= '<td><b>'.$row->balance.'</b></td>';
 						$html .= '</tr>';
@@ -370,6 +364,9 @@ class PersonalStatement extends CI_Controller {
 				}
 				$html .= '</table>';
 			}
+
+			$html .= '<p align="center">'.str_pad('_', 80, '_', STR_PAD_LEFT).'<br>';
+			$html .= $employee->row()->name.'</p>';
 
 			$html .= '</body></html>';
 
