@@ -133,14 +133,13 @@ class PersonalStatement extends CI_Controller {
 			$pdf->charset_in='UTF-8';
 			$pdf->SetDisplayMode('fullpage');
 			//Cabeçalho: Seta a data/hora completa de quando o PDF foi gerado + um texto no lado direito
-			$pdf->SetHeader('Empresa: '.$company->row()->name.'||Período: '.ucfirst(utf8_encode(strftime('%m/%Y', strtotime($mes)))));
+			$pdf->SetHeader('Empresa: '.$company->row()->name.'||Período: '.ucfirst(utf8_encode(strftime('%m/%g', strtotime($mes)))));
 			
 			//Rodapé: Seta a data/hora completa de quando o PDF foi gerado + um texto no lado direito
-			$pdf->SetFooter('{DATE j/m/Y H:i}|{PAGENO}/{nb}|Copyright © 2019 Contole Ponto');
+			$pdf->SetFooter('{DATE j/m/y H:i}|{PAGENO}/{nb}|Copyright © 2019 Controle Ponto');
 			//$pdf->SetFooter('{DATE j/m/Y H:i}|{PAGENO}/{nb}|Contole Ponto Web');
 			
-			//$html .= '<b>Empresa: '.$company->row()->name.'&nbsp;&nbsp;&nbsp;&nbsp;Período: '.ucfirst(utf8_encode(strftime('%m/%Y', strtotime($mes)))).'</b><br>';
-			$html .= '<table><tr><td width="10%"><b>Código: '.$employee->row()->id.'</b></td><td width="40%"><b>Funcionário: '.$employee->row()->name.'</b></td><td width="30%"><b>Função: '.$employee->row()->role.'</b></td><td width="20%"><b>Admissão: '.ucfirst(utf8_encode(strftime('%d/%m/%Y', strtotime($employee->row()->admission)))).'</b></td></tr></table><br>';
+			$html .= '<table><tr><td width="10%"><b>Código: '.$employee->row()->id.'</b></td><td width="40%"><b>Funcionário: '.$employee->row()->name.'</b></td><td width="30%"><b>Função: '.$employee->row()->role.'</b></td><td width="20%"><b>Admissão: '.ucfirst(utf8_encode(strftime('%d/%m/%g', strtotime($employee->row()->admission)))).'</b></td></tr></table><br>';
 			$html .= str_pad('_', 141, '_', STR_PAD_LEFT).'<br>';
 			$html .= '<table>';
 			$html .= '<tr>';
@@ -162,16 +161,26 @@ class PersonalStatement extends CI_Controller {
 				if ($row->info != 'TOTAL') {
 					$secounds = 0;
 					$html .= '<tr>';
-					$html .= '<td>'.ucfirst(utf8_encode(strftime('%d/%m/%Y', strtotime($row->date)))).'</td>';
+					$html .= '<td>'.ucfirst(utf8_encode(strftime('%d/%m/%g', strtotime($row->date)))).'</td>';
 					$html .= '<td>'.$row->name.'</td>';
-					$html .= '<td>'.$row->time.'</td>';
-					$html .= '<td>'.$row->hour1.'</td>';
-					$html .= '<td>'.$row->hour2.'</td>';
-					$html .= '<td>'.$row->hour3.'</td>';
-					$html .= '<td>'.$row->hour4.'</td>';
-					$html .= '<td>'.$row->hour5.'</td>';
-					$html .= '<td>'.$row->hour6.'</td>';
-					$html .= '<td>'.$row->balance.'</td>';
+		
+					list($h, $m, $s) = explode(':', $row->time);
+					list($h1, $m1, $s1) = explode(':', $row->hour1);
+					list($h2, $m2, $s2) = explode(':', $row->hour2);
+					list($h3, $m3, $s3) = explode(':', $row->hour3);
+					list($h4, $m4, $s4) = explode(':', $row->hour4);
+					list($h5, $m5, $s5) = explode(':', $row->hour5);
+					list($h6, $m6, $s6) = explode(':', $row->hour6);
+					list($h7, $m7, $s7) = explode(':', $row->balance);
+
+					$html .= '<td>'.str_pad($h, 2, '0', STR_PAD_LEFT).':'.str_pad($m, 2, '0', STR_PAD_LEFT).'</td>';
+					$html .= '<td>'.str_pad($h1, 2, '0', STR_PAD_LEFT).':'.str_pad($m1, 2, '0', STR_PAD_LEFT).'</td>';
+					$html .= '<td>'.str_pad($h2, 2, '0', STR_PAD_LEFT).':'.str_pad($m2, 2, '0', STR_PAD_LEFT).'</td>';
+					$html .= '<td>'.str_pad($h3, 2, '0', STR_PAD_LEFT).':'.str_pad($m3, 2, '0', STR_PAD_LEFT).'</td>';
+					$html .= '<td>'.str_pad($h4, 2, '0', STR_PAD_LEFT).':'.str_pad($m4, 2, '0', STR_PAD_LEFT).'</td>';
+					$html .= '<td>'.str_pad($h5, 2, '0', STR_PAD_LEFT).':'.str_pad($m5, 2, '0', STR_PAD_LEFT).'</td>';
+					$html .= '<td>'.str_pad($h6, 2, '0', STR_PAD_LEFT).':'.str_pad($m6, 2, '0', STR_PAD_LEFT).'</td>';
+					$html .= '<td>'.str_pad($h7, 2, '0', STR_PAD_LEFT).':'.str_pad($m7, 2, '0', STR_PAD_LEFT).'</td>';
 					$html .= '</tr>';
 					//Calculando as horas a trabalhar
 					list($h, $m, $s) = explode(':', $row->time);
@@ -273,17 +282,17 @@ class PersonalStatement extends CI_Controller {
 						$html .= '<td><b>Total Semana</b></td>';
 						$html .= '<td></td>';
 						$html .= '<td><b>Horas a trabalhar</b></td>';
-						$html .= '<td><b>'.str_pad($hour, 2, '0', STR_PAD_LEFT).':'.str_pad($minutes, 2, '0', STR_PAD_LEFT).':'.str_pad($secounds, 2, '0', STR_PAD_LEFT).'</b></td>';
+						$html .= '<td><b>'.str_pad($hour, 2, '0', STR_PAD_LEFT).':'.str_pad($minutes, 2, '0', STR_PAD_LEFT).'</b></td>';
 						$html .= '<td></td>';
 						$html .= '<td><b>Horas Trabalhadas</b></td>';
-						$html .= '<td><b>'.str_pad($hworked, 2, '0', STR_PAD_LEFT).':'.str_pad($mworked, 2, '0', STR_PAD_LEFT).':'.str_pad($sworked, 2, '0', STR_PAD_LEFT).'</b></td>';
+						$html .= '<td><b>'.str_pad($hworked, 2, '0', STR_PAD_LEFT).':'.str_pad($mworked, 2, '0', STR_PAD_LEFT).'</b></td>';
 						$html .= '<td></td>';
 						$html .= '<td><b>Saldo</b></td>';
 						//$html .= '<td><b>'.$over.'</b></td>';
 						if ($negative) {
-							$html .= '<td><b>-'.str_pad($hbalance, 2, '0', STR_PAD_LEFT).':'.str_pad($mbalance, 2, '0', STR_PAD_LEFT).':'.str_pad($sbalance, 2, '0', STR_PAD_LEFT).'</b></td>';
+							$html .= '<td><b>-'.str_pad($hbalance, 2, '0', STR_PAD_LEFT).':'.str_pad($mbalance, 2, '0', STR_PAD_LEFT).'</b></td>';
 						} else {
-							$html .= '<td><b>'.str_pad($hbalance, 2, '0', STR_PAD_LEFT).':'.str_pad($mbalance, 2, '0', STR_PAD_LEFT).':'.str_pad($sbalance, 2, '0', STR_PAD_LEFT).'</b></td>';
+							$html .= '<td><b>'.str_pad($hbalance, 2, '0', STR_PAD_LEFT).':'.str_pad($mbalance, 2, '0', STR_PAD_LEFT).'</b></td>';
 						}
 						$html .= '</tr>';
 						$html .= '<tr>';
@@ -303,7 +312,11 @@ class PersonalStatement extends CI_Controller {
 					}
 				} else {
 					$html .= '</table>';
-					$html .= '&nbsp;<b>Horas a trabalhar: '.$row->hour6.'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Horas Trabalhadas: '.$row->hour5.'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Saldo: '.$row->balance.'</b>';
+					list($h1, $m1, $s1) = explode(':', $row->hour6);
+					list($h2, $m2, $s2) = explode(':', $row->hour5);
+					list($h3, $m3, $s3) = explode(':', $row->balance);
+
+					$html .= '&nbsp;<b>Horas a trabalhar: '.str_pad($h1, 2, '0', STR_PAD_LEFT).':'.str_pad($m1, 2, '0', STR_PAD_LEFT).'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Horas Trabalhadas: '.str_pad($h2, 2, '0', STR_PAD_LEFT).':'.str_pad($m2, 2, '0', STR_PAD_LEFT).'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Saldo: '.str_pad($h3, 2, '0', STR_PAD_LEFT).':'.str_pad($m3, 2, '0', STR_PAD_LEFT).'</b>';
 				}
 
 			}
@@ -354,13 +367,15 @@ class PersonalStatement extends CI_Controller {
 				foreach($rows->result() as $row){
 					if ($row->info != 'TOTAL') {
 						$html .= '<tr>';
-						$html .= '<td>'.ucfirst(utf8_encode(strftime('%d/%m/%Y', strtotime($row->date)))).'</td>';
-						$html .= '<td>'.$row->hour1.'</td>';
+						$html .= '<td>'.ucfirst(utf8_encode(strftime('%d/%m/%g', strtotime($row->date)))).'</td>';
+						list($h1, $m1, $s1) = explode(':', $row->hour1);
+						$html .= '<td>'.str_pad($h1, 2, '0', STR_PAD_LEFT).':'.str_pad($m1, 2, '0', STR_PAD_LEFT).'</td>';
 						$html .= '</tr>';
 					} else {
 						$html .= '<tr>';
 						$html .= '<td><b>Saldo do Mês</b></td>';
-						$html .= '<td><b>'.$row->balance.'</b></td>';
+						list($h1, $m1, $s1) = explode(':', $row->balance);
+						$html .= '<td><b>'.str_pad($h1, 2, '0', STR_PAD_LEFT).':'.str_pad($m1, 2, '0', STR_PAD_LEFT).'</b></td>';
 						$html .= '</tr>';
 					}
 				}
