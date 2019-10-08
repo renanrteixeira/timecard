@@ -122,7 +122,7 @@ class Users extends CI_Controller {
 			   
 			}
 			
-			if (!IS_NULL($existe)) {
+			if (!isset($existe)) {
 				$variaveis['titulo'] = 'Novo Registro';
 				$variaveis['mensagem'] = "E-mail informado já foi cadastrado";
 				$this->load->view('users/cadastro', $variaveis);
