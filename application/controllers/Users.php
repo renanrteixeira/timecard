@@ -43,7 +43,7 @@ class Users extends CI_Controller {
 			
 			$user = $this->users->get($id);
 			
-			if ($user->num_rows() > 0 ) {
+			if ((($user->num_rows() > 0) && ($_SESSION['user_id'] == $id)) || ($_SESSION['admin'] == 'S')) {
 				$variaveis['titulo'] = 'Edição de Usuário';
 				$variaveis['user_id'] = $user->row()->user_id;
 				$variaveis['name'] = $user->row()->name;
@@ -53,7 +53,8 @@ class Users extends CI_Controller {
 				$variaveis['status'] = $user->row()->status;
 				$this->load->view('users/cadastro', $variaveis);
 			} else {
-				redirect('useres/index');
+				$_SESSION['erro'] = 'Não tem permissão para editar o usuário.';
+				redirect('users/index');
 			}
 			
 		}
@@ -120,9 +121,13 @@ class Users extends CI_Controller {
 
 			   $existe = $this->users->getEmail($email);
 			   
+			   $rows = $existe->num_rows();
+
+			} else {
+				$rows = 0;
 			}
 			
-			if ($existe->num_rows() > 0) {
+			if ( $rows > 0) {
 				$variaveis['titulo'] = 'Novo Registro';
 				$variaveis['mensagem'] = "E-mail informado já foi cadastrado";
 				$this->load->view('users/cadastro', $variaveis);

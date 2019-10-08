@@ -21,7 +21,7 @@ if (!$_SESSION['name']) {
 						<!-- <?= $mensagem ?> -->
 						<?= $_SESSION['mensagem'] ?>
 					</div>
-		<?php } ?>
+		<?php } $_SESSION['mensagem'] = ''?>
 		<?php if (!empty($_SESSION['erro'])) { ?>
 					<div class="alert alert-danger alert-dismissible">
 						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -29,7 +29,7 @@ if (!$_SESSION['name']) {
 						<!-- <?= $mensagem ?> -->
 						<?= $_SESSION['erro'] ?>
 					</div>
-		<?php } ?>
+		<?php } $_SESSION['erro'] = '' ?>
 	<div class="box-header">
 	    <div class="row col-md-12">
 			<a href="<?php echo base_url('/users/new')?>" class="btn btn-success btn-custom"><span class="glyphicon glyphicon-plus img-circle btn-icon"></span> Novo usuário</a>		
@@ -57,7 +57,11 @@ if (!$_SESSION['name']) {
 					<?php } else { ?>
 						<td>Ativo</td>
 					<?php } ?>
-					<td><?= anchor("users/edit/$user->user_id", "Editar") ?></td>
+					<?php if (($_SESSION['user_id'] == $user->user_id) || ($_SESSION['admin'] = 'S'))  {?>
+						<td><?= anchor("users/edit/$user->user_id", "Editar") ?></td>
+					<?php } else { ?>
+						<td></td>
+					<?php } ?>
 				</tr>
 				<?php } ?>
 			</tbody>			

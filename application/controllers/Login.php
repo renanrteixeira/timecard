@@ -83,6 +83,7 @@ class Login extends CI_Controller {
             'user_id' => $row->user_id,
             'name' => $row->name,
             'email' => $row->email,
+            'admin' => 'S',
             'is_authenticated' => TRUE,
           );
         $this->session->set_userdata($sessArray);
