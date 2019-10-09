@@ -190,7 +190,7 @@ class Hours_model extends CI_Model {
 					WHERE
 						h.id = h.id AND
 						h.employeefk = employees.id AND
-						PERIOD_ADD(DATE_FORMAT(SYSDATE(), "%Y%m"), -6) = DATE_FORMAT(h.date, "%Y%m")) AS MES_1,  
+						PERIOD_ADD(DATE_FORMAT(SYSDATE(), "%Y%m"), -9) = DATE_FORMAT(h.date, "%Y%m")) AS MES_1,  
 					(SELECT
 						sec_to_time(SUM(time_to_sec(balance)))
 					FROM
@@ -200,7 +200,7 @@ class Hours_model extends CI_Model {
 					WHERE
 						h.id = h.id AND
 						h.employeefk = employees.id AND
-						PERIOD_ADD(DATE_FORMAT(SYSDATE(), "%Y%m"), -6) = DATE_FORMAT(h.date, "%Y%m")) AS MES_2,  
+						PERIOD_ADD(DATE_FORMAT(SYSDATE(), "%Y%m"), -8) = DATE_FORMAT(h.date, "%Y%m")) AS MES_2,  
 					(SELECT
 						sec_to_time(SUM(time_to_sec(balance)))
 					FROM
@@ -210,7 +210,7 @@ class Hours_model extends CI_Model {
 					WHERE
 						h.id = h.id AND
 						h.employeefk = employees.id AND
-						PERIOD_ADD(DATE_FORMAT(SYSDATE(), "%Y%m"), -6) = DATE_FORMAT(h.date, "%Y%m")) AS MES_3,  
+						PERIOD_ADD(DATE_FORMAT(SYSDATE(), "%Y%m"), -7) = DATE_FORMAT(h.date, "%Y%m")) AS MES_3,  
 					(SELECT
 						sec_to_time(SUM(time_to_sec(balance)))
 					FROM
