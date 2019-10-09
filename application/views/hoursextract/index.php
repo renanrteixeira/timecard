@@ -23,6 +23,9 @@ if (!$_SESSION['name']) {
 			<thead>
 				<tr>
 					<th>Funcionário</th>
+					<th><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-9month'))))?></th>
+					<th><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-8month'))))?></th>
+					<th><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-7month'))))?></th>
 					<th><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-6month'))))?></th>
 					<th><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-5month'))))?></th>
 					<th><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-4month'))))?></th>
@@ -34,20 +37,22 @@ if (!$_SESSION['name']) {
 				</tr>
 			</thead>
 			<tbody>
-			<?php foreach($extract->result() as $value){ ?>
-				<tr>
-					<td><?= $value->name?></td>
-					<td><?= $value->MES_0?></td>
-					<td><?= $value->MES_1?></td>
-					<td><?= $value->MES_2?></td>
-					<td><?= $value->MES_3?></td>
-					<td><?= $value->MES_4?></td>
-					<td><?= $value->MES_5?></td>
-					<td><?= $value->MES_ATUAL?></td>
-					<td><?= $value->SALDO?></td>
-				</tr>
+				<?php foreach($extract->result() as $value){ ?>
+					<tr>
+						<td><?= $value->name?></td>
+						<td><?= $value->MES_1?></td>
+						<td><?= $value->MES_2?></td>
+						<td><?= $value->MES_3?></td>
+						<td><?= $value->MES_4?></td>
+						<td><?= $value->MES_5?></td>
+						<td><?= $value->MES_5?></td>
+						<td><?= $value->MES_6?></td>
+						<td><?= $value->MES_7?></td>
+						<td><?= $value->MES_9?></td>
+						<td><?= $value->MES_ATUAL?></td>
+						<td><?= $value->SALDO?></td>
+					</tr>
 				<?php } ?>
-
 			</tbody>			
 		</table>
 	</div>

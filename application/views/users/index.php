@@ -32,7 +32,7 @@ if (!$_SESSION['name']) {
 		<?php } $_SESSION['erro'] = '' ?>
 	<div class="box-header">
 	    <div class="row col-md-12">
-			<a href="<?php echo base_url('/users/new')?>" class="btn btn-success btn-custom"><span class="glyphicon glyphicon-plus img-circle btn-icon"></span> Novo usuário</a>		
+			<a href="<?php echo base_url('/users/new')?>" class="btn btn-success btn-custom"><span class="glyphicon glyphicon-plus img-circle btn-icon"></span> Novo Usuário</a>		
 		</div>
 	</div>
 	<div class="box-body">
