@@ -101,11 +101,6 @@ class Users extends CI_Controller {
 						'rules' => 'required|matches[password]'
 				),
 				array(
-						'field' => 'admin',
-						'label' => 'Administrador',
-						'rules' => 'required'
-				),
-				array(
 						'field' => 'status',
 						'label' => 'Status',
 						'rules' => 'trim|required'
@@ -139,13 +134,19 @@ class Users extends CI_Controller {
 				$this->load->view('users/cadastro', $variaveis);
 			} else {
 
+				if (($_SESSION['admin'] = 'N') && $id == null) {
+					$admin = 'N';
+				} else {
+					$admin = $this->input->post('admin');
+				}
+
 				$dados = array(
 				
 					"name" => $this->input->post('name'),
 					"status" => $this->input->post('status'),
 					"email" => $this->input->post('email'),
 					"password" => $this->input->post('password'),
-					"admin" => $this->input->post('admin')
+					"admin" => $admin
 				
 				);
 				

@@ -41,7 +41,7 @@ if (!$_SESSION['name']) {
 			</div>
 			<div class="form-group">
 				<label for="email">E-mail</label>
-				<input type="email" class="form-control" id="email" name="email" placeholder="Enter E-mail" value="<?= set_value('email') ? : (isset($email) ? $email : '') ?>" <?php echo isset($user_id) ? 'disabled' : ''; ?> required>
+				<input type="email" class="form-control" id="email" name="email" placeholder="Enter E-mail" value="<?= set_value('email') ? : (isset($email) ? $email : '') ?>" <?php echo isset($user_id) ? 'readonly' : ''; ?> required>
 			</div>
 			<div class="form-group">
 				<label for="password">Password</label>
