@@ -83,8 +83,8 @@ class Login extends CI_Controller {
             'user_id' => $row->user_id,
             'name' => $row->name,
             'email' => $row->email,
-            'admin' => 'S',
-            'is_authenticated' => TRUE,
+						'is_authenticated' => TRUE,
+						'admin' => $row->admin
           );
         $this->session->set_userdata($sessArray);
         }
@@ -101,6 +101,7 @@ class Login extends CI_Controller {
         $this->session->unset_userdata('name');
         $this->session->unset_userdata('email');
         $this->session->unset_userdata('is_authenticated');
+        $this->session->unset_userdata('admin');
         $this->session->sess_destroy();
         $this->output->set_header("Cache-Control: no-store, no-cache, must-revalidate, no-transform, max-age=0, post-check=0, pre-check=0");
         $this->output->set_header("Pragma: no-cache");

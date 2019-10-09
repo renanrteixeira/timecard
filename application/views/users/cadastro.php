@@ -51,6 +51,15 @@ if (!$_SESSION['name']) {
 				<label for="confirmpassword">Confirmação Password</label>
 				<input type="password" class="form-control" name="confirmpassword" id="confirmpassword" placeholder="Confirm Password" value="<?= set_value('confirmpassword') ? : (isset($confirmpassword) ? $confirmpassword : '') ?>" required>
 			</div>
+			<?php if ($_SESSION['admin'] == 'S') { ?>
+				<div class="form-group">
+					<label>Administrador?</label>
+					<select class="form-control" name="admin" id="admin" required>
+						<option value="S" <?php echo isset($admin) ? ($admin=='S') ?'selected':'' : ''; ?>>Sim</option>
+						<option value="N" <?php echo isset($admin) ? ($admin=='N') ?'selected':'' : ''; ?>>Não</option>
+					</select>
+				</div>	
+			<?php } ?>		
 			<div class="form-group">
 				<label>Status</label>
 				<select class="form-control" name="status" id="status" required>

@@ -57,8 +57,8 @@ if (!$_SESSION['name']) {
 					<?php } else { ?>
 						<td>Ativo</td>
 					<?php } ?>
-					<?php if (($_SESSION['user_id'] == $user->user_id) || ($_SESSION['admin'] = 'S'))  {?>
-						<td><?= anchor("users/edit/$user->user_id", "Editar") ?></td>
+					<?php if ( (($_SESSION['user_id'] == $user->user_id)) or ($_SESSION['admin'] == 'S') ){?>
+						<td><?= anchor("users/edit/$user->user_id", "Editar")?></td>
 					<?php } else { ?>
 						<td></td>
 					<?php } ?>

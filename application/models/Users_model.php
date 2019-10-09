@@ -21,6 +21,7 @@ class Users_model extends CI_Model {
   private $_name;
   private $_email;
   private $_password;
+  private $_admin;
   private $_status;
   
   public function setUserID($userID) {
@@ -44,19 +45,19 @@ class Users_model extends CI_Model {
 	} 
 	
   function login() {
-    $this -> db -> select('user_id, name, email');
-    $this -> db -> from('users');
-    $this -> db -> where('email', $this->_email);
-		$this -> db -> where('password', $this->_password);
-		$this -> db -> where('status', 1);
-		$this -> db -> limit(1);
-    $query = $this -> db -> get();
-    if($query -> num_rows() == 1) {
-      return $query->result();
-    } else {
-      return false;
-    }
+	$this -> db -> select('user_id, name, email, admin');
+	$this -> db -> from('users');
+	$this -> db -> where('email', $this->_email);
+	$this -> db -> where('password', $this->_password);
+	$this -> db -> where('status', 1);
+	$this -> db -> limit(1);
+	$query = $this -> db -> get();
+	if($query -> num_rows() == 1) {
+		return $query->result();
+	} else {
+		return false;
 	}
+  }
 	
 	/**
 	 * Grava os dados na tabela.

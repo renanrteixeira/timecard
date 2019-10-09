@@ -50,6 +50,7 @@ class Users extends CI_Controller {
 				$variaveis['email'] = $user->row()->email;
 				$variaveis['password'] = $user->row()->password;
 				$variaveis['confirmpassword'] = $user->row()->password;
+				$variaveis['admin'] = $user->row()->admin;
 				$variaveis['status'] = $user->row()->status;
 				$this->load->view('users/cadastro', $variaveis);
 			} else {
@@ -99,7 +100,12 @@ class Users extends CI_Controller {
 						'label' => 'Confirmação Password',
 						'rules' => 'required|matches[password]'
 				),
-	    		array(
+				array(
+						'field' => 'admin',
+						'label' => 'Administrador',
+						'rules' => 'required'
+				),
+				array(
 						'field' => 'status',
 						'label' => 'Status',
 						'rules' => 'trim|required'
@@ -138,7 +144,8 @@ class Users extends CI_Controller {
 					"name" => $this->input->post('name'),
 					"status" => $this->input->post('status'),
 					"email" => $this->input->post('email'),
-					"password" => $this->input->post('password')
+					"password" => $this->input->post('password'),
+					"admin" => $this->input->post('admin')
 				
 				);
 				
