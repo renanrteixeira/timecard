@@ -1,0 +1,102 @@
+Registro de empregado
+
+- Foto 3h
+- Nome 
+- CTPS
+  - Número
+  - Série
+- CTPS Rural
+  - Número
+  - Série
+- CPF
+- Título Eleitor
+  - Zona
+  - Número
+- RG
+- Salário Contratação
+- Período de Trabalho
+- Intervalo de Trabalho
+  - Hora de entrada
+  - Hora de Saída
+  - Horas Repouso/Alimentação
+- Nacionalidade
+- Nome Pai
+- Nome Mãe
+- Cidade Nascimento
+- Data de Nascimento
+- Estado Civil
+- Nome do Cônjuge
+- Grau de Instrução
+- Residência
+- Cart. Habilitação
+- Cert. Militar
+  - Número
+  - Série
+  - Categ.
+- PIS
+  - Data Cadastro
+  - Número
+  - Dep. no Banco
+- Benéficios
+- Obervações
+- Empregador
+- CNPJ/CPF/CEI
+- Município
+- Esp. do Estabelecimento
+- Cargo
+- CBO
+- Admissão
+  - Registro N°
+  - FLS./Ficha
+  - Remuneração
+- Demissão
+  - Data
+  - COM. Dispensa CD N°
+  - FGTS N° da conta
+
+44 campos 15h
+
+---------------------------------------------
+
+- Criar tabela filha Alterações de salário
+  - Data
+  - Valor
+  - Nome de quem atualizouo salário
+
+  4h
+
+- Criar tabela Filha de Alteração de Cargo
+  - Data
+  - Cargo
+
+  4h
+
+- Criar tabela filha de contribuição sindical
+  - Guia N°
+  - Data
+  - Sindicato
+
+  4h
+
+- Criar tabela de acidentes ou doenças profissionais
+  - Descrição
+  - Data início
+  - Data Fim
+
+  4h
+
+- Criar tabela filha de férias concedidas
+  - Data Inicial
+  - Data Final
+  - Data inicial referente
+  - Data Final referente
+
+  4h
+
+  20h
+
+  40h
+  
+  Montar PDF  10h
+
+  50  h
