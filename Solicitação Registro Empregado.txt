@@ -54,7 +54,7 @@ Registro de empregado
   - COM. Dispensa CD N°
   - FGTS N° da conta
 
-44 campos 15h
+44 campos 20h
 
 ---------------------------------------------
 
@@ -95,8 +95,8 @@ Registro de empregado
 
   20h
 
-  40h
+  total 40h
   
   Montar PDF  10h
 
-  50  h
+  total geral 50  h
