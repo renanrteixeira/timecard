@@ -108,7 +108,7 @@ if (!$_SESSION['name']) {
 					<td><?= $hour->hour4?></td>
 					<td><?= $hour->hour5?></td>
 					<td><?= $hour->hour6?></td>
-					<td><?= anchor("hours/edit/$hour->id", "Editar") ?></td>
+					<td><a href="<?php echo base_url('hours/edit/').$hour->id?>" data-toggle="tooltip" title="Editar" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit img-circle btn-icon"></td>
 				</tr>
 				<?php } ?>
 			</tbody>			

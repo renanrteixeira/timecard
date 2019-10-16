@@ -51,7 +51,7 @@ if (!$_SESSION['name']) {
 					<td><?= $typedate->id ?></td>
 					<td><?= $typedate->name?></td>
 					<td><?= $typedate->time?></td>
-					<td><?= anchor("typedates/edit/$typedate->id", "Editar") ?></td>
+					<td><a href="<?php echo base_url('typedates/edit/').$typedate->id?>" data-toggle="tooltip" title="Editar" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit img-circle btn-icon"></td>
 				</tr>
 				<?php } ?>
 			</tbody>			

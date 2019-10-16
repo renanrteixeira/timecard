@@ -58,7 +58,7 @@ if (!$_SESSION['name']) {
 						<td>Ativo</td>
 					<?php } ?>
 					<?php if ( (($_SESSION['user_id'] == $user->user_id)) || ($_SESSION['admin'] == 'S') ){?>
-						<td><?= anchor("users/edit/$user->user_id", "Editar")?></td>
+						<td><a href="<?php echo base_url('users/edit/').$user->user_id?>" data-toggle="tooltip" title="Editar"  class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit img-circle btn-icon"></span></a></td>
 					<?php } else { ?>
 						<td></td>
 					<?php } ?>

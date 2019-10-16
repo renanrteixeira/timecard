@@ -49,7 +49,7 @@ if (!$_SESSION['name']) {
 				<tr>
 					<td><?= $role->id ?></td>
 					<td><?= $role->name?></td>
-					<td><?= anchor("roles/edit/$role->id", "Editar") ?></td>
+					<td><a href="<?php echo base_url('roles/edit/').$role->id?>" data-toggle="tooltip" title="Editar" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit img-circle btn-icon"></td>
 				</tr>
 				<?php } ?>
 			</tbody>			
