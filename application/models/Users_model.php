@@ -37,7 +37,7 @@ class Users_model extends CI_Model {
   }       
 
   public function getUserInfo() {
-    $this->db->select(array('u.user_id', 'u.name', 'u.email'));
+    $this->db->select(array('u.user_id', 'u.name', 'u.email', ));
     $this->db->from('users as u');
     $this->db->where('u.user_id', $this->_userID);
     $query = $this->db->get();
@@ -52,7 +52,7 @@ class Users_model extends CI_Model {
 	$this -> db -> where('status', 1);
 	$this -> db -> limit(1);
 	$query = $this -> db -> get();
-	if($query -> num_rows() == 1) {
+	if($query->num_rows() == 1) {
 		return $query->result();
 	} else {
 		return false;

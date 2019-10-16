@@ -134,7 +134,7 @@ class Users extends CI_Controller {
 				$this->load->view('users/cadastro', $variaveis);
 			} else {
 
-				if (($_SESSION['admin'] = 'N') && $id == null) {
+				if (($_SESSION['admin'] == 'N') && $id == null) {
 					$admin = 'N';
 				} else {
 					$admin = $this->input->post('admin');
