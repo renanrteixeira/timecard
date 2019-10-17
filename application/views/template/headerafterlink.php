@@ -1,6 +1,7 @@
 </head>
 <body class="hold-transition sidebar-mini skin-blue-light">
-<div class="wrapper">
+<div id="loader"></div>
+<div class="wrapper animate-bottom" style="display:none;" id="myDiv">
 
   <header class="main-header">
 
