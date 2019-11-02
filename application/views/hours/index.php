@@ -108,7 +108,10 @@ if (!$_SESSION['name']) {
 					<td><?= $hour->hour4?></td>
 					<td><?= $hour->hour5?></td>
 					<td><?= $hour->hour6?></td>
-					<td><a href="<?php echo base_url('hours/edit/').$hour->id?>" data-toggle="tooltip" title="Editar" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit img-circle btn-icon"></td>
+					<td>
+						<a href="<?php echo base_url('hours/edit/').$hour->id?>" data-toggle="tooltip" title="Editar" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit img-circle btn-icon"></span></a>
+						<a href="<?php echo base_url('hours/delete/').$hour->id?>" data-toggle="tooltip" title="Excluir" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash img-circle btn-icon"></span></a>
+					</td>
 				</tr>
 				<?php } ?>
 			</tbody>			

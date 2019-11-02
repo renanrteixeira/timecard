@@ -99,7 +99,10 @@ if (!$_SESSION['name']) {
 					<td><?= $hour->name?></td>
 					<td><?= ucfirst(utf8_encode(strftime('%d/%m/%Y',strtotime($hour->date))))?></td>
 					<td><?= $hour->hour1?></td>
-					<td><a href="<?php echo base_url('payments/edit/').$hour->id?>" data-toggle="tooltip" title="Editar" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit img-circle btn-icon"></td>
+					<td>
+						<a href="<?php echo base_url('payments/edit/').$hour->id?>" data-toggle="tooltip" title="Editar" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit img-circle btn-icon"></span></a>
+						<a href="<?php echo base_url('payments/delete/').$hour->id?>" data-toggle="tooltip" title="Excluir" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash img-circle btn-icon"></span></a>
+					</td>
 				</tr>
 				<?php } ?>
 			</tbody>			
