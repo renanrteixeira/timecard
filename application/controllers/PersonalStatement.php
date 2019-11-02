@@ -234,8 +234,7 @@ class PersonalStatement extends CI_Controller {
 					$worked += ($secounds4 - $secounds3); 
 					$worked += ($secounds6 - $secounds5); 
 
-
-					if ($row->weekend == 'S') {
+					if (($row->weekend == 'S')) {
 						//Calculando saldo
 						$negative = false;
 						if ($worked < $time) {

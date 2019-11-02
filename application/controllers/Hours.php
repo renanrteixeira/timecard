@@ -213,10 +213,13 @@ class Hours extends CI_Controller {
 
 					$balance = $hours.':'.$minutes.':00';
 				}			
-		
+
+				$string = $this->input->post('employee') . date('d/m/Y H:i:s');
+				$sha1 = sha1($string);
+	
 				$dados = array(
 					
-
+					"id" => $sha1,
 					"employeefk" => $this->input->post('employee'),
 					"date" => $this->input->post('date'),
 					"typedatefk" => $this->input->post('typedate'),

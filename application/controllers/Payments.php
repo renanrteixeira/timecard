@@ -134,11 +134,12 @@ class Payments extends CI_Controller {
 				//$payment = date('H:i:s', $payment);
                 //echo $payment;
 				$payment = '-'.$payment;
-			
+				$string = $this->input->post('employee') . date('d/m/Y H:i:s');
+				$sha1 = sha1($string);			
 				//echo  'Base: '.$hourbase.'  -  Convertido: '.strtotime($hourbase).'  -  Entrada: '.$Entadamanha.'  -  Convertido: '.strtotime($Entadamanha);
 				$dados = array(
-					
 
+					"id" => $sha1,
 					"employeefk" => $this->input->post('employee'),
 					"date" => $this->input->post('date'),
 					"type" => 1,

@@ -84,9 +84,8 @@ if (!$_SESSION['name']) {
 		<table id="table" class="table table-striped table-bordered" style="width:100%">
 			<thead>
 				<tr>
-					<th>Código</th>
-					<th>Funcionário</th>
 					<th>Data Lançamento</th>
+					<th>Funcionário</th>
 					<th>Hora Entrada (Manhã)</th>
 					<th>Hora Saída (Manhã)</th>
 					<th>Hora Entrada (Tarde)</th>
@@ -99,9 +98,8 @@ if (!$_SESSION['name']) {
 			<tbody>
 				<?php foreach($hours->result() as $hour){ ?>
 				<tr>
-					<td><?= $hour->id ?></td>
-					<td><?= $hour->name?></td>
 					<td><?= ucfirst(utf8_encode(strftime('%d/%m/%Y', strtotime($hour->date))))?></td>
+					<td><?= $hour->name?></td>
 					<td><?= $hour->hour1?></td>
 					<td><?= $hour->hour2?></td>
 					<td><?= $hour->hour3?></td>

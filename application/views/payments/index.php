@@ -85,9 +85,8 @@ if (!$_SESSION['name']) {
 		<table id="table" class="table table-striped table-bordered" style="width:100%">
 			<thead>
 				<tr>
-					<th>Código</th>
-					<th>Funcionário</th>
 					<th>Data Lançamento</th>
+					<th>Funcionário</th>
 					<th>Horas Pagas</th>
 					<th>Ação</th>
 				</tr>
@@ -95,9 +94,8 @@ if (!$_SESSION['name']) {
 			<tbody>
 				<?php foreach($hours->result() as $hour){ ?>
 				<tr>
-					<td><?= $hour->id ?></td>
-					<td><?= $hour->name?></td>
 					<td><?= ucfirst(utf8_encode(strftime('%d/%m/%Y',strtotime($hour->date))))?></td>
+					<td><?= $hour->name?></td>
 					<td><?= $hour->hour1?></td>
 					<td>
 						<a href="<?php echo base_url('payments/edit/').$hour->id?>" data-toggle="tooltip" title="Editar" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit img-circle btn-icon"></span></a>

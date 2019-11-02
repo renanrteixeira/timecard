@@ -34,7 +34,7 @@ ALTER TABLE `employees` ADD CONSTRAINT `employee_rolefk`
 		ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 CREATE TABLE `hours` ( 
-		`id` INT NOT NULL AUTO_INCREMENT , 
+		`id` text NOT NULL, 
 		`employeefk` INT NOT NULL , 
 		`date` DATE NOT NULL , 
 		`hour1` TIME NOT NULL , 
@@ -100,9 +100,11 @@ CREATE TABLE `companies` ( `id` BIGINT NOT NULL AUTO_INCREMENT , `name` VARCHAR(
 
 ALTER TABLE `typedates` ADD `weekend` VARCHAR(1) NOT NULL DEFAULT 'N' AFTER `time`;
 
+ALTER TABLE `users` ADD `admin` VARCHAR(1) NOT NULL DEFAULT 'N' AFTER `password`;
 
 --//Aqui
-ALTER TABLE `users` ADD `admin` VARCHAR(1) NOT NULL DEFAULT 'N' AFTER `password`;
+ALTER TABLE `hours` CHANGE `id` `id` TEXT NOT NULL;
+ALTER TABLE `hours` DROP PRIMARY KEY;
 
 /*
 trabalhando com horas no select para tirar o resultado
