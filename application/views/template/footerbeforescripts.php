@@ -1,7 +1,7 @@
 </section>
 		
 		<!-- /.content -->
-	  </div>
+	  </div> 
 	  <!-- /.content-wrapper -->
 	
 	  <footer class="main-footer">
@@ -11,4 +11,4 @@
 		<strong>Copyright &copy; 2019 <a href="<?php echo base_url()?>">Controle Ponto</a>.</strong> All rights
 		reserved.
 	  </footer>
-	</div>
+	</div> 

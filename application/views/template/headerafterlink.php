@@ -1,10 +1,7 @@
 </head>
 <body class="hold-transition sidebar-mini skin-blue-light">
-<div id="loader"></div>
-<div class="wrapper animate-bottom" style="display:none;" id="myDiv">
-
+<div class="wrapper">
   <header class="main-header">
-
     <!-- Logo -->
     <a href="<?php echo base_url()?>" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
