@@ -214,7 +214,7 @@ class Hours extends CI_Controller {
 					$balance = $hours.':'.$minutes.':00';
 				}			
 
-				$string = $this->input->post('employee') . date('d/m/Y H:i:s');
+				$string = $this->input->post('employee') . date('d/m/Y H:i:s') . mt_rand();
 				$sha1 = sha1($string);
 	
 				$dados = array(
