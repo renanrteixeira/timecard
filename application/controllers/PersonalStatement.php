@@ -75,7 +75,7 @@ class PersonalStatement extends CI_Controller {
 					SELECT
 						NULL, 
 						"TOTAL", 
-						2300-12-31, 
+						"2999-12-31", 
 						NULL, 
 						NULL as data, 
 						NULL,
@@ -232,8 +232,8 @@ class PersonalStatement extends CI_Controller {
 
 					$worked += ($secounds2 - $secounds1); 
 					$worked += ($secounds4 - $secounds3); 
-					$worked += ($secounds6 - $secounds5); 
-
+					$worked += ($secounds6 - $secounds5);
+					//
 					if (($row->weekend == 'S')) {
 						//Calculando saldo
 						$negative = false;
@@ -336,27 +336,11 @@ class PersonalStatement extends CI_Controller {
 						hours.type = 1 AND
 						employees.id = '.$id.' AND
 						DATE_FORMAT(hours.date, "%Y-%m") = "'.$mes.'"
-					UNION ALL
-					SELECT
-						null, 
-						"TOTAL" AS info,
-						2300-12-31 AS date, 
-						NULL, 
-						sec_to_time(SUM(time_to_sec(balance))) AS balance
-					FROM
-						hours,
-						employees
-					WHERE
-						hours.employeefk = employees.id AND
-						employees.status = 1 AND
-						hours.type in (0, 1) AND
-						employees.id = '.$id.' AND
-						DATE_FORMAT(hours.date, "%Y-%m") = "'.$mes.'"					
 					ORDER BY 3';
 
 			$rows = $this->db->query($query);
 
-			if ($rows->num_rows() > 1){
+			if ($rows->num_rows() > 0){
 				$html .= '<br><br><b>&nbsp;Horas Pagas</b><table>';
 				$html .= '<tr>';
 				$html .= '<td><b>Data</b></td>';
@@ -364,24 +348,115 @@ class PersonalStatement extends CI_Controller {
 				$html .= '</tr>';
 				
 				foreach($rows->result() as $row){
-					if ($row->info != 'TOTAL') {
-						$html .= '<tr>';
-						$html .= '<td>'.ucfirst(utf8_encode(strftime('%d/%m/%g', strtotime($row->date)))).'</td>';
-						list($h1, $m1, $s1) = explode(':', $row->hour1);
-						$html .= '<td>'.str_pad($h1, 2, '0', STR_PAD_LEFT).':'.str_pad($m1, 2, '0', STR_PAD_LEFT).'</td>';
-						$html .= '</tr>';
-					} else {
-						$html .= '<tr>';
-						$html .= '<td><b>Saldo do Mês</b></td>';
-						list($h1, $m1, $s1) = explode(':', $row->balance);
-						$html .= '<td><b>'.str_pad($h1, 2, '0', STR_PAD_LEFT).':'.str_pad($m1, 2, '0', STR_PAD_LEFT).'</b></td>';
-						$html .= '</tr>';
-					}
+					$html .= '<tr>';
+					$html .= '<td>'.ucfirst(utf8_encode(strftime('%d/%m/%g', strtotime($row->date)))).'</td>';
+					list($h1, $m1, $s1) = explode(':', $row->hour1);
+					$html .= '<td>'.str_pad($h1, 2, '0', STR_PAD_LEFT).':'.str_pad($m1, 2, '0', STR_PAD_LEFT).'</td>';
+					$html .= '</tr>';
 				}
 				$html .= '</table>';
-			}
+				//
 
-			$html .= '<p align="center">'.str_pad('_', 80, '_', STR_PAD_LEFT).'<br>';
+				$html .= '<br>';
+				$html .= '<table>';
+
+				$day = $mes.'-01';
+				$lastDayofMonth = date("Y-m-t", strtotime($day));
+
+				$query = 'SELECT
+							COALESCE(sec_to_time(SUM(time_to_sec(balance))),"00:00:00") as balance
+						  FROM
+							hours h
+						    left join typedates on
+								h.typedatefk = typedates.id 
+						  WHERE
+							h.id = h.id AND
+							h.type in (0, 1) AND
+							h.employeefk = '.$id.' AND
+							h.date < date('.$day.')';
+
+				$hoursprevious = $this->db->query($query);
+
+				if ($hoursprevious->num_rows() > 0) {
+					foreach($hoursprevious->result() as $previous){
+						$html .= '<tr>';
+						$html .= '<td><b>Saldo antes do mês:</b></td>';
+						list($h1, $m1, $s1) = explode(':', $previous->balance);
+						$html .= '<td><b>'.str_pad($h1, 2, '0', STR_PAD_LEFT).':'.str_pad($m1, 2, '0', STR_PAD_LEFT).'</b></td>';
+					}
+				}
+
+				$query = 'SELECT
+							COALESCE(sec_to_time(SUM(time_to_sec(balance))),"00:00:00") as balance
+						FROM
+							hours,
+							employees
+						WHERE
+							hours.employeefk = employees.id AND
+							employees.status = 1 AND
+							hours.type = 0 AND
+							employees.id = '.$id.' AND
+							DATE_FORMAT(hours.date, "%Y-%m") = "'.$mes.'"';
+			
+				$hoursmonth = $this->db->query($query);
+				
+				if ($hoursmonth->num_rows() > 0) {
+					foreach($hoursmonth->result() as $month){
+						$html .= '<td>&nbsp;&nbsp;<b>(+)Saldo no mês:</b></td>';
+						list($h1, $m1, $s1) = explode(':', $month->balance);
+						$html .= '<td>&nbsp;&nbsp;<b>'.str_pad($h1, 2, '0', STR_PAD_LEFT).':'.str_pad($m1, 2, '0', STR_PAD_LEFT).'</b></td>';
+					}
+				}
+
+				$query = 'SELECT
+							COALESCE(sec_to_time(abs(SUM(time_to_sec(balance)))),"00:00:00") as balance
+						FROM
+							hours,
+							employees
+						WHERE
+							hours.employeefk = employees.id AND
+							employees.status = 1 AND
+							hours.type = 1 AND
+							employees.id = '.$id.' AND
+							DATE_FORMAT(hours.date, "%Y-%m") = "'.$mes.'"';
+			
+				$hourspay = $this->db->query($query);
+				
+				if ($hourspay->num_rows() > 0) {
+					foreach($hourspay->result() as $pay){
+						$html .= '<td>&nbsp;&nbsp;<b>(-)Horas pagas:</b></td>';
+						list($h1, $m1, $s1) = explode(':', $pay->balance);
+						$html .= '<td>&nbsp;&nbsp;<b>'.str_pad($h1, 2, '0', STR_PAD_LEFT).':'.str_pad($m1, 2, '0', STR_PAD_LEFT).'</b></td>';
+					}
+				}
+
+				$query = 'SELECT
+							sec_to_time(SUM(time_to_sec(balance))) as balance
+						FROM
+							hours,
+							employees
+						WHERE
+							hours.employeefk = employees.id AND
+							employees.status = 1 AND							
+							employees.id = '.$id.' AND
+							hours.date <= "'.$lastDayofMonth.'"';
+			
+				$hoursbalance = $this->db->query($query);
+				
+				if ($hoursbalance->num_rows() > 0) {
+					foreach($hoursbalance->result() as $balance){
+						$html .= '<td><b>&nbsp;&nbsp;(=)Saldo Geral Até o mês:</b></td>';
+						list($h1, $m1, $s1) = explode(':', $balance->balance);
+						$html .= '<td>&nbsp;&nbsp;<b>'.str_pad($h1, 2, '0', STR_PAD_LEFT).':'.str_pad($m1, 2, '0', STR_PAD_LEFT).'</b></td>';
+					}
+				}
+
+				$html .= '</tr>';
+				$html .= '</table>';
+
+			}			
+
+			$html .= '<br><p align="center">'.str_pad('_', 80, '_', STR_PAD_LEFT).'<br>';
 			$html .= $employee->row()->name.'</p>';
 
 			$html .= '</body></html>';
