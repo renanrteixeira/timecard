@@ -45,9 +45,9 @@ if (!$_SESSION['name']) {
 						<td><?= $value->MES_3?></td>
 						<td><?= $value->MES_4?></td>
 						<td><?= $value->MES_5?></td>
-						<td><?= $value->MES_5?></td>
 						<td><?= $value->MES_6?></td>
 						<td><?= $value->MES_7?></td>
+						<td><?= $value->MES_8?></td>
 						<td><?= $value->MES_9?></td>
 						<td><?= $value->MES_ATUAL?></td>
 						<td><?= $value->SALDO?></td>
