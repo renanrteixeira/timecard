@@ -142,7 +142,7 @@ class Hours_model extends CI_Model {
 					SELECT
 						NULL, 
 						"TOTAL", 
-						2300-12-31, 
+						"2300-12-31", 
 						NULL, 
 						NULL as data, 
 						NULL,
