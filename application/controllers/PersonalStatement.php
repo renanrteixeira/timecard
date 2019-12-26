@@ -234,7 +234,10 @@ class PersonalStatement extends CI_Controller {
 					//
 					$datenumber = $row->date;
 					//
-					if ((date('N', strtotime($datenumber)) == 6)) {
+					$nowday = date('d', strtotime($row->date));
+					$lastday = date('t', strtotime($row->date));
+					//
+					if ((date('N', strtotime($datenumber)) == 6) || ($nowday == $lastday)) {
 						//Calculando saldo
 						$negative = false;
 						if ($worked < $time) {
