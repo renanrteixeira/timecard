@@ -43,7 +43,7 @@ class PersonalStatement extends CI_Controller {
 		$id = $this->input->post('employee');
 		$mes = $this->input->post('periodo');
 
-		if ($id && $mes) {
+		if (($id) && ($mes)) {
 
 			$query = 'SELECT
 						hours.id, 
@@ -234,7 +234,10 @@ class PersonalStatement extends CI_Controller {
 					$worked += ($secounds4 - $secounds3); 
 					$worked += ($secounds6 - $secounds5);
 					//
-					if (($row->weekend == 'S')) {
+					$datenumber = $row->date;
+					//
+					//if (($row->weekend == 'S')) {
+					if ((date('N', strtotime($datenumber)) == 6)) {
 						//Calculando saldo
 						$negative = false;
 						if ($worked < $time) {
