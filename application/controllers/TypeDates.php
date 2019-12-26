@@ -48,7 +48,6 @@ class TypeDates extends CI_Controller {
 				$variaveis['id'] = $typedate->row()->id;
 				$variaveis['name'] = $typedate->row()->name;
 				$variaveis['time'] = $typedate->row()->time;
-				$variaveis['weekend'] = $typedate->row()->weekend;
 				$this->load->view('typedates/cadastro', $variaveis);
 			} else {
 				redirect('typedates/index');
@@ -85,13 +84,8 @@ class TypeDates extends CI_Controller {
 						'field' => 'time',
 						'label' => 'Tempo Base',
 						'rules' => 'trim|required',
-				array(
-						'field' => 'weekend',
-						'label' => 'Final da Semana',
-						'rules' => 'trim|required'
 				)
-			)
-	);
+		);
 
 		$this->form_validation->set_rules($regras);
 
@@ -106,8 +100,7 @@ class TypeDates extends CI_Controller {
 			$dados = array(
 			
 				"name" => $this->input->post('name'),
-				"time" => $this->input->post('time'),
-				"weekend" => $this->input->post('weekend')
+				"time" => $this->input->post('time')
 
 			);
 			if ($this->typedates->save($dados, $id)) {

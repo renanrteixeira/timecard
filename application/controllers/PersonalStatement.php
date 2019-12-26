@@ -52,7 +52,6 @@ class PersonalStatement extends CI_Controller {
 						hours.typedatefk, 
 						typedates.name,
 						typedates.time,
-						typedates.weekend,
 						hours.hour1, 
 						hours.hour2, 
 						hours.hour3, 
@@ -78,7 +77,6 @@ class PersonalStatement extends CI_Controller {
 						"2999-12-31", 
 						NULL, 
 						NULL as data, 
-						NULL,
 						NULL,
 						NULL,
 						NULL, 
@@ -236,7 +234,6 @@ class PersonalStatement extends CI_Controller {
 					//
 					$datenumber = $row->date;
 					//
-					//if (($row->weekend == 'S')) {
 					if ((date('N', strtotime($datenumber)) == 6)) {
 						//Calculando saldo
 						$negative = false;
