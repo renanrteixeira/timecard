@@ -10,6 +10,8 @@ if (!$_SESSION['name']) {
 	redirect('login/login');
 }
 
+  $today = strtotime('first day of this month');
+  
 ?>
 <?php $this->load->view('template/header') ?>
 <?php $this->load->view('template/link') ?>
@@ -23,16 +25,16 @@ if (!$_SESSION['name']) {
 			<thead>
 				<tr>
 					<th>Funcionário</th>
-					<th><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-9month'))))?></th>
-					<th><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-8month'))))?></th>
-					<th><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-7month'))))?></th>
-					<th><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-6month'))))?></th>
-					<th><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-5month'))))?></th>
-					<th><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-4month'))))?></th>
-					<th><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-3month'))))?></th>
-					<th><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-2month'))))?></th>
-					<th><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-1month'))))?></th>
-					<th><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('today'))))?></th>
+					<th><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-9 months', $today))))?></th> 
+					<th><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-8 months', $today))))?></th> 
+					<th><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-7 months', $today))))?></th> 
+					<th><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-6 months', $today))))?></th> 
+					<th><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-5 months', $today))))?></th> 
+					<th><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-4 months', $today))))?></th> 
+					<th><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-3 months', $today))))?></th> 
+					<th><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-2 months', $today))))?></th> 
+					<th><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-1 months', $today))))?></th> 
+					<th><?= ucfirst(utf8_encode(strftime('%b/%g', $today)))?></th>
 					<th>Saldo Total</th>
 				</tr>
 			</thead>
