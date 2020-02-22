@@ -19,38 +19,75 @@ if (!$_SESSION['name']) {
 <?php $this->load->view('template/headerselect2') ?>
 <?php $this->load->view('template/headerafterlink') ?>
 
-<div class="box box-primary">
-	<div class="box-body">
-		<table id="table" class="table table-striped table-bordered" style="width:100%">
+<div class="box box-primary table-responsive-xl">
+	<div class="box-body table-responsive-xl">
+		<table id="table" class="table table-striped table-bordered table-responsive-xl" style="width:100%">
 			<thead>
 				<tr>
+					<th></th>
+					<td class="text-center"></td>
+					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-9 months', $today))))?></th> 
+					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-8 months', $today))))?></th> 
+					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-7 months', $today))))?></th> 
+					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-6 months', $today))))?></th> 
+					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-5 months', $today))))?></th> 
+					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-4 months', $today))))?></th> 
+					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-3 months', $today))))?></th> 
+					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-2 months', $today))))?></th> 
+					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-1 months', $today))))?></th> 
+					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%g', $today)))?></th>
+					<th></th>
+				</tr>
+				<tr>
 					<th>Funcionário</th>
-					<th><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-9 months', $today))))?></th> 
-					<th><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-8 months', $today))))?></th> 
-					<th><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-7 months', $today))))?></th> 
-					<th><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-6 months', $today))))?></th> 
-					<th><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-5 months', $today))))?></th> 
-					<th><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-4 months', $today))))?></th> 
-					<th><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-3 months', $today))))?></th> 
-					<th><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-2 months', $today))))?></th> 
-					<th><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-1 months', $today))))?></th> 
-					<th><?= ucfirst(utf8_encode(strftime('%b/%g', $today)))?></th>
-					<th>Saldo Total</th>
+					<th class="text-center">Anterior</th>
+					<th class="text-center">Saldo</th>
+					<th class="text-center">Atual</th>
+					<th class="text-center">Saldo</th>
+					<th class="text-center">Atual</th>
+					<th class="text-center">Saldo</th>
+					<th class="text-center">Atual</th>
+					<th class="text-center">Saldo</th>
+					<th class="text-center">Atual</th>
+					<th class="text-center">Saldo</th>
+					<th class="text-center">Atual</th>
+					<th class="text-center">Saldo</th>
+					<th class="text-center">Atual</th>
+					<th class="text-center">Saldo</th>
+					<th class="text-center">Atual</th>
+					<th class="text-center">Saldo</th>
+					<th class="text-center">Atual</th>
+					<th class="text-center">Saldo</th>
+					<th class="text-center">Atual</th>
+					<th class="text-center">Saldo</th>
+					<th class="text-center">Atual</th>
+					<th class="text-center">Saldo Total</th>
 				</tr>
 			</thead>
 			<tbody>
 				<?php foreach($extract->result() as $value){ ?>
 					<tr>
 						<td><?= $value->name?></td>
+						<td><?= $value->ANTERIOR?></td>
+						<td><?= $value->MES_1_SALDO?></td>
 						<td><?= $value->MES_1?></td>
+						<td><?= $value->MES_2_SALDO?></td>
 						<td><?= $value->MES_2?></td>
+						<td><?= $value->MES_3_SALDO?></td>
 						<td><?= $value->MES_3?></td>
+						<td><?= $value->MES_4_SALDO?></td>
 						<td><?= $value->MES_4?></td>
+						<td><?= $value->MES_5_SALDO?></td>
 						<td><?= $value->MES_5?></td>
+						<td><?= $value->MES_6_SALDO?></td>
 						<td><?= $value->MES_6?></td>
+						<td><?= $value->MES_7_SALDO?></td>
 						<td><?= $value->MES_7?></td>
+						<td><?= $value->MES_8_SALDO?></td>
 						<td><?= $value->MES_8?></td>
+						<td><?= $value->MES_9_SALDO?></td>
 						<td><?= $value->MES_9?></td>
+						<td><?= $value->MES_ATUAL_SALDO?></td>
 						<td><?= $value->MES_ATUAL?></td>
 						<td><?= $value->SALDO?></td>
 					</tr>

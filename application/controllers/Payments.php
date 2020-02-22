@@ -74,6 +74,15 @@ class Payments extends CI_Controller {
 		}
 	}
 
+	function checkDateFormat($date) {
+        $d = DateTime::createFromFormat('Y-m-d', $date);
+        if(($d && $d->format('Y-m-d') === $date) === FALSE){
+            $this->form_validation->set_message('checkDateFormat', ''.$date.' is not a valid date format.');
+            return FALSE;
+        }else{
+            return TRUE;
+        }
+	}
 
 	public function save(){
 		
@@ -99,6 +108,9 @@ class Payments extends CI_Controller {
 		);
 
 		$this->form_validation->set_rules($regras);
+
+		
+		$this->form_validation->set_rules('date', 'Data de Lançameto', 'trim|required|callback_checkDateFormat');
 
 		if ($this->form_validation->run() == FALSE) {
 			$variaveis['titulo'] = 'Novo Abatimento';
