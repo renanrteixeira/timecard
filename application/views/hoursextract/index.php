@@ -25,7 +25,6 @@ if (!$_SESSION['name']) {
 			<thead>
 				<tr>
 					<th></th>
-					<td class="text-center"></td>
 					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-9 months', $today))))?></th> 
 					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-8 months', $today))))?></th> 
 					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-7 months', $today))))?></th> 
@@ -40,7 +39,6 @@ if (!$_SESSION['name']) {
 				</tr>
 				<tr>
 					<th>Funcionário</th>
-					<th class="text-center">Anterior</th>
 					<th class="text-center">Saldo</th>
 					<th class="text-center">Atual</th>
 					<th class="text-center">Saldo</th>
@@ -68,7 +66,6 @@ if (!$_SESSION['name']) {
 				<?php foreach($extract->result() as $value){ ?>
 					<tr>
 						<td><?= $value->name?></td>
-						<td><?= $value->ANTERIOR?></td>
 						<td><?= $value->MES_1_SALDO?></td>
 						<td><?= $value->MES_1?></td>
 						<td><?= $value->MES_2_SALDO?></td>

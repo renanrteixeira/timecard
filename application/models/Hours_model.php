@@ -190,16 +190,6 @@ class Hours_model extends CI_Model {
 					WHERE
 						h.id = h.id AND
 						h.employeefk = employees.id AND
-						DATE_SUB( DATE_FORMAT(CURDATE(), "%Y-%m-01"), INTERVAL 10 MONTH) > h.date) AS ANTERIOR,
-					(SELECT
-						sec_to_time(SUM(time_to_sec(balance)))
-					FROM
-						hours h
-						left join typedates on
-							h.typedatefk = typedates.id 
-					WHERE
-						h.id = h.id AND
-						h.employeefk = employees.id AND
 						DATE_SUB( DATE_FORMAT(CURDATE(), "%Y-%m-01"), INTERVAL 9 MONTH) > h.date) AS MES_1_SALDO,
 					(SELECT
 						sec_to_time(SUM(time_to_sec(balance)))
