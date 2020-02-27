@@ -370,7 +370,7 @@ class Hours_model extends CI_Model {
 					WHERE
 						h.id = h.id AND
 						h.employeefk = employees.id AND
-						DATE_SUB( DATE_FORMAT(CURDATE(), "%Y-%m-01"), INTERVAL -1 MONTH) > h.date) AS MES_ATUAL_SALDO,
+						DATE_SUB( DATE_FORMAT(CURDATE(), "%Y-%m-01"), INTERVAL 0 MONTH) > h.date) AS MES_ATUAL_SALDO,
 					(SELECT
 						sec_to_time(SUM(time_to_sec(balance)))
 					FROM
