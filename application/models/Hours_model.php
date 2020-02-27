@@ -411,6 +411,7 @@ class Hours_model extends CI_Model {
 	}
 
 	public function getEmployees(){
+		$this->db->where('status = 1');
 		return $this->db->get('employees');
 	}
 
