@@ -21,7 +21,7 @@ if (!$_SESSION['name']) {
 
 <div class="box box-primary table-responsive-xl">
 	<div class="box-body table-responsive-xl">
-		<table id="table" class="table table-striped table-bordered table-responsive-xl" style="width:100%">
+		<table id="table" class="table table-striped table-bordered table-sm" style="width:100%">
 			<thead>
 				<tr>
 					<th></th>

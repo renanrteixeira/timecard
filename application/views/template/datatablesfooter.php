@@ -27,7 +27,8 @@
 					"sortDescending": ": activate to sort column descending"
 				}
 			},
-			responsive: true
+			responsive: true,
+			"scrollX": true
 		});
 	});
 </script>
