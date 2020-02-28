@@ -17,7 +17,7 @@
 				"search": "Pesquisar:",
 				"zeroRecords": "Nenhum Registro encontrado",
 				"paginate": {
-					"first": "Promeiro",
+					"first": "Primeiro",
 					"last": "Último",
 					"next": "Próximo",
 					"previous": "Anterior"
