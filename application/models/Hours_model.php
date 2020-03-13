@@ -190,7 +190,7 @@ class Hours_model extends CI_Model {
 					WHERE
 						h.id = h.id AND
 						h.employeefk = employees.id AND
-						DATE_SUB( DATE_FORMAT(CURDATE(), "%Y-%m-01"), INTERVAL 9 MONTH) > h.date) AS MES_1_SALDO,
+						DATE_SUB( DATE_FORMAT(CURDATE(), "%Y-%m-01"), INTERVAL 12 MONTH) > h.date) AS MES_12_SALDO,
 					(SELECT
 						sec_to_time(SUM(time_to_sec(balance)))
 					FROM
@@ -200,7 +200,7 @@ class Hours_model extends CI_Model {
 					WHERE
 						h.id = h.id AND
 						h.employeefk = employees.id AND
-						PERIOD_ADD(DATE_FORMAT(SYSDATE(), "%Y%m"), -9) = DATE_FORMAT(h.date, "%Y%m")) AS MES_1,
+						PERIOD_ADD(DATE_FORMAT(SYSDATE(), "%Y%m"), -12) = DATE_FORMAT(h.date, "%Y%m")) AS MES_12,
 					(SELECT
 						sec_to_time(SUM(time_to_sec(balance)))
 					FROM
@@ -210,7 +210,7 @@ class Hours_model extends CI_Model {
 					WHERE
 						h.id = h.id AND
 						h.employeefk = employees.id AND
-						DATE_SUB( DATE_FORMAT(CURDATE(), "%Y-%m-01"), INTERVAL 8 MONTH) > h.date) AS MES_2_SALDO,
+						DATE_SUB( DATE_FORMAT(CURDATE(), "%Y-%m-01"), INTERVAL 11 MONTH) > h.date) AS MES_11_SALDO,
 					(SELECT
 						sec_to_time(SUM(time_to_sec(balance)))
 					FROM
@@ -220,7 +220,7 @@ class Hours_model extends CI_Model {
 					WHERE
 						h.id = h.id AND
 						h.employeefk = employees.id AND
-						PERIOD_ADD(DATE_FORMAT(SYSDATE(), "%Y%m"), -8) = DATE_FORMAT(h.date, "%Y%m")) AS MES_2,  
+						PERIOD_ADD(DATE_FORMAT(SYSDATE(), "%Y%m"), -11) = DATE_FORMAT(h.date, "%Y%m")) AS MES_11,
 					(SELECT
 						sec_to_time(SUM(time_to_sec(balance)))
 					FROM
@@ -230,7 +230,7 @@ class Hours_model extends CI_Model {
 					WHERE
 						h.id = h.id AND
 						h.employeefk = employees.id AND
-						DATE_SUB( DATE_FORMAT(CURDATE(), "%Y-%m-01"), INTERVAL 7 MONTH) > h.date) AS MES_3_SALDO,
+						DATE_SUB( DATE_FORMAT(CURDATE(), "%Y-%m-01"), INTERVAL 10 MONTH) > h.date) AS MES_10_SALDO,
 					(SELECT
 						sec_to_time(SUM(time_to_sec(balance)))
 					FROM
@@ -240,7 +240,17 @@ class Hours_model extends CI_Model {
 					WHERE
 						h.id = h.id AND
 						h.employeefk = employees.id AND
-						PERIOD_ADD(DATE_FORMAT(SYSDATE(), "%Y%m"), -7) = DATE_FORMAT(h.date, "%Y%m")) AS MES_3,  
+						PERIOD_ADD(DATE_FORMAT(SYSDATE(), "%Y%m"), -10) = DATE_FORMAT(h.date, "%Y%m")) AS MES_10,
+                                        (SELECT
+						sec_to_time(SUM(time_to_sec(balance)))
+					FROM
+						hours h
+						left join typedates on
+							h.typedatefk = typedates.id 
+					WHERE
+						h.id = h.id AND
+						h.employeefk = employees.id AND
+						DATE_SUB( DATE_FORMAT(CURDATE(), "%Y-%m-01"), INTERVAL 9 MONTH) > h.date) AS MES_9_SALDO,
 					(SELECT
 						sec_to_time(SUM(time_to_sec(balance)))
 					FROM
@@ -250,7 +260,7 @@ class Hours_model extends CI_Model {
 					WHERE
 						h.id = h.id AND
 						h.employeefk = employees.id AND
-						DATE_SUB( DATE_FORMAT(CURDATE(), "%Y-%m-01"), INTERVAL 6 MONTH) > h.date) AS MES_4_SALDO,
+						PERIOD_ADD(DATE_FORMAT(SYSDATE(), "%Y%m"), -9) = DATE_FORMAT(h.date, "%Y%m")) AS MES_9,
 					(SELECT
 						sec_to_time(SUM(time_to_sec(balance)))
 					FROM
@@ -260,7 +270,57 @@ class Hours_model extends CI_Model {
 					WHERE
 						h.id = h.id AND
 						h.employeefk = employees.id AND
-						PERIOD_ADD(DATE_FORMAT(SYSDATE(), "%Y%m"), -6) = DATE_FORMAT(h.date, "%Y%m")) AS MES_4,  
+						DATE_SUB( DATE_FORMAT(CURDATE(), "%Y-%m-01"), INTERVAL 8 MONTH) > h.date) AS MES_8_SALDO,
+					(SELECT
+						sec_to_time(SUM(time_to_sec(balance)))
+					FROM
+						hours h
+						left join typedates on
+							h.typedatefk = typedates.id 
+					WHERE
+						h.id = h.id AND
+						h.employeefk = employees.id AND
+						PERIOD_ADD(DATE_FORMAT(SYSDATE(), "%Y%m"), -8) = DATE_FORMAT(h.date, "%Y%m")) AS MES_8,  
+					(SELECT
+						sec_to_time(SUM(time_to_sec(balance)))
+					FROM
+						hours h
+						left join typedates on
+							h.typedatefk = typedates.id 
+					WHERE
+						h.id = h.id AND
+						h.employeefk = employees.id AND
+						DATE_SUB( DATE_FORMAT(CURDATE(), "%Y-%m-01"), INTERVAL 7 MONTH) > h.date) AS MES_7_SALDO,
+					(SELECT
+						sec_to_time(SUM(time_to_sec(balance)))
+					FROM
+						hours h
+						left join typedates on
+							h.typedatefk = typedates.id 
+					WHERE
+						h.id = h.id AND
+						h.employeefk = employees.id AND
+						PERIOD_ADD(DATE_FORMAT(SYSDATE(), "%Y%m"), -7) = DATE_FORMAT(h.date, "%Y%m")) AS MES_7,  
+					(SELECT
+						sec_to_time(SUM(time_to_sec(balance)))
+					FROM
+						hours h
+						left join typedates on
+							h.typedatefk = typedates.id 
+					WHERE
+						h.id = h.id AND
+						h.employeefk = employees.id AND
+						DATE_SUB( DATE_FORMAT(CURDATE(), "%Y-%m-01"), INTERVAL 6 MONTH) > h.date) AS MES_6_SALDO,
+					(SELECT
+						sec_to_time(SUM(time_to_sec(balance)))
+					FROM
+						hours h
+						left join typedates on
+							h.typedatefk = typedates.id 
+					WHERE
+						h.id = h.id AND
+						h.employeefk = employees.id AND
+						PERIOD_ADD(DATE_FORMAT(SYSDATE(), "%Y%m"), -6) = DATE_FORMAT(h.date, "%Y%m")) AS MES_6,  
 					(SELECT
 						sec_to_time(SUM(time_to_sec(balance)))
 					FROM
@@ -290,7 +350,7 @@ class Hours_model extends CI_Model {
 					WHERE
 						h.id = h.id AND
 						h.employeefk = employees.id AND
-						DATE_SUB( DATE_FORMAT(CURDATE(), "%Y-%m-01"), INTERVAL 4 MONTH) > h.date) AS MES_6_SALDO,
+						DATE_SUB( DATE_FORMAT(CURDATE(), "%Y-%m-01"), INTERVAL 4 MONTH) > h.date) AS MES_4_SALDO,
 					(SELECT
 						sec_to_time(SUM(time_to_sec(balance)))
 					FROM
@@ -300,7 +360,7 @@ class Hours_model extends CI_Model {
 					WHERE
 						h.id = h.id AND
 						h.employeefk = employees.id AND
-						PERIOD_ADD(DATE_FORMAT(SYSDATE(), "%Y%m"), -4) = DATE_FORMAT(h.date, "%Y%m"))  AS MES_6,
+						PERIOD_ADD(DATE_FORMAT(SYSDATE(), "%Y%m"), -4) = DATE_FORMAT(h.date, "%Y%m"))  AS MES_4,
 					(SELECT
 						sec_to_time(SUM(time_to_sec(balance)))
 					FROM
@@ -310,7 +370,7 @@ class Hours_model extends CI_Model {
 					WHERE
 						h.id = h.id AND
 						h.employeefk = employees.id AND
-						DATE_SUB( DATE_FORMAT(CURDATE(), "%Y-%m-01"), INTERVAL 3 MONTH) > h.date) AS MES_7_SALDO,
+						DATE_SUB( DATE_FORMAT(CURDATE(), "%Y-%m-01"), INTERVAL 3 MONTH) > h.date) AS MES_3_SALDO,
 					(SELECT
 						sec_to_time(SUM(time_to_sec(balance)))								
 					FROM
@@ -320,7 +380,7 @@ class Hours_model extends CI_Model {
 					WHERE
 						h.id = h.id AND
 						h.employeefk = employees.id AND
-						PERIOD_ADD(DATE_FORMAT(SYSDATE(), "%Y%m"), -3) = DATE_FORMAT(h.date, "%Y%m"))  AS MES_7,
+						PERIOD_ADD(DATE_FORMAT(SYSDATE(), "%Y%m"), -3) = DATE_FORMAT(h.date, "%Y%m"))  AS MES_3,
 					(SELECT
 						sec_to_time(SUM(time_to_sec(balance)))
 					FROM
@@ -330,7 +390,7 @@ class Hours_model extends CI_Model {
 					WHERE
 						h.id = h.id AND
 						h.employeefk = employees.id AND
-						DATE_SUB( DATE_FORMAT(CURDATE(), "%Y-%m-01"), INTERVAL 2 MONTH) > h.date) AS MES_8_SALDO,
+						DATE_SUB( DATE_FORMAT(CURDATE(), "%Y-%m-01"), INTERVAL 2 MONTH) > h.date) AS MES_2_SALDO,
 					(SELECT
 						sec_to_time(SUM(time_to_sec(balance)))
 					FROM
@@ -340,7 +400,7 @@ class Hours_model extends CI_Model {
 					WHERE
 						h.id = h.id AND
 						h.employeefk = employees.id AND
-						PERIOD_ADD(DATE_FORMAT(SYSDATE(), "%Y%m"), -2) = DATE_FORMAT(h.date, "%Y%m")) AS MES_8,
+						PERIOD_ADD(DATE_FORMAT(SYSDATE(), "%Y%m"), -2) = DATE_FORMAT(h.date, "%Y%m")) AS MES_2,
 					(SELECT
 						sec_to_time(SUM(time_to_sec(balance)))
 					FROM
@@ -350,7 +410,7 @@ class Hours_model extends CI_Model {
 					WHERE
 						h.id = h.id AND
 						h.employeefk = employees.id AND
-						DATE_SUB( DATE_FORMAT(CURDATE(), "%Y-%m-01"), INTERVAL 1 MONTH) > h.date) AS MES_9_SALDO,
+						DATE_SUB( DATE_FORMAT(CURDATE(), "%Y-%m-01"), INTERVAL 1 MONTH) > h.date) AS MES_1_SALDO,
 					(SELECT
 						sec_to_time(SUM(time_to_sec(balance)))
 					FROM
@@ -360,7 +420,7 @@ class Hours_model extends CI_Model {
 					WHERE
 						h.id = h.id AND
 						h.employeefk = employees.id AND
-						PERIOD_ADD(DATE_FORMAT(SYSDATE(), "%Y%m"), -1) = DATE_FORMAT(h.date, "%Y%m"))  AS MES_9,  
+						PERIOD_ADD(DATE_FORMAT(SYSDATE(), "%Y%m"), -1) = DATE_FORMAT(h.date, "%Y%m"))  AS MES_1,  
 					(SELECT
 						sec_to_time(SUM(time_to_sec(balance)))
 					FROM

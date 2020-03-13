@@ -25,6 +25,9 @@ if (!$_SESSION['name']) {
 			<thead>
 				<tr>
 					<th></th>
+					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-12 months', $today))))?></th> 
+					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-11 months', $today))))?></th> 
+					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-10 months', $today))))?></th> 
 					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-9 months', $today))))?></th> 
 					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-8 months', $today))))?></th> 
 					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-7 months', $today))))?></th> 
@@ -59,6 +62,12 @@ if (!$_SESSION['name']) {
 					<th class="text-center">Atual</th>
 					<th class="text-center">Saldo</th>
 					<th class="text-center">Atual</th>
+					<th class="text-center">Saldo</th>
+					<th class="text-center">Atual</th>
+					<th class="text-center">Saldo</th>
+					<th class="text-center">Atual</th>
+					<th class="text-center">Saldo</th>
+					<th class="text-center">Atual</th>
 					<th class="text-center">Saldo Total</th>
 				</tr>
 			</thead>
@@ -66,24 +75,30 @@ if (!$_SESSION['name']) {
 				<?php foreach($extract->result() as $value){ ?>
 					<tr>
 						<td><?= $value->name?></td>
-						<td><?= $value->MES_1_SALDO?></td>
-						<td><?= $value->MES_1?></td>
-						<td><?= $value->MES_2_SALDO?></td>
-						<td><?= $value->MES_2?></td>
-						<td><?= $value->MES_3_SALDO?></td>
-						<td><?= $value->MES_3?></td>
-						<td><?= $value->MES_4_SALDO?></td>
-						<td><?= $value->MES_4?></td>
-						<td><?= $value->MES_5_SALDO?></td>
-						<td><?= $value->MES_5?></td>
-						<td><?= $value->MES_6_SALDO?></td>
-						<td><?= $value->MES_6?></td>
-						<td><?= $value->MES_7_SALDO?></td>
-						<td><?= $value->MES_7?></td>
-						<td><?= $value->MES_8_SALDO?></td>
-						<td><?= $value->MES_8?></td>
+						<td><?= $value->MES_12_SALDO?></td>
+						<td><?= $value->MES_12?></td>
+						<td><?= $value->MES_11_SALDO?></td>
+						<td><?= $value->MES_11?></td>
+						<td><?= $value->MES_10_SALDO?></td>
+						<td><?= $value->MES_10?></td>
 						<td><?= $value->MES_9_SALDO?></td>
 						<td><?= $value->MES_9?></td>
+						<td><?= $value->MES_8_SALDO?></td>
+						<td><?= $value->MES_8?></td>
+						<td><?= $value->MES_7_SALDO?></td>
+						<td><?= $value->MES_7?></td>
+						<td><?= $value->MES_6_SALDO?></td>
+						<td><?= $value->MES_6?></td>
+						<td><?= $value->MES_5_SALDO?></td>
+						<td><?= $value->MES_5?></td>
+						<td><?= $value->MES_4_SALDO?></td>
+						<td><?= $value->MES_4?></td>
+						<td><?= $value->MES_3_SALDO?></td>
+						<td><?= $value->MES_3?></td>
+						<td><?= $value->MES_2_SALDO?></td>
+						<td><?= $value->MES_2?></td>
+						<td><?= $value->MES_1_SALDO?></td>
+						<td><?= $value->MES_1?></td>
 						<td><?= $value->MES_ATUAL_SALDO?></td>
 						<td><?= $value->MES_ATUAL?></td>
 						<td><?= $value->SALDO?></td>
