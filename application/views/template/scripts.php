@@ -21,7 +21,19 @@
 	<script src="<?php echo base_url('/assets/plugins/input-mask/jquery.inputmask.js')?>"></script>
 	<script src="<?php echo base_url('/assets/plugins/input-mask/jquery.inputmask.date.extensions.js')?>"></script>
 	<script src="<?php echo base_url('/assets/plugins/input-mask/jquery.inputmask.extensions.js')?>"></script>
-    <script>
+	<script src="<?php echo base_url('/assets/bower_components/modernizr/modernizr.js')?>"></script>
+
+	<script src="<?php echo base_url('/assets/bower_components/jquery/dist/jquery.min.2.2.4.js')?>"></script>
+	<script src="<?php echo base_url('/assets/bower_components/modernizr/modernizr.js')?>"></script>
+        <script>
+            //paste this code under the head tag or in a separate js file.
+                    // Wait for window load
+                    $(window).load(function() {
+                            // Animate loader off screen
+                            $(".se-pre-con").fadeOut("slow");;
+                    });
+        </script>
+        <script>
 		$(document).ready(function() {
 			// show the alert
 			setTimeout(function() {
