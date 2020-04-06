@@ -35,10 +35,12 @@
         </script>
         <script>
 		$(document).ready(function() {
-			// show the alert
-			setTimeout(function() {
-				$(".alert").alert('close');
-			}, 2000);
+			$(".alert").fadeTo(1, 1).removeClass('hidden');
+                        window.setTimeout(function() {
+                            $(".alert").fadeTo(500, 0).slideUp(500, function(){
+                                $(".alert").addClass('hidden');
+                            });
+                          }, 2000);                         
 		});
 		$('[data-mask]').inputmask();
 	</script>
