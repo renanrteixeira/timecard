@@ -1,5 +1,6 @@
 </head>
 <body class="hold-transition sidebar-mini skin-blue-light">
+<div class="se-pre-con"></div>
 <div class="wrapper">
   <header class="main-header">
     <!-- Logo -->
