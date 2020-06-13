@@ -68,7 +68,7 @@ if (!$_SESSION['name']) {
 		<?= form_open('personalstatement/export', 'target="_blank"') ?>
 			<input type="hidden" name="periodo" id="periodo" value="<?= isset($periodo) ? $periodo : '' ?>">
 			<input type="hidden" name="employee" id="employee" value="<?= isset($employee) ? $employee->row()->id : ''?>">
-			<button type="submit" class="btn btn-primary btn-custom"><span class="glyphicon glyphicon-export img-circle btn-icon"></span> Exportar PDF</button>
+			<button type="submit" class="btn btn-danger btn-custom"><span class="fa fa-file-pdf-o"></span> Exportar PDF</button>
 		<?= form_close(); ?>
 	</div>
 	<div class="box-body">

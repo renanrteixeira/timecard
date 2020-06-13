@@ -20,6 +20,12 @@ if (!$_SESSION['name']) {
 <?php $this->load->view('template/headerafterlink') ?>
 
 <div class="box box-primary table-responsive-xl">
+	<div class="box-header">
+		<?= form_open('hoursextract/export') ?>
+			<button type="submit" class="btn btn-success btn-custom"><span class="fa fa-file-excel-o"></span> Exportar Excel</button>
+		<?= form_close(); ?>
+	</div>
+
 	<div class="box-body table-responsive-xl">
 		<table id="table" class="table table-striped table-bordered table-sm" style="width:100%">
 			<thead>
