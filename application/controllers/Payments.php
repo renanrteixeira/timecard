@@ -27,7 +27,7 @@ class Payments extends CI_Controller {
 
 	public function index()
 	{
-		$variaveis['hours'] = $this->hours->getPayments($this->input->post('employee'), $this->input->post('date'));
+		$variaveis['hours'] = $this->hours->getPayments($this->input->post('employee'), $this->input->post('datebegin'), $this->input->post('datefinish'));
 		$variaveis['employees'] = $this->hours->getEmployees();
 		$this->load->view('payments/index', $variaveis);
 	}

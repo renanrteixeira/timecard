@@ -27,9 +27,10 @@ if (!$_SESSION['name']) {
 	</div>
 
 	<div class="box-body table-responsive-xl">
-		<table id="table" class="table table-striped table-bordered table-sm" style="width:100%">
+		<table id="table" class="table table-striped table-bordered table-sm">
 			<thead>
 				<tr>
+					<th style="width:400px"></th>
 					<th></th>
 					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-12 months', $today))))?></th> 
 					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-11 months', $today))))?></th> 
@@ -44,43 +45,42 @@ if (!$_SESSION['name']) {
 					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-2 months', $today))))?></th> 
 					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-1 months', $today))))?></th> 
 					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%g', $today)))?></th>
-					<th></th>
 				</tr>
 				<tr>
-					<th>Funcionário</th>
+					<th style="width:400px">Funcionário</th>
+					<th class="text-center">Saldo Anterior</th>
+					<th class="text-center">Total</th>
 					<th class="text-center">Saldo</th>
-					<th class="text-center">Atual</th>
+					<th class="text-center">Total</th>
 					<th class="text-center">Saldo</th>
-					<th class="text-center">Atual</th>
+					<th class="text-center">Total</th>
 					<th class="text-center">Saldo</th>
-					<th class="text-center">Atual</th>
+					<th class="text-center">Total</th>
 					<th class="text-center">Saldo</th>
-					<th class="text-center">Atual</th>
+					<th class="text-center">Total</th>
 					<th class="text-center">Saldo</th>
-					<th class="text-center">Atual</th>
+					<th class="text-center">Total</th>
 					<th class="text-center">Saldo</th>
-					<th class="text-center">Atual</th>
+					<th class="text-center">Total</th>
 					<th class="text-center">Saldo</th>
-					<th class="text-center">Atual</th>
+					<th class="text-center">Total</th>
 					<th class="text-center">Saldo</th>
-					<th class="text-center">Atual</th>
+					<th class="text-center">Total</th>
 					<th class="text-center">Saldo</th>
-					<th class="text-center">Atual</th>
+					<th class="text-center">Total</th>
 					<th class="text-center">Saldo</th>
-					<th class="text-center">Atual</th>
+					<th class="text-center">Total</th>
 					<th class="text-center">Saldo</th>
-					<th class="text-center">Atual</th>
+					<th class="text-center">Total</th>
 					<th class="text-center">Saldo</th>
-					<th class="text-center">Atual</th>
+					<th class="text-center">Total</th>
 					<th class="text-center">Saldo</th>
-					<th class="text-center">Atual</th>
-					<th class="text-center">Saldo Total</th>
 				</tr>
 			</thead>
 			<tbody>
 				<?php foreach($extract->result() as $value){ ?>
 					<tr>
-						<td><?= $value->name?></td>
+						<td style="width:400px"><?= $value->name?></td>
 						<td><?= $value->MES_12_SALDO?></td>
 						<td><?= $value->MES_12?></td>
 						<td><?= $value->MES_11_SALDO?></td>

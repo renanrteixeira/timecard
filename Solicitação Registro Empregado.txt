@@ -100,3 +100,8 @@ Registro de empregado
   Montar PDF  10h
 
   total geral 50  h
+
+
+-----
+
+Exportar excel por período na planilha

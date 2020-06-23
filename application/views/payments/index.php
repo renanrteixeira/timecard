@@ -40,16 +40,21 @@ if (!$_SESSION['name']) {
 						</select>
 					</div>
 				</div>	
-
-				<div class="form-group">
-					<label for="date">Data</label>
+					<div class="form-group">
+					<label for="date">Data Inicial</label>
 					<div class="input-group">
 						<div class="input-group-addon">
 							<i class="fa fa-calendar"></i>
 						</div>
-						<input type="date" class="form-control" id="date" name="date">
+						<input type="date" class="form-control" id="datebegin" name="datebegin">
 					</div>
-					<!-- /.input group -->
+					<label for="date">Data Final</label>
+					<div class="input-group">
+						<div class="input-group-addon">
+							<i class="fa fa-calendar"></i>
+						</div>
+						<input type="date" class="form-control" id="datefinish" name="datefinish">
+					</div>					<!-- /.input group -->
 				</div>
 				<div class="box-footer">
 					<button type="submit" class="btn btn-primary btn-custom"><span class="glyphicon glyphicon-filter img-circle btn-icon"></span> Filtrar</button>

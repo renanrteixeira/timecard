@@ -60,7 +60,7 @@ class Hours_model extends CI_Model {
 	 * @param $id - Se indicado, retorna somente um registro, caso contário, todos os registros.
 	 * @return objeto da banco de dados da tabela cadastros
 	 */
-	public function get($id = null, $employee = null, $date = null){
+	public function get($id = null, $employee = null, $datebegin = null, $datefinish = null){
 		
 		if ($id) {
 			$this->db->where('hours.id', $id);
@@ -70,8 +70,9 @@ class Hours_model extends CI_Model {
 			$this->db->where('hours.employeefk', $employee);
 		}
 
-		if ($date){
-			$this->db->where('hours.date', $date);
+		if (($datebegin) && ($datefinish)) {
+			$this->db->where('hours.date >=', $datebegin);
+			$this->db->where('hours.date <=', $datefinish);
 		}
 		
 		$this->db->select('hours.id, employees.name, hours.date, hours.typedatefk, hours.hour1, hours.hour2, hours.hour3, hours.hour4, hours.hour5, hours.hour6, hours.balance'); 
@@ -85,14 +86,15 @@ class Hours_model extends CI_Model {
 		return $this->db->get();
 	}
 
-	public function getPayments( $employee = null, $date = null){
+	public function getPayments( $employee = null, $datebegin = null, $datefinish = null){
 		
 		if ($employee){
 			$this->db->where('hours.employeefk', $employee);
 		}
 
-		if ($date){
-			$this->db->where('hours.date', $date);
+		if (($datebegin) && ($datefinish)) {
+			$this->db->where('hours.date >=', $datebegin);
+			$this->db->where('hours.date <=', $datefinish);
 		}
 
 		$this->db->select('hours.id, employees.name, hours.date, hours.hour1, hours.balance'); 
