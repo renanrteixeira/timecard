@@ -500,6 +500,80 @@ class Hours_model extends CI_Model {
 		}
 	}
 
+	public function getMonthsExtract($datebegin, $datefinish){
+		if (($datebegin) && ($datefinish)){
+			$query = 'SELECT TIMESTAMPDIFF(MONTH,"'.$datebegin.'","'.$datefinish.'") + 1 as meses';
+			return $this->db->query($query);
+		} else {
+			return null;
+		}
+	}
+
+	public function getHoursPeriod($datebegin, $datefinish){
+		if (($datebegin) && ($datefinish)){
+			$query = 'SELECT
+						employees.ID AS ID,
+						MAX(employees.name) AS NAME,
+						(SELECT
+							sec_to_time(SUM(time_to_sec(balance)))
+						FROM
+							hours h
+							left join typedates on
+								h.typedatefk = typedates.id 
+						WHERE
+							h.id = h.id AND
+							h.employeefk = employees.id AND
+							h.date < "'.$datebegin.'") AS BALANCE_PRIOR
+					FROM
+						EMPLOYEES
+						LEFT JOIN HOURS ON
+						  HOURS.EMPLOYEEFK = EMPLOYEES.ID AND
+						  HOURS.DATE between "'.$datebegin.'" AND "'.$datefinish.'"
+					WHERE
+						STATUS = 1
+					GROUP BY
+						EMPLOYEES.ID
+					ORDER BY
+						2,3';
+			return $this->db->query($query);
+		} else {
+			return null;
+		}
+	}
+
+	public function getHoursIdIntervalMonth($id, $monthYear){
+		if (($id) && ($monthYear)){
+			$date = '01/'.$monthYear;
+			$explode = explode('/', $date);
+			$date = $explode[2].'-'.$explode[1].'-'.$explode[0];
+			$date = date('Y-m-d', strtotime($date.' +1 month'));
+			$query = 'SELECT 
+						(SELECT
+							sec_to_time(SUM(time_to_sec(balance)))
+						FROM
+							hours h
+							left join typedates on
+								h.typedatefk = typedates.id 
+						WHERE
+							h.id = h.id AND
+							h.employeefk = '.$id.' AND
+							h.date < "'.$date.'") AS SALDO,
+						(SELECT
+							sec_to_time(SUM(time_to_sec(balance)))
+						FROM
+							hours h
+							left join typedates on 
+								h.typedatefk = typedates.id 
+						WHERE
+							h.id = h.id AND
+							h.employeefk = '.$id.' AND
+							DATE_FORMAT(h.date, "%m/%Y") = "'.$monthYear.'") AS TOTAL';
+			return $this->db->query($query);
+		} else {
+			return null;
+		}
+	}
+
 	/**
 	 * Deleta um registro.
 	 * @param $id do registro a ser deletado

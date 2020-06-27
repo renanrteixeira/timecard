@@ -63,7 +63,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					</label>
 				</div>
 				<button class="btn btn-lg btn-primary btn-block" type="submit" id="Login">Sign in</button>
-				<p class="mt-5 mb-3 text-muted">&copy; 2019</p>
+				<p class="mt-5 mb-3 text-muted"><strong>&copy; 2019-2020</strong></p>
 			</form>
 			<?php echo form_close(); ?>
 		</div>

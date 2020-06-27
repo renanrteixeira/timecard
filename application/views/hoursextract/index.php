@@ -19,6 +19,38 @@ if (!$_SESSION['name']) {
 <?php $this->load->view('template/headerselect2') ?>
 <?php $this->load->view('template/headerafterlink') ?>
 
+<div class="box box-warning collapsed-box">
+	<div class="box-header">
+		<h3 class="box-title">Exportar por Período</h3>
+		<div class="box-tools pull-right">
+			<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+		</div>
+	</div>
+	<div class="box-body" id="box">
+		<?= form_open('hoursextract/exportPeriod')  ?>
+				<div class="form-group">
+					<label for="date">Data Inicial</label>
+					<div class="input-group">
+						<div class="input-group-addon">
+							<i class="fa fa-calendar"></i>
+						</div>
+						<input type="date" class="form-control" id="datebegin" name="datebegin">
+					</div>
+					<label for="date">Data Final</label>
+					<div class="input-group">
+						<div class="input-group-addon">
+							<i class="fa fa-calendar"></i>
+						</div>
+						<input type="date" class="form-control" id="datefinish" name="datefinish">
+					</div>					<!-- /.input group -->
+				</div>
+				<div class="box-footer">
+				<button type="submit" class="btn btn-success btn-custom"><span class="fa fa-file-excel-o"></span> Exportar Excel</button>
+				</div>
+		<?= form_close(); ?>
+	</div>
+</div>
+
 <div class="box box-primary table-responsive-xl">
 	<div class="box-header">
 		<?= form_open('hoursextract/export') ?>
