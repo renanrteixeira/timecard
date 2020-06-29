@@ -60,7 +60,7 @@ if (!$_SESSION['name']) {
 					<div class="input-group-addon">
 						<i class="fa fa-clock-o"></i>
 					</div>
-					<input type="time" class="form-control" id="payment" name="payment" value="<?= set_value('payment') ? : (isset($payment) ? $payment : '') ?>">
+					<input type="time" class="form-control" id="payment" name="payment" value="<?= set_value('payment') ? : (isset($payment) ? $payment : '') ?>" required>
 				</div>
 			</div>
 		<div class="box-footer">

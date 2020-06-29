@@ -34,14 +34,14 @@ if (!$_SESSION['name']) {
 						<div class="input-group-addon">
 							<i class="fa fa-calendar"></i>
 						</div>
-						<input type="date" class="form-control" id="datebegin" name="datebegin">
+						<input type="date" class="form-control" id="datebegin" name="datebegin" required>
 					</div>
 					<label for="date">Data Final</label>
 					<div class="input-group">
 						<div class="input-group-addon">
 							<i class="fa fa-calendar"></i>
 						</div>
-						<input type="date" class="form-control" id="datefinish" name="datefinish">
+						<input type="date" class="form-control" id="datefinish" name="datefinish" required>
 					</div>					<!-- /.input group -->
 				</div>
 				<div class="box-footer">
