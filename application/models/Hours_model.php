@@ -82,7 +82,7 @@ class Hours_model extends CI_Model {
 		$this->db->where('employees.status = 1');
 		$this->db->where('hours.type = 0');
 		$this->db->order_by("hours.id", 'desc');
-		$this->db->limit(350);
+		$this->db->limit(500);
 		return $this->db->get();
 	}
 
@@ -514,6 +514,7 @@ class Hours_model extends CI_Model {
 			$query = 'SELECT
 						employees.ID AS ID,
 						MAX(employees.name) AS NAME,
+  						MAX(roles.name) as ROLESNAME,
 						(SELECT
 							sec_to_time(SUM(time_to_sec(balance)))
 						FROM
@@ -529,6 +530,8 @@ class Hours_model extends CI_Model {
 						LEFT JOIN HOURS ON
 						  HOURS.EMPLOYEEFK = EMPLOYEES.ID AND
 						  HOURS.DATE between "'.$datebegin.'" AND "'.$datefinish.'"
+						INNER JOIN ROLES ON
+						  ROLES.ID = EMPLOYEES.ROLEFK
 					WHERE
 						STATUS = 1
 					GROUP BY

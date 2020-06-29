@@ -23,11 +23,10 @@ class Login extends CI_Controller {
 				$this->load->helper(array('cookie', 'url')); 
     }
   // Dashboard
-  public function index()
-  {
+  public function index() {
     if ($this->session->userdata('is_authenticated') == FALSE) {
 						redirect('Login/login'); // the user is not logged in, redirect them!
-					} else {
+		} else {
       $data['title'] = 'Controle Ponto';
           $data['metaDescription'] = 'Controle';
           $data['metaKeywords'] = 'Ponto';
@@ -35,11 +34,10 @@ class Login extends CI_Controller {
 					$data['userInfo'] = $this->user->getUserInfo();
 					//direcionando para o HomeController
           $this->load->view('dashboard/home', $data);
-      }
+    }
   }
         // Login
-  public function login()
-  {
+  public function login() {
   $data['title'] = 'Login';
         $data['metaDescription'] = 'Login';
         $data['metaKeywords'] = 'Login';
@@ -86,7 +84,7 @@ class Login extends CI_Controller {
 						'is_authenticated' => TRUE,
 						'admin' => $row->admin
           );
-        $this->session->set_userdata($sessArray);
+        	$this->session->set_userdata($sessArray);
         }
 
         redirect('dashboard/index');

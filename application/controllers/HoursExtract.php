@@ -127,7 +127,7 @@ class HoursExtract extends CI_Controller {
 		$html .= '</body></html>';
 
 		// Definimos o nome do arquivo que será exportado  
-		$arquivo = "Planilha_Horas.xls";  
+		$arquivo = 'Planilha_Horas_'.date('d-m-Y_H:i:s').'.xls';  
 		// Configurações header para forçar o download  
 		header('Content-Type: application/vnd.ms-excel');
 		header('Content-Disposition: attachment;filename="'.$arquivo.'"');
@@ -194,6 +194,7 @@ class HoursExtract extends CI_Controller {
 			$html .= '	<tr>';
 			$html .= '		<th></th>';
 			$html .= '		<th></th>';
+			$html .= '		<th></th>';
 
 			$arrayMonths = array();
 
@@ -204,6 +205,7 @@ class HoursExtract extends CI_Controller {
 
 			$html .= '	<tr>';
 			$html .= '		<th>'.utf8_decode('Funcionário').'</th>';
+			$html .= '		<th>'.utf8_decode('Função').'</th>';
 			$html .= '		<th class="text-center">Saldo Anterior</th>';
 			for ($i=0; $i<$months; $i++){
 				$html .= '		<th class="text-center">Total</th>';
@@ -225,6 +227,7 @@ class HoursExtract extends CI_Controller {
 					$first = False;
 					$html .= '	<tr>';
 					$html .= '		<th>'.utf8_decode($value->NAME).'</th>';
+					$html .= '		<th>'.utf8_decode($value->ROLESNAME).'</th>';
 					$html .= '		<th class="text-center">'.$value->BALANCE_PRIOR.'</th>';
 					$i = 0;
 					$balanceprior = $value->BALANCE_PRIOR;
@@ -254,7 +257,7 @@ class HoursExtract extends CI_Controller {
 			$html .= '</table>';
 			$html .= '</body></html>';
 			// Definimos o nome do arquivo que será exportado  
-			$arquivo = "Planilha_Horas_Periodo.xls";  
+			$arquivo = 'Planilha_Horas_Periodo_'.date('d-m-Y_H:i:s').'.xls';  
 			// Configurações header para forçar o download  
 			header('Content-Type: application/vnd.ms-excel');
 			header('Content-Disposition: attachment;filename="'.$arquivo.'"');

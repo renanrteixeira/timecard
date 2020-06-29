@@ -78,11 +78,11 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>
-        Controle Ponto
-        <small>Versão 1.0</small>
-      </h1>
-      <?php echo create_breadcrumb('home', base_url()); ?>
+			<h1>
+				Controle Ponto
+				<small>Versão 1.1</small>
+			</h1>
+			<?php echo create_breadcrumb('home', base_url()); ?>
     </section>
 
     <!-- Main content -->

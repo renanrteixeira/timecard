@@ -467,7 +467,7 @@ class PersonalStatement extends CI_Controller {
 			$pdf->WriteHTML($html);
 
 			// define um nome para o arquivo PDF
-			$filename = $employee->row()->name.'.pdf';
+			$filename = $employee->row()->name.'-'.date('d-m-Y_H:i:s').'.pdf';
 
 			// I - Abre no navegador
 			// F - Salva no servidor

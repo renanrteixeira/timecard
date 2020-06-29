@@ -8,8 +8,8 @@ if (!function_exists('create_breadcrumb')) {
 
         $open_tag = '<ol class="breadcrumb">';
         $close_tag = '</ol>';
-        $crumb_open_tag = '<li class="breadcrumb-item" >';
-        $active_crumb_open_tag = '<li class="breadcrumb-item" >';
+        $crumb_open_tag = '<li class="breadcrumb-item" aria-current="page">';
+        $active_crumb_open_tag = '<li class="breadcrumb-item active" aria-current="page">';
         $crumb_close_tag = '</li>';
         $separator = '';
 
