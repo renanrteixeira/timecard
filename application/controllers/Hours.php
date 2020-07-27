@@ -163,7 +163,7 @@ class Hours extends CI_Controller {
 			
 			$id = $this->input->post('id');
 
-			$existe = $this->hours->get(null, $this->input->post('employee'), $this->input->post('date'));
+			$existe = $this->hours->get(null, $this->input->post('employee'), $this->input->post('date'), $this->input->post('date'));
 
 			if (($existe->result()) && (!$id)){
 				$variaveis['titulo'] = 'Nova Hora';
