@@ -158,6 +158,9 @@ class Hours extends CI_Controller {
 			$variaveis['titulo'] = 'Nova Hora';
 			$variaveis['typedates'] = $this->hours->getTypeDates();
 			$variaveis['employees'] = $this->hours->getEmployees();
+			$variaveis['employee'] = $this->input->post('employee');
+			$variaveis['date'] = $this->input->post('date');
+			$variaveis['typedate'] = $this->input->post('typedate');
 			$this->load->view('hours/cadastro', $variaveis);
 		} else {
 			
@@ -170,6 +173,9 @@ class Hours extends CI_Controller {
 				$variaveis['mensagem'] = "Lançamento já foi cadastrado.";
 				$variaveis['typedates'] = $this->hours->getTypeDates();
 				$variaveis['employees'] = $this->hours->getEmployees();
+				$variaveis['employee'] = $this->input->post('employee');
+				$variaveis['date'] = $this->input->post('date');
+				$variaveis['typedate'] = $this->input->post('typedate');
 				$this->load->view('hours/cadastro', $variaveis);
 			} else {
 
@@ -195,10 +201,9 @@ class Hours extends CI_Controller {
 					$Entradaextra = $this->input->post('hour5').':00';
 					$Saidaextra   = $this->input->post('hour6').':00';
 				}
-
-
+	
 				$balance = ((strtotime($Saidamanha) - strtotime($Entradamanha))+
-						    (strtotime($Saidatarde) - strtotime($Entradatarde))+
+							(strtotime($Saidatarde) - strtotime($Entradatarde))+
 							(strtotime($Saidaextra) - strtotime($Entradaextra)));
 							
 				$balance = date('H:i:s', $balance);
@@ -246,9 +251,9 @@ class Hours extends CI_Controller {
 
 				if ($this->hours->save($dados, $id)) {
 					if ($id == null) {
-						$retorno = "Cadastro realizado com sucesso";
+						$retorno = "Cadastro realizado com sucesso.";
 					} else {
-						$retorno = "Cadastro atualizado com sucesso";
+						$retorno = "Cadastro atualizado com sucesso.";
 					}
 					$this->session->set_flashdata('retorno', $retorno);
 					redirect('hours/new');
@@ -256,8 +261,12 @@ class Hours extends CI_Controller {
 					$variaveis['mensagem'] = "Ocorreu um erro. Por favor, tente novamente.";
 					$variaveis['typedates'] = $this->hours->getTypeDates();
 					$variaveis['employees'] = $this->hours->getEmployees();
+					$variaveis['employee'] = $this->input->post('employee');
+					$variaveis['date'] = $this->input->post('date');
+					$variaveis['typedate'] = $this->input->post('typedate');
 					$this->load->view('hours/cadastro', $variaveis);
-				}							
+				}
+
 			}
 				
 		}
