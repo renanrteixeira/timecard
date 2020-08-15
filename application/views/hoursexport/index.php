@@ -21,7 +21,7 @@ if (!$_SESSION['name']) {
 
 <div class="box box-primary table-responsive-xl">
 <div class="box-header">
-		<h3 class="box-title">Exportar Lançamentos</h3>
+		<h3 class="box-title">Extrato de Lançamentos de Horas</h3>
 		<div class="box-tools pull-right">
 			<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
 		</div>
