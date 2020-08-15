@@ -115,6 +115,7 @@ class Payments extends CI_Controller {
 		if ($this->form_validation->run() == FALSE) {
 			$variaveis['titulo'] = 'Novo Abatimento';
 			$variaveis['employees'] = $this->hours->getEmployees();
+			$variaveis['employee'] = $this->input->post('employee');
 			$this->load->view('payments/cadastro', $variaveis);
 		} else {
 			
@@ -126,6 +127,7 @@ class Payments extends CI_Controller {
 				$variaveis['titulo'] = 'Novo Abatimento';
 				$variaveis['mensagem'] = "Lançamento já foi cadastrado.";
 				$variaveis['employees'] = $this->hours->getEmployees();
+				$variaveis['employee'] = $this->input->post('employee');
 				$this->load->view('payments/cadastro', $variaveis);
 			} else {
 
@@ -170,6 +172,7 @@ class Payments extends CI_Controller {
 				} else {
 					$variaveis['mensagem'] = "Ocorreu um erro. Por favor, tente novamente.";
 					$variaveis['employees'] = $this->hours->getEmployees();
+					$variaveis['employee'] = $this->input->post('employee');
 					$this->load->view('payments/cadastro', $variaveis);
 				}							
 			}
