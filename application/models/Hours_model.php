@@ -107,8 +107,12 @@ class Hours_model extends CI_Model {
 		return $this->db->get();
 	}
 
-	public function getCompanies(){
+	public function getCompanies($id = null){
 		
+		if ($id) {
+			$this->db->where('companies.id = '.$id);
+		}
+
 		return $this->db->get('companies');
 
 	}

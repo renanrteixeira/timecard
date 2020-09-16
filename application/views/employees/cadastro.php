@@ -67,6 +67,14 @@ if (!$_SESSION['name']) {
 				</select>
 			</div>			
 			<div class="form-group">
+				<label for="company">Empresa</label>
+				<select class="form-control select2-single" id="company" name="company" style="width: 100%;" required>
+					<?php foreach($companies->result() as $value) {?>
+						<option value="<?= $value->id?>" <?php echo isset($company) ? ($company==$value->id) ? 'selected': '' : '';  ?>><?=$value->name?></option>
+					<?php }?>
+				</select>
+			</div>
+			<div class="form-group">
 				<label>
 					<input type="checkbox" id="status" name="status" value="<?= set_value('status') ? : (isset($status) ? $status : '0') ?>" <?php if(isset($status)) { if ($status == 1) { ?> checked <?php } } ?>> Ativo?
 				</label>

@@ -18,11 +18,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Employees_model extends CI_Model {
   // declare private variable
   private $_ID;
-  private $_name;
+  private $_Name;
   private $_Role;
   private $_Admission;
   private $_Gender;
   private $_Status;
+  private $_Company;
 
   public function setRoleID($ID) {
     $this->_ID = $ID;
@@ -40,8 +41,16 @@ class Employees_model extends CI_Model {
 		$this->_Admission = $admission;
 	}	
 
-  public function sete($gender) {
+  public function setGender($gender) {
 		$this->_Gender = $gender;
+	}	
+
+	public function setStatus($status) {
+		$this->_Status = $status;
+	}	
+
+	public function setCompany($company) {
+		$this->_Company = $company;
 	}	
 
 	/**
@@ -80,6 +89,7 @@ class Employees_model extends CI_Model {
 		if ($id) {
 			$this->db->where('employees.id', $id);
 		}
+
 		$this->db->select('employees.id, employees.name, roles.name as role, employees.admission, employees.gender'); 
 		$this->db->from('employees');
 		$this->db->from('roles');
@@ -101,6 +111,10 @@ class Employees_model extends CI_Model {
 	public function getRoles(){
 		return $this->db->get('roles');
 	}
+
+	public function getCompanies(){
+		return $this->db->get('companies');
+	}	
 
 	/**
 	 * Deleta um registro.

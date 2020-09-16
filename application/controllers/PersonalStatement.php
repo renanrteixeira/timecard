@@ -108,13 +108,14 @@ class PersonalStatement extends CI_Controller {
 			
 			$rows = $this->db->query($query);
 
-			$this->db->select('employees.id, employees.name, employees.admission, employees.gender, roles.name as role'); 
+			$this->db->select('employees.id, employees.name, employees.admission, employees.gender, roles.name as role, employees.companyfk'); 
 			$this->db->from('employees');
 			$this->db->from('roles');
 			$this->db->where('employees.rolefk = roles.id');
 			$this->db->where('employees.id = '.$id);
 			$employee = $this->db->get();
-
+			
+			$this->db->where('companies.id = '.$employee->row()->companyfk);
 			$company = $this->db->get('companies');
 
 			$html = '<html><body>';

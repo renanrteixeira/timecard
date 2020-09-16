@@ -100,7 +100,7 @@ class Companies extends CI_Controller {
 			
 			$id = $this->input->post('id');
 			
-			$count = $this->companies->count();
+			//$count = $this->companies->count();
 
 			$dados = array(
 			
@@ -110,11 +110,11 @@ class Companies extends CI_Controller {
 
 			);
 
-			if (($count->num_rows() > 0) && ($id == null)) {
-					$variaveis['titulo'] = 'Nova Empresa';
-					$variaveis['mensagem'] = "Já existe cadastro de empresa. Apenas é permitido um registro.";
-					$this->load->view('companies/cadastro', $variaveis);					
-			} else {
+			//if (($count->num_rows() > 0) && ($id == null)) {
+			//		$variaveis['titulo'] = 'Nova Empresa';
+			//		$variaveis['mensagem'] = "Já existe cadastro de empresa. Apenas é permitido um registro.";
+			//		$this->load->view('companies/cadastro', $variaveis);					
+			//} else {
 
 				if ($this->companies->save($dados, $id)) {
 					if ($id == null) {
@@ -130,7 +130,7 @@ class Companies extends CI_Controller {
 					$this->load->view('companies/cadastro', $variaveis);
 				} 
 
-			} 
+			//} 
 				
 		}
 	}	

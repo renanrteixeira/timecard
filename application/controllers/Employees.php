@@ -35,6 +35,7 @@ class Employees extends CI_Controller {
 	{
 		$variaveis['titulo'] = 'Novo Funcionário';
 		$variaveis['roles'] = $this->employees->getRoles();
+		$variaveis['companies'] = $this->employees->getCompanies();
 		$this->load->view('employees/cadastro', $variaveis);
 	}
 
@@ -46,6 +47,7 @@ class Employees extends CI_Controller {
 			
 			if ($employee->num_rows() > 0 ) {
 				$variaveis['roles'] = $this->employees->getRoles();
+				$variaveis['companies'] = $this->employees->getCompanies();
 				$variaveis['titulo'] = 'Edição de Funcionário';
 				$variaveis['id'] = $employee->row()->id;
 				$variaveis['name'] = $employee->row()->name;
@@ -53,6 +55,7 @@ class Employees extends CI_Controller {
 				$variaveis['admission'] = $employee->row()->admission;
 				$variaveis['gender'] = $employee->row()->gender;
 				$variaveis['status'] = $employee->row()->status;
+				$variaveis['company'] = $employee->row()->companyfk;
 				$this->load->view('employees/cadastro', $variaveis);
 			} else {
 				redirect('employees/index');
@@ -110,8 +113,12 @@ class Employees extends CI_Controller {
 					'field' => 'status',
 					'label' => 'Status',
 					'rules' => 'trim|required'
-		)
-
+   			),
+			array(
+					'field' => 'company',
+					'label' => 'Empresa',
+					'rules' => 'trim|required'
+			)
 		);
 
 		$this->form_validation->set_rules($regras);
@@ -120,6 +127,7 @@ class Employees extends CI_Controller {
 			$variaveis['titulo'] = 'Novo Funcionário';
 			$variaveis['employees'] = $this->employees->get();
 			$variaveis['roles'] = $this->employees->getRoles();
+			$variaveis['companies'] = $this->employees->getCompanies();
 			$this->load->view('employees/cadastro', $variaveis);
 		} else {
 			
@@ -133,13 +141,14 @@ class Employees extends CI_Controller {
 				"admission" => $this->input->post('admission'),
 				"gender" => $this->input->post('gender'),
 				"status" => $this->input->post('status'),
-
+				"companyfk" => $this->input->post('company')
 			);
+
 			if ($this->employees->save($dados, $id)) {
 				if ($id == null) {
-					$retorno = "Cadastro realizado com sucesso";
+					$retorno = "Cadastro realizado com sucesso!";
 				} else {
-					$retorno = "Cadastro atualizado com sucesso";
+					$retorno = "Cadastro atualizado com sucesso!";
 				}
 				$this->session->set_flashdata('mensagem', $retorno);
 				redirect('employees/index');
@@ -147,6 +156,7 @@ class Employees extends CI_Controller {
 				$variaveis['mensagem'] = "Ocorreu um erro. Por favor, tente novamente.";
 				$variaveis['employees'] = $this->employees->get();
 				$variaveis['roles'] = $this->employees->getRoles();
+				$variaveis['companies'] = $this->employees->getCompanies();
 				$this->load->view('employees/cadastro', $variaveis);
 			}
 				
