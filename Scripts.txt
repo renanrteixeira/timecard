@@ -271,3 +271,14 @@ echo getFullHour($calculo);
 
 
 */
+
+ALTER TABLE `ponto`.`employees` 
+ADD COLUMN `companyfk` BIGINT(20) NULL AFTER `status`,
+ADD INDEX `employee_companyfk_idx` (`companyfk` ASC) VISIBLE;
+;
+ALTER TABLE `ponto`.`employees` 
+ADD CONSTRAINT `employee_companyfk`
+  FOREIGN KEY (`companyfk`)
+  REFERENCES `ponto`.`companies` (`id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
