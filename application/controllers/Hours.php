@@ -38,6 +38,7 @@ class Hours extends CI_Controller {
 		$variaveis['titulo'] = 'Nova Hora';
 		$variaveis['employees'] = $this->hours->getEmployees();
 		$variaveis['typedates'] = $this->hours->getTypeDates();
+		$variaveis['employee'] = $this->session->flashdata('employee');
 		$this->load->view('hours/cadastro', $variaveis);
 	}
 
@@ -256,6 +257,7 @@ class Hours extends CI_Controller {
 						$retorno = "Cadastro atualizado com sucesso.";
 					}
 					$this->session->set_flashdata('retorno', $retorno);
+					$this->session->set_flashdata('employee', $this->input->post('employee'));
 					redirect('hours/new');
 				} else {
 					$variaveis['mensagem'] = "Ocorreu um erro. Por favor, tente novamente.";
