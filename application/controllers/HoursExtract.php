@@ -44,19 +44,19 @@ class HoursExtract extends CI_Controller {
 		$html .= '	<tr>';
 		$html .= '		<th></th>';
 		$html .= '		<th></th>';
-		$html .= '		<th class="text-center" colspan="2">'.ucfirst(utf8_encode(strftime('%b/%g', strtotime('-12 months', $today)))).'</th> ';
-		$html .= '		<th class="text-center" colspan="2">'.ucfirst(utf8_encode(strftime('%b/%g', strtotime('-11 months', $today)))).'</th> ';
-		$html .= '		<th class="text-center" colspan="2">'.ucfirst(utf8_encode(strftime('%b/%g', strtotime('-10 months', $today)))).'</th> ';
-		$html .= '		<th class="text-center" colspan="2">'.ucfirst(utf8_encode(strftime('%b/%g', strtotime('-9 months', $today)))).'</th> ';
-		$html .= '		<th class="text-center" colspan="2">'.ucfirst(utf8_encode(strftime('%b/%g', strtotime('-8 months', $today)))).'</th> ';
-		$html .= '		<th class="text-center" colspan="2">'.ucfirst(utf8_encode(strftime('%b/%g', strtotime('-7 months', $today)))).'</th> ';
-		$html .= '		<th class="text-center" colspan="2">'.ucfirst(utf8_encode(strftime('%b/%g', strtotime('-6 months', $today)))).'</th> ';
-		$html .= '		<th class="text-center" colspan="2">'.ucfirst(utf8_encode(strftime('%b/%g', strtotime('-5 months', $today)))).'</th> ';
-		$html .= '		<th class="text-center" colspan="2">'.ucfirst(utf8_encode(strftime('%b/%g', strtotime('-4 months', $today)))).'</th> ';
-		$html .= '		<th class="text-center" colspan="2">'.ucfirst(utf8_encode(strftime('%b/%g', strtotime('-3 months', $today)))).'</th> ';
-		$html .= '		<th class="text-center" colspan="2">'.ucfirst(utf8_encode(strftime('%b/%g', strtotime('-2 months', $today)))).'</th> ';
-		$html .= '		<th class="text-center" colspan="2">'.ucfirst(utf8_encode(strftime('%b/%g', strtotime('-1 months', $today)))).'</th> ';
-		$html .= '		<th class="text-center" colspan="2">'.ucfirst(utf8_encode(strftime('%b/%g', $today))).'</th>';
+		$html .= '		<th class="text-center" colspan="2">'.ucfirst(utf8_encode(strftime('%b/%y', strtotime('-12 months', $today)))).'</th> ';
+		$html .= '		<th class="text-center" colspan="2">'.ucfirst(utf8_encode(strftime('%b/%y', strtotime('-11 months', $today)))).'</th> ';
+		$html .= '		<th class="text-center" colspan="2">'.ucfirst(utf8_encode(strftime('%b/%y', strtotime('-10 months', $today)))).'</th> ';
+		$html .= '		<th class="text-center" colspan="2">'.ucfirst(utf8_encode(strftime('%b/%y', strtotime('-9 months', $today)))).'</th> ';
+		$html .= '		<th class="text-center" colspan="2">'.ucfirst(utf8_encode(strftime('%b/%y', strtotime('-8 months', $today)))).'</th> ';
+		$html .= '		<th class="text-center" colspan="2">'.ucfirst(utf8_encode(strftime('%b/%y', strtotime('-7 months', $today)))).'</th> ';
+		$html .= '		<th class="text-center" colspan="2">'.ucfirst(utf8_encode(strftime('%b/%y', strtotime('-6 months', $today)))).'</th> ';
+		$html .= '		<th class="text-center" colspan="2">'.ucfirst(utf8_encode(strftime('%b/%y', strtotime('-5 months', $today)))).'</th> ';
+		$html .= '		<th class="text-center" colspan="2">'.ucfirst(utf8_encode(strftime('%b/%y', strtotime('-4 months', $today)))).'</th> ';
+		$html .= '		<th class="text-center" colspan="2">'.ucfirst(utf8_encode(strftime('%b/%y', strtotime('-3 months', $today)))).'</th> ';
+		$html .= '		<th class="text-center" colspan="2">'.ucfirst(utf8_encode(strftime('%b/%y', strtotime('-2 months', $today)))).'</th> ';
+		$html .= '		<th class="text-center" colspan="2">'.ucfirst(utf8_encode(strftime('%b/%y', strtotime('-1 months', $today)))).'</th> ';
+		$html .= '		<th class="text-center" colspan="2">'.ucfirst(utf8_encode(strftime('%b/%y', $today))).'</th>';
 		$html .= '	</tr>';
 		$html .= '	<tr>';
 		$html .= '		<th>Funcionário</th>';
@@ -199,7 +199,7 @@ class HoursExtract extends CI_Controller {
 			$arrayMonths = array();
 
 			for ($i=0; $i<$months; $i++){
-				$html .= '		<th class="text-center" colspan="2">'.ucfirst(utf8_encode(strftime('%b/%g', strtotime('+'.$i.' months', $dbegin)))).'</th> ';
+				$html .= '		<th class="text-center" colspan="2">'.ucfirst(utf8_encode(strftime('%b/%y', strtotime('+'.$i.' months', $dbegin)))).'</th> ';
 				$arrayMonths[$i] = date('m/Y', strtotime('+'.$i.' months', $dbegin));
 			}
 

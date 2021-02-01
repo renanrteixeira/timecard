@@ -132,13 +132,13 @@ class PersonalStatement extends CI_Controller {
 			$pdf->charset_in='UTF-8';
 			$pdf->SetDisplayMode('fullpage');
 			//Cabeçalho: Seta a data/hora completa de quando o PDF foi gerado + um texto no lado direito
-			$pdf->SetHeader('Empresa: '.$company->row()->name.'||Período: '.ucfirst(utf8_encode(strftime('%m/%g', strtotime($mes)))));
+			$pdf->SetHeader('Empresa: '.$company->row()->name.'||Período: '.ucfirst(utf8_encode(strftime('%m/%y', strtotime($mes)))));
 			
 			//Rodapé: Seta a data/hora completa de quando o PDF foi gerado + um texto no lado direito
 			$pdf->SetFooter('{DATE j/m/y H:i}|{PAGENO}/{nb}|Copyright © 2019 Controle Ponto');
 			//$pdf->SetFooter('{DATE j/m/Y H:i}|{PAGENO}/{nb}|Contole Ponto Web');
 			
-			$html .= '<table><tr><td width="10%"><b>Código: '.$employee->row()->id.'</b></td><td width="40%"><b>Funcionário: '.$employee->row()->name.'</b></td><td width="30%"><b>Função: '.$employee->row()->role.'</b></td><td width="20%"><b>Admissão: '.ucfirst(utf8_encode(strftime('%d/%m/%g', strtotime($employee->row()->admission)))).'</b></td></tr></table><br>';
+			$html .= '<table><tr><td width="10%"><b>Código: '.$employee->row()->id.'</b></td><td width="40%"><b>Funcionário: '.$employee->row()->name.'</b></td><td width="30%"><b>Função: '.$employee->row()->role.'</b></td><td width="20%"><b>Admissão: '.ucfirst(utf8_encode(strftime('%d/%m/%y', strtotime($employee->row()->admission)))).'</b></td></tr></table><br>';
 			$html .= str_pad('_', 141, '_', STR_PAD_LEFT).'<br>';
 			$html .= '<table>';
 			$html .= '<tr>';
@@ -160,7 +160,7 @@ class PersonalStatement extends CI_Controller {
 				if ($row->info != 'TOTAL') {
 					$secounds = 0;
 					$html .= '<tr>';
-					$html .= '<td>'.ucfirst(utf8_encode(strftime('%d/%m/%g', strtotime($row->date)))).'</td>';
+					$html .= '<td>'.ucfirst(utf8_encode(strftime('%d/%m/%y', strtotime($row->date)))).'</td>';
 					$html .= '<td>'.$row->name.'</td>';
 		
 					list($h, $m, $s) = explode(':', $row->time);
@@ -353,7 +353,7 @@ class PersonalStatement extends CI_Controller {
 				
 				foreach($rows->result() as $row){
 					$html .= '<tr>';
-					$html .= '<td>'.ucfirst(utf8_encode(strftime('%d/%m/%g', strtotime($row->date)))).'</td>';
+					$html .= '<td>'.ucfirst(utf8_encode(strftime('%d/%m/%y', strtotime($row->date)))).'</td>';
 					list($h1, $m1, $s1) = explode(':', $row->hour1);
 					$html .= '<td>'.str_pad($h1, 2, '0', STR_PAD_LEFT).':'.str_pad($m1, 2, '0', STR_PAD_LEFT).'</td>';
 					$html .= '</tr>';

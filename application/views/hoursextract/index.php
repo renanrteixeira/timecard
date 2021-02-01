@@ -64,19 +64,19 @@ if (!$_SESSION['name']) {
 				<tr>
 					<th style="width:400px"></th>
 					<th></th>
-					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-12 months', $today))))?></th> 
-					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-11 months', $today))))?></th> 
-					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-10 months', $today))))?></th> 
-					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-9 months', $today))))?></th> 
-					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-8 months', $today))))?></th> 
-					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-7 months', $today))))?></th> 
-					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-6 months', $today))))?></th> 
-					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-5 months', $today))))?></th> 
-					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-4 months', $today))))?></th> 
-					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-3 months', $today))))?></th> 
-					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-2 months', $today))))?></th> 
-					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%g', strtotime('-1 months', $today))))?></th> 
-					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%g', $today)))?></th>
+					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%y', strtotime('-12 months', $today))))?></th> 
+					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%y', strtotime('-11 months', $today))))?></th> 
+					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%y', strtotime('-10 months', $today))))?></th> 
+					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%y', strtotime('-9 months', $today))))?></th> 
+					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%y', strtotime('-8 months', $today))))?></th> 
+					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%y', strtotime('-7 months', $today))))?></th> 
+					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%y', strtotime('-6 months', $today))))?></th> 
+					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%y', strtotime('-5 months', $today))))?></th> 
+					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%y', strtotime('-4 months', $today))))?></th> 
+					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%y', strtotime('-3 months', $today))))?></th> 
+					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%y', strtotime('-2 months', $today))))?></th> 
+					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%y', strtotime('-1 months', $today))))?></th> 
+					<th class="text-center" colspan="2"><?= ucfirst(utf8_encode(strftime('%b/%y', $today)))?></th>
 				</tr>
 				<tr>
 					<th style="width:400px">Funcionário</th>
